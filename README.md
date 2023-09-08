@@ -21,7 +21,7 @@ We intend to build a web-app that allows Professional Engineers (PEs) to track t
 - Add the following lines to the ~/.bashrc file
     ```
     \# rbenv
-    eval "$(/home/*username*/.rbenv/bin/rbenv init -bash)"
+    eval "$(/home/*your_username*/.rbenv/bin/rbenv init -bash)"
     ```
 - Restart the terminal, `cd` back into the project repo
 - Reload profile: `source ~/.bashrc`
@@ -32,15 +32,17 @@ We intend to build a web-app that allows Professional Engineers (PEs) to track t
 - Install bundler: `gem install bundler`
 - Configure bundler to skip production gems: `bundle config set --local without 'production'`
 - Install dependencies: `bundle install`
+- Install JavaScript base files: `rails javascript:install:esbuild`
 - Skip Heroku steps below if you just wanna run the Rails server locally
   - Install Heroku CLI: `curl https://cli-assets.heroku.com/install-ubuntu.sh | sh`
   - Login to Heroku: `heroku login`
 
-You should be able to launch the server after running the dependencies
+You should be now be able to launch the server
 
 ## Running the server
 - `cd` into the project folder
 - Run `rails server` or `rails s`
 - The server will launch on the local machine on port 3000
 - Go to http://localhost:3000 to access
+- To play around with the homepage, edit *repo_path*/app/views/welcome/index.html.erb
   
