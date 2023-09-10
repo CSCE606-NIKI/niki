@@ -4,6 +4,17 @@
 We intend to build a web-app that allows Professional Engineers (PEs) to track their continuing education credits every year to ensure they meet the requirements in case of an audit.
 
 ## Setup
+**Using DockerFile for installations**
+- Ensure you have docker installed on your machine as per your Operating System:
+- Follow instructions on  https://docs.docker.com/engine/install/ to install docker
+- Install docker-compose using https://docs.docker.com/engine/install/
+- To run the project, follow the following steps:
+    - To build the project and install all dependencies:
+      - `docker-compose build`
+    - To spin up the container and run rails server:
+      - `docker-compose up`
+    - Visit 'http://localhost:3001' to see the app running (port mapped to 3001 on host machine)
+
 **Instructions below were done on Ubuntu 22.04, 4GB RAM, 20GB storage**
 - Install updates and build essentials
   - `sudo apt-get update`
