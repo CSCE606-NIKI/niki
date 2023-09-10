@@ -6,7 +6,7 @@ We intend to build a web-app that allows Professional Engineers (PEs) to track t
 ## Setup
 **Using DockerFile for installations**
 - Ensure you have docker installed on your machine as per your Operating System:
-- Follow instructions on  https://docs.docker.com/engine/install/ to install docker
+    - Follow instructions on  https://docs.docker.com/engine/install/ to install docker
 - Install docker-compose using https://docs.docker.com/engine/install/
 - To run the project, follow the following steps:
     - To build the project and install all dependencies:
