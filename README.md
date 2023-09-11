@@ -31,8 +31,8 @@ We intend to build a web-app that allows Professional Engineers (PEs) to track t
 - Install rbenv with ruby-build: `curl -fsSL https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer | bash`
 - Add the following lines to the ~/.bashrc file
     ```
-    \# rbenv
-    eval "$(/home/*your_username*/.rbenv/bin/rbenv init -bash)"
+    # rbenv
+    eval "$(/home/*your_username*/.rbenv/bin/rbenv init - -bash)"
     ```
 - Restart the terminal, `cd` back into the project repo
 - Reload profile: `source ~/.bashrc`
