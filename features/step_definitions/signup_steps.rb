@@ -19,9 +19,12 @@ When('I fill in the following information') do |table|
 end
 
 Then('I should see an error message') do
+  expect(page).to have_content('Email already exists')
+
 end
 
 Then('I should see a missing field error') do
+  expect(page).to have_content('Invalid email or password!')
 end
 
 When('I click the {string} button') do |button_text|
@@ -29,7 +32,7 @@ When('I click the {string} button') do |button_text|
 end
 
 Then('I should be logged in') do
-  expect(page).to have_content('Welcome')
+  expect(page).to have_content('Signed in successfully.')
 end
 
 
