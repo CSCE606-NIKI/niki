@@ -13,3 +13,13 @@ gem "cucumber", '~> 7.1'
 gem "rspec", '~>3.12'
 gem 'webrick', '~> 1.8'
 gem 'jsbundling-rails', '~> 1.1'
+gem 'devise', '~> 4.9', '>= 4.9.2'
+gem 'dotenv-rails', groups: [:development, :test]
+gem "aws-sdk-s3", require: false
+gem 'pg'
+gem "puma"
+gem 'cucumber-rails'
+gem 'rspec-rails'
+gem 'database_cleaner'
+gem  'Selenium'
+gem  'selenium-webdriver'
