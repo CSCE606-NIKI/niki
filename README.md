@@ -24,7 +24,20 @@ We intend to build a web-app that allows Professional Engineers (PEs) to track t
 - Install prerequisites for Ruby and Ruby on Rails
   - PostgreSQL: `sudo apt install postgresql postgresql-contrib`
     - To start the service: `sudo systemctl start postgresql.service`
-    - Create a role: `sudo -u postgres createuser --interactive`
+    - Setup PostgreSQL on your machine: Install the latest version of PostgreSQL based on your operating system.
+                                       Enter PostgreSQL interactive mode and create a role for the project:
+    - Log into the PostgreSQL account: `sudo -i -u postgres` followed by `psql`
+    - Create a role (suppose 'credittrackeradmin') with the ability to create databases using `CREATE ROLE credittrackeradmin WITH CREATEDB;`
+    - Allow the 'credittrackeradmin' role to log in: `ALTER ROLE credittrackeradmin WITH LOGIN;`
+    - Create a .env file in the /niki directory and set the values for the following PostgreSQL environment variables:
+            POSTGRES_USER
+            POSTGRES_DB
+            POSTGRES_HOST
+            POSTGRES_PASSWORD
+            POSTGRES_TEST_DB
+    - Run the server using the command: rails s
+    - If you encounter the following error: "password authentication failed for user credittrackeradmin," you can change the user's password in PostgreSQL:
+    - Alter the password for the user 'credittrackeradmin' using the following command: `ALTER USER credittrackeradmin PASSWORD 'new_password';`
   - Node.js
     - Follow instructions for your OS here https://github.com/nodesource/distributions
   - Yarn: `npm install --global yarn`
