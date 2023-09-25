@@ -25,7 +25,6 @@ We intend to build a web-app that allows Professional Engineers (PEs) to track t
   - PostgreSQL: `sudo apt install postgresql postgresql-contrib`
     - To start the service: `sudo systemctl start postgresql.service`
     - Setup PostgreSQL on your machine: Install the latest version of PostgreSQL based on your operating system.
-                                       Enter PostgreSQL interactive mode and create a role for the project:
     - Log into the PostgreSQL account: `sudo -i -u postgres` followed by `psql`
     - Create a role (suppose 'credittrackeradmin') with the ability to create databases using `CREATE ROLE credittrackeradmin WITH CREATEDB;`
     - Allow the 'credittrackeradmin' role to log in: `ALTER ROLE credittrackeradmin WITH LOGIN;`
