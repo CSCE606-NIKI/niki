@@ -23,8 +23,8 @@ We intend to build a web-app that allows Professional Engineers (PEs) to track t
 - Install Git: `sudo apt-get install git-all`
 - Install prerequisites for Ruby and Ruby on Rails
   - PostgreSQL: `sudo apt install postgresql postgresql-contrib`
-    To start the service: `sudo systemctl start postgresql.service`
-    Create a role: `sudo -u postgres createuser --interactive`
+    - To start the service: `sudo systemctl start postgresql.service`
+    - Create a role: `sudo -u postgres createuser --interactive`
   - Node.js
     - Follow instructions for your OS here https://github.com/nodesource/distributions
   - Yarn: `npm install --global yarn`
