@@ -2,18 +2,17 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: localhost
-  username: askani
-  password: admin123
-
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
+  host: <%= ENV['POSTGRES_HOST'] %>
+  timeout: 5000
+  port: 5432
 development:
   <<: *default
-  database: credittracker
-
+  database: <%= ENV['POSTGRES_DB'] %>
 test:
   <<: *default
-  database: credittrackertest
-
+  database: <%= ENV['POSTGRES_DB_TEST'] %>
 production:
   <<: *default
   database: credittracker
