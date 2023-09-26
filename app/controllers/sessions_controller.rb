@@ -1,5 +1,10 @@
 class SessionsController < ApplicationController
   def new
+    if logged_in?
+      redirect_to root_path # Redirect logged-in users to their profile
+    else
+      @user = User.new
+    end
   end
 
   def create
@@ -13,7 +18,7 @@ class SessionsController < ApplicationController
         session[:user_id] = @user.id
         redirect_to root_path
     else
-        flash[:danger] =['Invalid email/password combination']
+        flash[:danger] ='Invalid credentials'
         redirect_to login_path(@user)
     end
   end

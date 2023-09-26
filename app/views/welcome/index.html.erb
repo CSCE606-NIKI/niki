@@ -5,11 +5,21 @@
 	<head>
 	<body>
 		<h4> Welcome User </h4>
+
 		<% if current_user %>
     		<%= form_tag logout_path, method: :delete do %>
 				<%= submit_tag 'Logout' %>
 		    <% end %>
 		  
-  		<% end %>
+		<% else %>
+		  	<!-- Display login and registration links -->
+			<%= form_tag login_path, method: :get do %>
+				<%= submit_tag 'Log in' %>
+			<% end %>
+			
+			<%= form_tag new_user_path, method: :get do %>
+				<%= submit_tag 'Sign up' %>
+			<% end %>
+		<% end %>
 	</body>
 </html>
