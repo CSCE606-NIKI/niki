@@ -1,25 +1,45 @@
-<h1>Sign Up</h1>
 
-<%= form_with(model: @user, local: true) do |form| %>
-  <%= form.label :username %>
-  <%= form.text_field :username %>
+<%=stylesheet_link_tag 'sign_up.css'%>
+<div class ="signup-container">
+  <h1>Credits Tracker</h1>
+  <div class="signup">
+    <h2>Sign up</h2>
+    <%= form_with(model: @user, local: true) do |form| %>
+      <div class="field">
+          <%= form.label :username %>
+          <%= form.text_field :username %>
+      </div>
+      <div class="field">
+          <%= form.label :email %>
+          <%= form.email_field :email%>
+      </div>
+      <div class="field">
+          <%= form.label :password %>
+          <%= form.password_field :password %>
+      </div>
+      <div class="field">
+          <%= form.label :password_confirmation %>
+          <%= form.password_field :password_confirmation %>
+      </div>
+      <% if flash[:alert].present? %>
+      <div class="signup-alert">
+          <%= flash[:alert] %>
+      </div>
+      <% end %>
+      <div class="actions">
+          <%= form.submit "Sign up" %>
+      </div>
+      <% end %>
 
-  <%= form.label :email %>
-  <%= form.email_field :email %>
-
-  <%= form.label :password %>
-  <%= form.password_field :password %>
-
-  <%= form.label :password_confirmation %>
-  <%= form.password_field :password_confirmation %>
-
-  <%= form.submit "Sign Up" %>
-
-  <% if flash[:alert].present? %>
-  <div class="alert alert-danger">
-    <%= flash[:alert] %>
+      <div class="social-signup">
+          <%= button_tag "Sign up with Google", class: "google-signup" %>
+          <!-- You'll need to replace the above line with the appropriate OAuth flow -->
+      </div>
+      <div class="existing-account">
+            Already have an account? 
+            <%= link_to "Log in", '/login' %>
+      </div>
+      
   </div>
-  <% end %>
-
-<% end %>
+</div>
 

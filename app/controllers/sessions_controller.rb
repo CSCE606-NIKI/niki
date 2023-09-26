@@ -8,13 +8,14 @@ class SessionsController < ApplicationController
   end
 
   def create
-    identifier = login_params[:identifier]
+    identifier = params[:identifier]
+
     @user = if identifier.include?('@')  # Check if it looks like an email
       User.find_by('lower(email) = ?', identifier.downcase)
     else
       User.find_by('lower(username) = ?', identifier.downcase)
     end
-    if @user && @user.authenticate(login_params[:password])
+    if @user && @user.authenticate(params[:password])
         session[:user_id] = @user.id
         redirect_to root_path
     else
@@ -27,11 +28,6 @@ class SessionsController < ApplicationController
     session[:user_id] = nil
     redirect_to '/login', notice: 'Logged out successfully'
   end
-
-  private
-  def login_params
-      params.require(:login).permit(:email, :password , :username, :identifier)
-  end 
 
   private
   def find_user_by_username_or_email(identifier)

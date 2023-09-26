@@ -1,13 +1,35 @@
-<h1>Login</h1>
-  
-<form action="/login" method="POST">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-  <input type="text" name="login[identifier]" placeholder="Email or Username">
-  <input type="password" name="login[password]" placeholder="Password">
-  <input type="submit" name="submit" class="submit">
-</form>
-<% if flash[:danger] %>
-<div class="alert alert-danger">
-    <%= flash[:danger] %>
-  </div>
+
+<%=stylesheet_link_tag 'sign_up.css'%>
+<div class ="login-container">
+  <h1>Credits Tracker</h1>
+  <div class="signup">
+    <h2>Log In</h2>
+    <%= form_with url: '/login', method: :post, local: true do |form| %>
+      <!-- Display flash message if present -->
+    <% if flash[:danger] %>
+      <div class="login-alert">
+        <%= flash[:danger] %>
+      </div>
+  <% end %>
+
+
+    <div class="field">
+      <%= form.label :identifier, 'Email or Username' %>
+      <%= form.text_field :identifier, placeholder: 'Email or Username' %>
+    </div>
+
+    <div class="field">
+      <%= form.label :password %>
+      <%= form.password_field :password, placeholder: 'Password' %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit "Log in", class: "submit" %>
+    </div>
+
 <% end %>
+
+      
+  </div>
+</div>
+
