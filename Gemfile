@@ -16,10 +16,10 @@ gem 'jsbundling-rails', '~> 1.1'
 gem 'pg'
 gem 'dotenv-rails', groups: [:development, :test]
 gem "aws-sdk-s3", require: false
-gem 'pg'
 gem "puma"
 gem 'cucumber-rails'
 gem 'rspec-rails'
 gem 'database_cleaner'
 gem  'Selenium'
 gem  'selenium-webdriver'
+gem 'bcrypt'

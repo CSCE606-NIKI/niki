@@ -10,7 +10,7 @@ class UsersController < ApplicationController
           specific_params = {
             username: user_params[:username],
             email: user_params[:email],
-            password_digest: user_params[:password]
+            password: user_params[:password]
           }
           @user = User.new(specific_params)
 
