@@ -4,18 +4,17 @@ class SessionsController < ApplicationController
 
   def create
     identifier = login_params[:identifier]
-    user = if identifier.include?('@')  # Check if it looks like an email
+    @user = if identifier.include?('@')  # Check if it looks like an email
       User.find_by('lower(email) = ?', identifier.downcase)
     else
       User.find_by('lower(username) = ?', identifier.downcase)
     end
-    puts user
-    if user && user.authenticate(login_params[:password])
-        session[:user_id] = user.id
-        redirect_to '/'
+    if @user && @user.authenticate(login_params[:password])
+        session[:user_id] = @user.id
+        redirect_to root_path
     else
         flash[:danger] =['Invalid email/password combination']
-        render 'new'
+        redirect_to login_path(@user)
     end
   end
 
@@ -33,4 +32,12 @@ class SessionsController < ApplicationController
   def find_user_by_username_or_email(identifier)
     User.find_by('lower(username) = ? OR lower(email) = ?', identifier.downcase, identifier.downcase)
   end
+
+  def require_login
+    unless current_user
+      flash[:error] = 'You must be logged in to log out.'
+      redirect_to root_path
+    end
+  end
+
 end
