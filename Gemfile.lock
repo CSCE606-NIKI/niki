@@ -131,7 +131,6 @@ GEM
     minitest (5.20.0)
     msgpack (1.7.2)
     multi_test (0.1.2)
-    mysql2 (0.5.5)
     net-imap (0.3.4)
       date
       net-protocol
@@ -221,7 +220,6 @@ DEPENDENCIES
   cucumber (~> 7.1)
   jsbundling-rails (~> 1.1)
   listen (~> 3.8)
-  mysql2 (~> 0.5)
   rails (~> 7.0.7.2)
   rspec (~> 3.12)
   sprockets-rails (~> 3.4)
