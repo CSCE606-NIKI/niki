@@ -14,6 +14,13 @@ require 'factory_bot_rails'
 # the additional setup, and require it from the spec files that actually need
 # it.
 #
+# spec/spec_helper.rb
+
+require 'simplecov'
+SimpleCov.start
+
+# Previous content of test helper now starts here
+
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods

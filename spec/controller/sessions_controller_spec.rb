@@ -43,4 +43,11 @@ describe SessionsController, type: :controller do
       expect(response).to redirect_to(login_path) 
     end
   end
+  describe 'GET #new' do
+    it 'already logged in user' do
+      session[:user_id] = user.id
+      get :new
+      expect(response).to redirect_to(root_path) 
+    end
+  end
 end

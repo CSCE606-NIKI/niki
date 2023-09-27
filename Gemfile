@@ -26,3 +26,6 @@ gem 'bcrypt'
 gem 'factory_bot_rails', '~> 6.2'
 gem 'cucumber-rails'
 gem 'faker', '~> 2.18', require: false
+gem 'simplecov', require: false, group: :test
+
+  
