@@ -151,6 +151,13 @@ GEM
       dotenv (= 2.8.1)
       railties (>= 3.2)
     erubi (1.12.0)
+    factory_bot (6.2.1)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.2.0)
+      factory_bot (~> 6.2.0)
+      railties (>= 5.0.0)
+    faker (2.23.0)
+      i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
     globalid (1.2.1)
       activesupport (>= 6.1)
@@ -299,6 +306,8 @@ DEPENDENCIES
   cucumber-rails
   database_cleaner
   dotenv-rails
+  factory_bot_rails (~> 6.2)
+  faker (~> 2.18)
   jsbundling-rails (~> 1.1)
   listen (~> 3.8)
   pg
