@@ -43,10 +43,13 @@ class UsersController < ApplicationController
 
   # Method to validate password.
   def validate_password(password, password_confirmation)
-    password.length >= 6
-    password == password_confirmation
+    password.length >= 8
+    if (password != password_confirmation)
+      puts "Passwords don't match"
+      return false
+    end
     if password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
-      puts "valid"
+      puts "valid password"
       return true
     else
       puts "password must include at least one lowercase letter, one uppercase letter, one digit, and one special character"
@@ -58,6 +61,7 @@ class UsersController < ApplicationController
   # Returns false if username is not valid or already in use.
   def check_if_username_valid(username)
     if User.exists?(username: username)
+      puts "user with this username already exists"
       return false
     else
       return true
@@ -68,6 +72,7 @@ class UsersController < ApplicationController
   # Returns false if not a new user. Otherwise True.
   def check_if_new_user(email)
     if User.exists?(email: email)
+      puts "user with this email already exists"
       return false
     else
       return true
