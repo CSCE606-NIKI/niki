@@ -6,21 +6,26 @@ class UsersController < ApplicationController
   def create
      if check_if_new_user(user_params[:email])
       if check_if_username_valid(user_params[:username])
-        if validate_password(user_params[:password], user_params[:password_confirmation])
-          specific_params = {
-            username: user_params[:username],
-            email: user_params[:email],
-            password: user_params[:password]
-          }
-          @user = User.new(specific_params)
+        if validate_password(user_params[:password])
+          if match_password(user_params[:password], user_params[:password_confirmation])
+            specific_params = {
+              username: user_params[:username],
+              email: user_params[:email],
+              password: user_params[:password]
+            }
+            @user = User.new(specific_params)
 
-          if @user.save
-            redirect_to login_path(@user)
+            if @user.save
+              redirect_to login_path(@user)
+            else
+              render :new
+            end
           else
-            render :new
+            flash[:alert] = "Passwords Mismatch"
+            redirect_to new_user_path(@user)
           end
         else
-          flash[:alert] = "Invalid password. Password must include at least one lowercase letter, one uppercase letter, one digit, and one special character"
+          flash[:alert] = "Invalid password. Password must be atleast 8 character long with at least one lowercase letter, one uppercase letter, one digit, and one special character"
           redirect_to new_user_path(@user)
         end
       else
@@ -42,18 +47,23 @@ class UsersController < ApplicationController
   end
 
   # Method to validate password.
-  def validate_password(password, password_confirmation)
+  def validate_password(password)
     password.length >= 8
-    if (password != password_confirmation)
-      puts "Passwords don't match"
-      return false
-    end
     if password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
       puts "valid password"
       return true
     else
-      puts "password must include at least one lowercase letter, one uppercase letter, one digit, and one special character"
+      puts "Password must be atleast 8 character long with at least one lowercase letter, one uppercase letter, one digit, and one special character"
       return false
+    end
+  end
+
+  def match_password(password, password_confirmation)
+    if (password != password_confirmation)
+      puts "Passwords don't match"
+      return false
+    else
+      return true
     end
   end
 

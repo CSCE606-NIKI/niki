@@ -33,6 +33,13 @@ RSpec.describe UsersController, type: :controller do
       expect(User.count).to eq(current_user_count) # No user should be created
     end
 
+    it 'create user fails due to shorter password' do
+      post :create, params: { user: { username: 'test_user1', email: 'test1@example.com', password: 'Pa12@', password_confirmation: 'Pa12@' } }
+
+      expect(response).to redirect_to(new_user_path)
+      expect(User.count).to eq(current_user_count) # No user should be created
+    end
+
     it 'create user fails due to password mismatch' do
       post :create, params: { user: { username: 'test_user1', email: 'test1@example.com', password: 'Password123!', password_confirmation: 'Password123' } }
 
