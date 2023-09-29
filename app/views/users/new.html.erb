@@ -31,9 +31,12 @@
       </div>
       <% end %>
 
+      <!-- Add a button to log in with Google
+      Make sure to keep it separate from other routing logic because this button has to make a POST request to /auth/google_oauth2
+      and not POST to /login
+      (Any 3rd party login button should make a POST request to /auth/:provider)-->      
       <div class="social-signup">
           <%= button_to "Sign up with Google", '/auth/google_oauth2', class: "google-signup" %>
-          <!-- You'll need to replace the above line with the appropriate OAuth flow -->
       </div>
       <div class="existing-account">
             Already have an account? 
