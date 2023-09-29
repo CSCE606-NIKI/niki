@@ -6,7 +6,6 @@ end
 Given('I am on the login page') do
     visit login_path 
 end
-  
 
 Given('I am new user and I am on the user new page') do
     visit new_user_path 

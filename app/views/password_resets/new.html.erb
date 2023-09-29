@@ -1,0 +1,26 @@
+
+<%= stylesheet_link_tag 'password_reset.css' %>
+<div class ="passwordreset-container">
+  <h1>Credits Tracker</h1>
+  <div class="passwordreset">
+    <h2>Forgot your password?</h2>
+    <%= form_with url: password_reset_path, method: :post, local: true do |form| %>
+      <!-- Display flash message if present -->
+      <% if flash[:danger] %>
+        <div class="passwordreset-alert">
+          <%= flash[:danger] %>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <%= form.label :email, 'Email' %>
+        <%= form.email_field :email, placeholder: 'Email' %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit "Reset Password", class: "submit" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
