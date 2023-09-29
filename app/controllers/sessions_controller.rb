@@ -29,16 +29,4 @@ class SessionsController < ApplicationController
     redirect_to '/login', notice: 'Logged out successfully'
   end
 
-  private
-  def find_user_by_username_or_email(identifier)
-    User.find_by('lower(username) = ? OR lower(email) = ?', identifier.downcase, identifier.downcase)
-  end
-
-  def require_login
-    unless current_user
-      flash[:error] = 'You must be logged in to log out.'
-      redirect_to root_path
-    end
-  end
-
 end
