@@ -1,6 +1,3 @@
-Given('I am on the login page') do
-    visit login_path 
-end
 
 When('I click on the "Forgot Password" link') do
 click_link "Forgot Password" # Replace with the actual text or selector for the link
