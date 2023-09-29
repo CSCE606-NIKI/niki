@@ -16,9 +16,11 @@ gem 'pg'
 gem 'dotenv-rails', group: [:development, :test]
 gem "aws-sdk-s3", require: false
 gem "puma"
-group :test do
-    gem 'cucumber-rails', require: false
-end 
+# group :test do
+#     gem 'cucumber-rails', require: false
+# end 
+gem 'cucumber-rails', require: false
+
 gem 'rspec-rails'
 gem 'capybara', '~> 3.35'
 gem 'database_cleaner'
@@ -27,7 +29,7 @@ gem  'selenium-webdriver'
 gem 'bcrypt'
 gem 'factory_bot_rails', '~> 6.2'
 gem 'faker', '~> 2.18', require: false
-gem 'simplecov', require: false, group: :test
+gem 'simplecov'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
