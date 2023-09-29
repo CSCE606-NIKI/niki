@@ -10,7 +10,7 @@
       <div class="login-alert">
         <%= flash[:danger] %>
       </div>
-  <% end %>
+    <% end %>
 
 
     <div class="field">
@@ -26,9 +26,15 @@
     <div class="actions">
       <%= form.submit "Log in", class: "submit" %>
     </div>
-
-<% end %>
-
+    <% end %>
+    
+    # Add a button to log in with Google
+    # Make sure to keep it separate from other routing logic because this button has to make a POST request to /auth/google_oauth2
+    # and not POST to /login
+    # (Any 3rd party login button should make a POST request to /auth/:provider)
+    <div class="social-signup">
+    <%= button_to "Log in with Google", '/auth/google_oauth2', class: "google-signup" %>
+    </div>
       
   </div>
 </div>

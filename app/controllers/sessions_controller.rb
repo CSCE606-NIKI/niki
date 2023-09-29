@@ -29,4 +29,17 @@ class SessionsController < ApplicationController
     redirect_to '/login', notice: 'Logged out successfully'
   end
 
+  def omniauth
+    # Create a user object from the response
+    # from_omniauth takes care of creating a new user if it doesn't exist yet
+    @user = User.from_omniauth(request.env['omniauth.auth']) 
+    if @user.valid?
+      session[:user_id] = @user.id
+      redirect_to root_path
+    else
+      # If Google returns an invalid hash, take the user to the login page
+      redirect_to '/login', notice: 'Google Authentication failed. Please try again or try a different sign-in method.'
+    end
+  end
+
 end
