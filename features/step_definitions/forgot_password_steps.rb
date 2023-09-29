@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 Given('I am on the login form') do
     visit login_path
 end  
+=======
+>>>>>>> 736ff2640835926c9f18d93917284a17a0cf1f6c
 
 When('I click on the "Forgot Password?" link') do
     click_link "Forgot Password?"

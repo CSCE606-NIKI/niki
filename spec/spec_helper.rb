@@ -15,7 +15,7 @@ require 'factory_bot_rails'
 # it.
 #
 # spec/spec_helper.rb
-
+require_relative '../coverage_helper'
 require 'simplecov'
 SimpleCov.start
 
