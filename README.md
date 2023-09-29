@@ -29,11 +29,16 @@ We intend to build a web-app that allows Professional Engineers (PEs) to track t
     - Create a role (suppose 'credittrackeradmin') with the ability to create databases using `CREATE ROLE credittrackeradmin WITH CREATEDB;`
     - Allow the 'credittrackeradmin' role to log in: `ALTER ROLE credittrackeradmin WITH LOGIN;`
     - Create a .env file in the /niki directory and set the values for the following PostgreSQL environment variables:
-            POSTGRES_USER
-            POSTGRES_DB
-            POSTGRES_HOST
-            POSTGRES_PASSWORD
-            POSTGRES_TEST_DB
+      ```
+        - POSTGRES_USER = credittrackeradmin
+        - POSTGRES_DB = development
+        - POSTGRES_HOST = localhost # normally localhost, could be something else if you're not accessing the local db
+        - POSTGRES_PASSWORD = *insert your password*
+        - POSTGRES_TEST_DB = test
+      ```
+    - Create database and then run migrations on it
+        - rake db:create
+        - rake db:migrate
     - Run the server using the command: rails s
     - If you encounter the following error: "password authentication failed for user credittrackeradmin," you can change the user's password in PostgreSQL:
     - Alter the password for the user 'credittrackeradmin' using the following command: `ALTER USER credittrackeradmin PASSWORD 'new_password';`
