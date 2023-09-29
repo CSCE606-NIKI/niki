@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy', as: 'logout'
+  get 'auth/:provider/callback', to: 'sessions#omniauth'
   get '/password/reset', to: 'password_resets#new'
   post '/password/reset', to: 'password_resets#create'
   get '/password/reset/edit', to: 'password_resets#edit'
