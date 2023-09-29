@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'users/create'
   post 'users/new', to: "users#create"
   root "welcome#index"
+  get 'dashboard/dashboard'
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy', as: 'logout'
