@@ -3,6 +3,10 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     scope: "userinfo.email, userinfo.profile",
     prompt: "select_account"
   end
+
+  Rails.application.config.middleware.use OmniAuth::Builder do
+    provider :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_APP_SECRET']
+  end
 # Make sure POST requests are allowed in OmniAuth
 # However, OmniAuth 2.0 now only accepts POST requests so this might be redundant
 OmniAuth.config.allowed_request_methods = %i[post]

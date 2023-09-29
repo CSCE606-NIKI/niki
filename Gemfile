@@ -28,5 +28,6 @@ gem 'simplecov', require: false, group: :test
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
+gem 'omniauth-facebook', group: [:development, :test]
 
   
