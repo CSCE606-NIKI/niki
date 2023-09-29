@@ -1,6 +1,10 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
+  # Configure 'rails notes' to inspect Cucumber files
+  config.annotations.register_directories('features')
+  config.annotations.register_extensions('feature') { |tag| /#\s*(#{tag}):?\s*(.*)$/ }
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time
@@ -73,4 +77,22 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+
+  #config.action_mailer.default_url_options = {host: 'localhost:3000'}
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+
+  config.action_mailer.logger = Logger.new('log/mail.log')
+
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  # address: 'smtp.example.com',  # Replace with your SMTP server address
+  # port: 587,                   # SMTP server port (587 is common for TLS, 465 for SSL)
+  # domain: 'example.com',       # Your domain (e.g., example.com)
+  # user_name: 'username',   # Your SMTP username
+  # password: 'password_digest',   # Your SMTP password
+  # authentication: :login,      # Authentication method (:login, :plain, :cram_md5, etc.)
+  # enable_starttls_auto: true   # Enable TLS/SSL
+  # }
+
 end

@@ -1,0 +1,48 @@
+
+<%=stylesheet_link_tag 'sign_up.css'%>
+<div class ="signup-container">
+  <h1>Credits Tracker</h1>
+  <div class="signup">
+    <h2>Sign up</h2>
+    <%= form_with(model: @user, local: true) do |form| %>
+      <div class="field">
+          <%= form.label :username %>
+          <%= form.text_field :username %>
+      </div>
+      <div class="field">
+          <%= form.label :email %>
+          <%= form.email_field :email%>
+      </div>
+      <div class="field">
+          <%= form.label :password %>
+          <%= form.password_field :password %>
+      </div>
+      <div class="field">
+          <%= form.label :password_confirmation %>
+          <%= form.password_field :password_confirmation %>
+      </div>
+      <% if flash[:alert].present? %>
+      <div class="signup-alert">
+          <%= flash[:alert] %>
+      </div>
+      <% end %>
+      <div class="actions">
+          <%= form.submit "Sign up" %>
+      </div>
+      <% end %>
+
+      <!-- Add a button to log in with Google
+      Make sure to keep it separate from other routing logic because this button has to make a POST request to /auth/google_oauth2
+      and not POST to /login
+      (Any 3rd party login button should make a POST request to /auth/:provider)-->      
+      <div class="social-signup">
+          <%= button_to "Sign up with Google", '/auth/google_oauth2', class: "google-signup" %>
+      </div>
+      <div class="existing-account">
+            Already have an account? 
+            <%= link_to "Log in", '/login' %>
+      </div>
+      
+  </div>
+</div>
+

@@ -1,0 +1,47 @@
+
+<%=stylesheet_link_tag 'sign_up.css'%>
+<div class ="login-container">
+  <h1>Credits Tracker</h1>
+  <div class="signup">
+    <h2>Log In</h2>
+    <%= form_with url: '/login', method: :post, local: true do |form| %>
+      <!-- Display flash message if present -->
+    <% if flash[:danger] %>
+      <div class="login-alert">
+        <%= flash[:danger] %>
+      </div>
+    <% end %>
+
+
+    <div class="field">
+      <%= form.label :identifier, 'Email or Username' %>
+      <%= form.text_field :identifier, placeholder: 'Email or Username' %>
+    </div>
+
+    <div class="field">
+      <%= form.label :password %>
+      <%= form.password_field :password, placeholder: 'Password' %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit "Log in", class: "submit" %>
+    </div>
+    <% end %>
+    
+    <!-- Add a button to log in with Google
+    Make sure to keep it separate from other routing logic because this button has to make a POST request to /auth/google_oauth2
+    and not POST to /login
+    (Any 3rd party login button should make a POST request to /auth/:provider)-->
+    <div class="social-signup">
+      <%= button_to "Log in with Google", '/auth/google_oauth2', class: "google-signup" %>
+    </div>
+
+    <div class="actions">
+      <%= link_to "Forgot Password?", password_reset_path %>
+    </div>
+
+<% end %>
+      
+  </div>
+</div>
+
