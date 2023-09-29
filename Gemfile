@@ -16,8 +16,11 @@ gem 'pg'
 gem 'dotenv-rails', group: [:development, :test]
 gem "aws-sdk-s3", require: false
 gem "puma"
-gem 'cucumber-rails'
+group :test do
+    gem 'cucumber-rails', require: false
+end 
 gem 'rspec-rails'
+gem 'capybara', '~> 3.35'
 gem 'database_cleaner'
 gem  'Selenium'
 gem  'selenium-webdriver'
@@ -29,5 +32,6 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-facebook', group: [:development, :test]
+gem 'rails-controller-testing'
 
   
