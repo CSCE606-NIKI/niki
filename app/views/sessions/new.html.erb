@@ -26,11 +26,12 @@
     <div class="actions">
       <%= form.submit "Log in", class: "submit" %>
     </div>
-    
+       
     
     <div class="actions">
     <%= link_to "Forgot Password?", password_reset_path %>
     </div>
+
     
     <% end %>
     <!-- Add a button to log in with Google
@@ -42,5 +43,11 @@
     </div>
     
   </div>
+
+  <% if flash[:alert] %>
+      <div class="passwordreset-alert">
+          <%= flash[:alert] %>
+      </div>
+  <% end %>
 </div>
 
