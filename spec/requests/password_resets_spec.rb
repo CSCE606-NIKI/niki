@@ -8,19 +8,36 @@ RSpec.describe "PasswordResets", type: :request do
     end
   end
 
-  describe "GET /create" do
-    it "returns http success" do
-      get "/password_resets/create"
-      expect(response).to have_http_status(:success)
+  # Assuming you have set up RSpec and FactoryBot for testing
+
+# In your password_resets_spec.rb or a similar test file
+
+  describe "POST /password/reset" do
+    context "when a user with the given email exists" do
+      let(:user) { create(:user, email: "user@example.com") }
+
+      it "sets a flash message" do
+        post "/password/reset", params: { email: user.email }
+        expect(flash[:alert]).to eq('If an account with that email was found, we have sent a link to reset the password')
+      end
+
+      it "redirects to the login page" do
+        post "/password/reset", params: { email: user.email }
+        expect(response).to redirect_to(login_path)
+      end
+
+      it "sets a flash message" do
+        post "/password/reset", params: { email: "nonexistent@example.com" }
+        expect(flash[:alert]).to eq('If an account with that email was found, we have sent a link to reset the password')
+      end
+
+      it "redirects to the login page" do
+        post "/password/reset", params: { email: "nonexistent@example.com" }
+        expect(response).to redirect_to(login_path)
+      end
     end
   end
 
-  describe "POST /password/reset" do
-    it "returns http success" do
-      post '/password/reset'
-      expect(response).to have_http_status(:success)
-    end
-  end
 
   describe "GET /password/reset/edit" do
     let(:user) { create(:user) }
@@ -31,26 +48,5 @@ RSpec.describe "PasswordResets", type: :request do
       expect(response).to have_http_status(:success)
     end
   end
-
-  # describe "PATCH /password/reset/edit" do
-  #   let(:user) { create(:user) }
-  #   let(:token) { user.signed_id(purpose: 'password_reset', expires_in: 30.minutes) }
-  #   let(:new_password) { "new_password_here" }
-  
-  #   it "returns http success and updates the user's password" do
-  #     user.reset_password_token = token
-  #     user.save(validate: false) # Skip password validations
-  #     patch "/password/reset/edit", params: {
-  #       token: token,
-  #       user: {
-  #         password: new_password,
-  #         password_confirmation: new_password
-  #       }
-  #     }
-  
-  #     expect(response).to have_http_status(:success)
-  #     expect(user.reload.authenticate(new_password)).to be_truthy
-  #   end
-  # end
   
 end
