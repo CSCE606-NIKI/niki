@@ -37,4 +37,5 @@
 
 /node_modules
 
+.env
 coverage
