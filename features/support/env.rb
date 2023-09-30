@@ -91,7 +91,7 @@ Before('@omniauth_test1') do
   OmniAuth.config.on_failure = Proc.new { |env|
     OmniAuth::FailureEndpoint.new(env).redirect_to_failure
   }
-
+  
   OmniAuth.config.add_mock(:google_oauth2, {
     :uid => '12345',
     :info => {
