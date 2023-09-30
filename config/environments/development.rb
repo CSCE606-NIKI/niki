@@ -79,7 +79,7 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   #config.action_mailer.default_url_options = {host: 'localhost:3000'}
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: 'localhost:3000'}
 
 
   config.action_mailer.logger = Logger.new('log/mail.log')
@@ -94,5 +94,8 @@ Rails.application.configure do
   # authentication: :login,      # Authentication method (:login, :plain, :cram_md5, etc.)
   # enable_starttls_auto: true   # Enable TLS/SSL
   # }
+
+  config.action_mailer.delivery_method = :log
+  config.action_mailer.perform_deliveries = true
 
 end
