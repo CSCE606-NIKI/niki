@@ -8,4 +8,7 @@ class User < ApplicationRecord
             u.password_digest = SecureRandom.hex(15)
         end
     end
+
+    # Every user has to have an email, Google login fails if no email is provided
+    validates :email, presence: true
 end
