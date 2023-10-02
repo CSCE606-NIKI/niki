@@ -83,7 +83,7 @@ h2 {
     margin-top: 20px;
 }
 
-.google-signup {
+.third-party-signup {
     width: 100%;
     padding: 12px;
     background-color: #4285f4; /* Google blue color */
@@ -96,7 +96,7 @@ h2 {
     text-align: center;
 }
 
-.google-signup:hover {
+.third-party-signup:hover {
     background-color: #2a75f3;
 }
 

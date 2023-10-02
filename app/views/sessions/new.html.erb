@@ -26,24 +26,21 @@
     <div class="actions">
       <%= form.submit "Log in", class: "submit" %>
     </div>
-       
-    
-    <div class="actions">
-    <%= link_to "Forgot Password?", password_reset_path %>
-    </div>
-
     
     <% end %>
-    <!-- Add a button to log in with Google
-    Make sure to keep it separate from other routing logic because this button has to make a POST request to /auth/google_oauth2
-    and not POST to /login
-    (Any 3rd party login button should make a POST request to /auth/:provider)-->
-    <div class="social-signup">
-      <%= button_to "Log in with Google", '/auth/google_oauth2', class: "google-signup" %>
-    </div>
-    
-  </div>
 
+    <!-- Make sure to keep 3rd party logins separate from other routing logic because the buttons have to make POST requests to /auth/:provider
+    and not POST to /login-->
+    <div class="social-signup">
+      <%= button_to "Log in with Google", '/auth/google_oauth2', class: "third-party-signup" %>
+    </div>
+    <div class="social-signup">
+      <%= button_to "Log in with Facebook", '/auth/facebook', class: "third-party-signup" %>
+    </div>
+    <div class="actions">
+      <%= link_to "Forgot Password?", password_reset_path %>
+    </div>
+  </div>
   <% if flash[:alert] %>
       <div class="passwordreset-alert">
           <%= flash[:alert] %>

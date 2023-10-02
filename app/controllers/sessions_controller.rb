@@ -38,7 +38,7 @@ class SessionsController < ApplicationController
       redirect_to dashboard_dashboard_path(@user)
     else
       # If Google returns an invalid hash, take the user to the login page
-      redirect_to '/login', notice: 'Google Authentication failed. Please try again or try a different sign-in method.'
+      redirect_to '/login', notice: 'Authentication failed. Please try again or try a different sign-in method.'
     end
   end
 
