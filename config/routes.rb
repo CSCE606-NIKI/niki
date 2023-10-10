@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   get 'users/create'
   post 'users/new', to: "users#create"
   root "welcome#index"
-  get 'dashboard/dashboard'
+  get '/dashboard', to: 'dashboard#index'
+
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy', as: 'logout'
@@ -18,6 +19,9 @@ Rails.application.routes.draw do
   get '/password/reset/edit', to: 'password_resets#edit'
   patch '/password/reset/edit', to: 'password_resets#update'
 
+  # config/routes.rb
   resources :users, only: [:new, :create]
+  resources :credits
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

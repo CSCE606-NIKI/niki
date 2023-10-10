@@ -1,0 +1,15 @@
+<h1> Add Credit <h1>
+
+<%= form_for @credit do |form| %>
+    <%= form.label :credit_type %>
+    <%= form.select :credit_type , @credit_types %>
+
+    <%= form.label :date %>
+    <%= form.date_field :date %>
+
+    <%= form.label :amount %>
+    <%= form.number_field :amount%>
+
+    <%= form.submit %>
+
+<% end %>
