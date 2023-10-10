@@ -1,15 +1,37 @@
 <h1> Add Credit <h1>
 
+<style>
+form label {
+  font-size: 16px;
+}
+form input[type="text"],
+form select,
+form input[type="date"],
+form button, 
+form input[type="number"] {
+  font-size: 14px; 
+}
+.custom-button {
+  width: 70px; /* Adjust the width as needed */
+  height: 30px; /* Adjust the height as needed */
+  font-size: 16px; /* Adjust the font size as needed */
+  /* Add other styles as needed */
+}
+
+
+</style>
 <%= form_for @credit do |form| %>
-    <%= form.label :credit_type %>
-    <%= form.select :credit_type , @credit_types %>
+  <%= form.label :credit_type %>
+  <%= form.select :credit_type, @credit_types %>
 
-    <%= form.label :date %>
-    <%= form.date_field :date %>
+  <%= form.label :date %>
+  <%= form.date_field :date %>
 
-    <%= form.label :amount %>
-    <%= form.number_field :amount%>
+  <%= form.label :amount %>
+  <%= form.number_field :amount %>
 
-    <%= form.submit %>
+  <%= form.label :description %>
+  <%= form.text_field :description %>
 
+  <%= form.submit 'Submit', class: 'custom-button' %>
 <% end %>

@@ -1,73 +1,17 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  
-
-</head>
-
-
-
-<style>
-    .navbar-custom {
-        background-color: #004a7c;
-    }
-
-    .navbar-custom .navbar-brand, 
-    .navbar-custom .nav-link {
-        color: white;
-    }
-
-    .btn-custom {
-        background-color: #500000;
-        color: white;
-    }
-</style>
-
-<body>
-
-<nav class="navbar navbar-expand-lg navbar-custom">
-
-
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Profile
-            </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
-                <a class="dropdown-item" href="#">Edit Profile</a>
-                <% if current_user %>
-                    <%= form_tag logout_path, method: :delete, class: "dropdown-item" do %>
-                        <%= submit_tag 'Logout', class: "btn btn-custom btn-link", style: "background: none; border: none;" %>
-                    <% end %>
-                <% else %>
-                    <%= form_tag login_path, method: :get, class: "dropdown-item" do %>
-                        <%= submit_tag 'Log in', class: "btn btn-custom btn-link", style: "background: none; border: none;" %>
-                    <% end %>
-                    <%= form_tag new_user_path, method: :get, class: "dropdown-item" do %>
-                        <%= submit_tag 'Sign up', class: "btn btn-custom btn-link", style: "background: none; border: none;" %>
-                    <% end %>
-                <% end %>
-            </div>
-        </li>
-    </ul>
-</nav>
 
 <!-- Main Dashboard-->
 <div class="container mt-5">
     <h1>Welcome to the Dashboard</h1>
     
-    <h2>Summary</h2>
-    <h2>Total Credits for Each Type</h2>
-    <table>
+    <h2>Summary Credits</h2>
+    <table class="styled-table">
     <thead>
         <tr>
-        <th>Credit Type</th>
-        <th>Total Credits</th>
+            <th>Credit Type</th>
+            <th>Total Credits</th>
         </tr>
     </thead>
     <tbody>
@@ -78,7 +22,7 @@
         </tr>
         <% end %>
     </tbody>
-    </table>
+</table>
 
 
     
