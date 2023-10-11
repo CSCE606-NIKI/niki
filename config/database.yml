@@ -6,7 +6,7 @@ default: &default
   password: <%= ENV['POSTGRES_PASSWORD'] %>
   host: <%= ENV['POSTGRES_HOST'] %>
   timeout: 5000
-  port: 5432
+  port: 5433
 development:
   <<: *default
   database: <%= ENV['POSTGRES_DB'] %>
@@ -16,5 +16,5 @@ test:
 production:
   <<: *default
   database: credittracker
-  username: askani
+  username: credittarckeradmin
   password: admin123

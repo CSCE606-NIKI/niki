@@ -1,0 +1,19 @@
+<h1>Edit Profile page</h1>
+<%= link_to 'Dashboard', dashboard_dashboard_path, class: 'btn btn-primary' %>
+<%= form_for @user, url: profile_update_path do |f| %>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :username %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.email_field :email %>
+  </div>
+
+  <!-- Add other fields as needed -->
+
+  <div class="actions">
+    <%= f.submit "Update Profile" %>
+  </div>
+<% end %>
