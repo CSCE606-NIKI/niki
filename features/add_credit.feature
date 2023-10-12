@@ -28,7 +28,18 @@ Feature: Managing Credits
         | Amount       | 300         |
         | Description  | Test credit |
     And I click the "Submit" button
-    Then I should see an error message for "Credit_type1"
+    Then I should see an error message for "You've already reached your credit limit for type Credit_type1"
+    And I should not be redirected to the dashboard
+
+  Scenario: Creating a New Credit with Invalid Inputs
+    When I visit the new credit page
+      And I fill in the following:
+        | Field        | Value       |
+        | Credit Type  | Credit_type1 |
+        | Amount       | 10         |
+        | Description  | Test credit |
+    And I click the "Submit" button
+    Then I should see an error message for "Couldn't be added, try again!"
     And I should not be redirected to the dashboard
 
   Scenario: Viewing a Credit

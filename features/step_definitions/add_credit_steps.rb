@@ -58,7 +58,7 @@ Given("I have existing credits of type {string} totaling to {string}") do |credi
 end
 
 Then('I should see an error message for {string}') do |string|
-    expect(page).to have_content("You've already reached your credit limit for type #{string}")
+    expect(page).to have_content(string)
 end
 
 And("I should not be redirected to the dashboard") do
