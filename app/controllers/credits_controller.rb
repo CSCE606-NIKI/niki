@@ -10,23 +10,27 @@ class CreditsController < ApplicationController
     end
 
     def create
-
         @credit = Credit.new(credit_params)
         @credit.user = current_user 
 
         existing_credits = Credit.where(credit_type: @credit.credit_type)
         total_number_of_credits = existing_credits.sum(:amount) + @credit.amount
+        puts total_number_of_credits
         if total_number_of_credits <= Credit::CREDIT_LIMITS[@credit.credit_type]
             @credit.total_number_of_credits = total_number_of_credits
             if @credit.save
-              redirect_to dashboard_path
+                flash[:notice] = "Added Successfully!"
+                redirect_to dashboard_path
+                return 
             else
-              render 'new'
+                redirect_to new_credit_path
+                flash[:error] = "Couldn't be added, try again!"
             end
         else
+            redirect_to new_credit_path
             flash[:error] = "You've already reached your credit limit for type #{@credit.credit_type}!"
-            render 'new'
         end
+        
     end
 
     def show
