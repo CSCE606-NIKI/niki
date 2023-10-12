@@ -5,6 +5,7 @@ class ProfileController < ApplicationController
       
     def update
         @user = current_user
+        puts current_user.profile_pic
         if @user.update(user_params)
           redirect_to dashboard_dashboard_path, notice: 'Profile updated successfully.'
         else
@@ -15,6 +16,6 @@ class ProfileController < ApplicationController
     private
     
     def user_params
-        params.require(:user).permit(:username, :email) # Permit only username and email
+        params.require(:user).permit(:username, :email, :profile_pic) # Permit only username and email
     end
 end
