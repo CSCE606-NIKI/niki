@@ -1,0 +1,12 @@
+<%= stylesheet_link_tag 'credits.css' %>
+<p><strong>Credit ID:</strong> <%= credit.creditID %></p>
+<p><strong>Date:</strong> <%= credit.date %></p>
+<p><strong>Status:</strong> <%= credit.status %></p>
+<p><strong>Type:</strong> <%= credit.type %></p>
+<p><strong>Credit Value:</strong> <%= credit.credit_value %></p>
+<p><strong>Description:</strong></p>
+  <div class="description-container">
+    <p><%= @credit.description %></p>
+  </div>
+
+

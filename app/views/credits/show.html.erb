@@ -1,0 +1,10 @@
+<%= stylesheet_link_tag 'credits.css' %>
+<div class="credits-container">
+  <%= render @credit %>
+
+  <div class="button-container">
+    <%= link_to "Edit credit", edit_credit_path(@credit), class: "btn btn-custom" %>
+    <%= link_to "Back to credits", credits_path, class: "btn btn-custom" %>
+    <%= button_to "Destroy credit", @credit, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-custom" %>
+  </div>
+</div>
