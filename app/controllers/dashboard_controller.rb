@@ -1,6 +1,7 @@
 class DashboardController < ApplicationController
   before_action :require_login
   def index
+    @credits = Credit.all
     @credit_totals = {}
 
     Credit::CREDIT_TYPES.each do |credit_type|

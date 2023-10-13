@@ -1,7 +1,33 @@
 
 <!DOCTYPE html>
 <html lang="en">
+<style>
 
+.credit-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.credit-table th, .credit-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.credit-table th {
+  background-color: #f2f2f2;
+}
+
+.credit-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.credit-table tr:hover {
+  background-color: #ddd;
+}
+
+</style>
 <!-- Main Dashboard-->
 <div class="container mt-5">
     <h1>Welcome to the Dashboard</h1>
@@ -22,7 +48,30 @@
         </tr>
         <% end %>
     </tbody>
-</table>
+    </table>
+
+    <br/>
+    <hr/>
+    <h3>Credit List</h3>
+    <table class="credit-table">
+    <thead>
+        <tr>
+        <th>Credit Type</th>
+        <th>Date</th>
+        <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @credits.each do |credit| %>
+        <tr>
+            <td><%= credit.credit_type %></td>
+            <td><%= credit.date %></td>
+            <td><%= credit.amount %></td>
+        </tr>
+        <% end %>
+    </tbody>
+    </table>
+
 
 
     
