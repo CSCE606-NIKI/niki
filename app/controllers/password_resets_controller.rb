@@ -11,9 +11,6 @@ class PasswordResetsController < ApplicationController
     end
       flash[:alert] = 'If an account with that email was found, we have sent a link to reset the password'
       redirect_to login_path
-      # puts "Email not found: #{params[:email]}"
-      #flash.now[:notice] = 'If an account with that email was found, we have sent a link to reset the password'
-    
   end
 
   
