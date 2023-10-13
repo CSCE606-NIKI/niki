@@ -25,7 +25,7 @@ Feature: Forgot Password
     When I request a password reset for "test@example.com"
     Then I should see a password reset page
     And I should be able to enter a new password
-    And I should see a success message
+    And I should get a success message
 
 
 

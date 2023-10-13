@@ -13,7 +13,7 @@ class CreditsController < ApplicationController
         @credit = Credit.new(credit_params)
         @credit.user = current_user 
 
-        existing_credits = Credit.where(credit_type: @credit.credit_type)
+        existing_credits = Credit.where(user: current_user, credit_type: @credit.credit_type)
         total_number_of_credits = existing_credits.sum(:amount) + @credit.amount
         puts total_number_of_credits
         if total_number_of_credits <= Credit::CREDIT_LIMITS[@credit.credit_type]

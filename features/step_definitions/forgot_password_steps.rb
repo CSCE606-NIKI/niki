@@ -53,6 +53,6 @@ Then('I should be able to enter a new password') do
     click_button 'Reset Password' 
 end
 
-Then('I should see a success message') do
+Then('I should get a success message') do
     expect(page).to have_content('Your password was reset succesfully. Please log in.')
 end
