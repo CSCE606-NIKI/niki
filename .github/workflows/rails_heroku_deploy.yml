@@ -12,40 +12,48 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # - name: Checkout Code
-    #   uses: actions/checkout@v2
+    - name: Checkout Code
+      uses: actions/checkout@v2
 
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: 3.2.2 # Set to your Ruby version
-    - name: Check GitHub Workspace
-      run: echo ${{ github.workspace }}
 
     - name: Install Bundler
-      run: |
-         cd ${{ github.workspace }}
-         gem install bundler
-      working-directory: ${{ github.workspace }}
-     
+      run: gem install bundler
 
     - name: Install Dependencies
+      run: bundle install
+      
+    - name: Install Heroku CLI
+      uses: heroku/heroku@v5
+
+    - name: Login to Heroku
       run: |
-         cd ${{ github.workspace }}
-         bundle install
-      working-directory: ${{ github.workspace }}
+        echo $HEROKU_API_KEY | heroku login --interactive
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}  # Set your Heroku API key as a GitHub secret
+
+    - name: Access Heroku Database
+      run: |
+        DATABASE_URL=$(heroku config:get DATABASE_URL -a your-heroku-app-name)  # Replace 'your-heroku-app-name' with your app name
+        echo "Database URL: $DATABASE_URL"
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+
+    - name: Run Database Migrations
+      run: |
+        # You can use the DATABASE_URL environment variable to run database migrations
+        bundle exec rails db:migrate
+      env:
+        DATABASE_URL: $DATABASE_URL
 
     - name: Database Setup
-      run: | 
-         cd ${{ github.workspace }}
-         bundle exec rails db:create db:migrate
-      working-directory: ${{ github.workspace }}
+      run: heroku run rake db:create db:migrate
 
     - name: Run Tests
-      run:  cd ${{ github.workspace }}
-         bundle exec rspec
-      working-directory: ${{ github.workspace }}
-      
+      run: bundle exec rspec
 
     - name: Deploy to Heroku
       run: |
