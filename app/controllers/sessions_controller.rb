@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def new
     if logged_in?
-      redirect_to root_path # Redirect logged-in users to their profile
+      redirect_to dashboard_path # Redirect logged-in users to their profile
     else
       @user = User.new
     end
@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
     end
     if @user && @user.authenticate(params[:password])
         session[:user_id] = @user.id
-        redirect_to dashboard_dashboard_path(@user)
+        redirect_to dashboard_path(@user)
     else
         flash[:danger] ='Invalid credentials'
         redirect_to login_path(@user)
@@ -35,7 +35,7 @@ class SessionsController < ApplicationController
     @user = User.from_omniauth(request.env['omniauth.auth']) 
     if @user.valid?
       session[:user_id] = @user.id
-      redirect_to dashboard_dashboard_path(@user)
+      redirect_to dashboard_path(@user)
     else
       # If Google returns an invalid hash, take the user to the login page
       redirect_to '/login', notice: 'Google Authentication failed. Please try again or try a different sign-in method.'

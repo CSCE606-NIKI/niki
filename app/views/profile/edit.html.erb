@@ -1,0 +1,27 @@
+<%= stylesheet_link_tag 'edit_profile.css' %>
+<div class ="edit-profile-container">
+
+  <h1>Edit Profile</h1>
+  <div class="edit_profile">
+  <%= form_with(model: @user, url: profile_update_path, local: true, method: :patch) do |f| %>
+      <div class="field">
+          <%= f.label :username, "Name" %>
+          <%= f.text_field :username %>
+      </div>
+      <div class="field">
+          <%= f.label :email, "Email" %>
+          <%= f.email_field :email%>
+      </div>
+      <!-- Existing form fields -->
+      <div class="field">
+        <%= f.label :profile_pic, "Profile Pic" %>
+        <%= f.file_field :profile_pic %>
+      </div>
+      <!-- ... -->
+
+      <div class="actions">
+        <%= f.submit "Update Profile" %>
+      </div>
+    <% end %>
+  </div>
+</div>

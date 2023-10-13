@@ -7,13 +7,13 @@ describe SessionsController, type: :controller do
     it 'logs in with valid email and password' do
       post :create, params: { identifier: user.email, password: user.password }
       expect(session[:user_id]).to eq(user.id)
-      expect(response).to redirect_to(dashboard_dashboard_path(user.id)) 
+      expect(response).to redirect_to(dashboard_path(user.id)) 
     end
     
     it 'logs in with valid username and password' do
         post :create, params: { identifier: user.username, password: user.password }
         expect(session[:user_id]).to eq(user.id)
-        expect(response).to redirect_to(dashboard_dashboard_path(user.id))
+        expect(response).to redirect_to(dashboard_path(user.id))
       end
 
     it 'does not log in with invalid password' do
@@ -47,7 +47,7 @@ describe SessionsController, type: :controller do
     it 'already logged in user' do
       session[:user_id] = user.id
       get :new
-      expect(response).to redirect_to(root_path) 
+      expect(response).to redirect_to(dashboard_path) 
     end
   end
 end

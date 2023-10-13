@@ -26,6 +26,12 @@
         background-color: #500000;
         color: white;
     }
+    .profile-picture {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
 </style>
 
 <body>
@@ -35,24 +41,31 @@
 
     <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Profile
-            </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
-                <a class="dropdown-item" href="#">Edit Profile</a>
-                <% if current_user %>
-                    <%= form_tag logout_path, method: :delete, class: "dropdown-item" do %>
-                        <%= submit_tag 'Logout', class: "btn btn-custom btn-link", style: "background: none; border: none;" %>
-                    <% end %>
+       
+            <div class="d-flex align-items-center">
+                <% if current_user.profile_pic.attached? %>
+                  <%= image_tag current_user.profile_pic, class: "profile-picture mr-2" %>
                 <% else %>
-                    <%= form_tag login_path, method: :get, class: "dropdown-item" do %>
-                        <%= submit_tag 'Log in', class: "btn btn-custom btn-link", style: "background: none; border: none;" %>
-                    <% end %>
-                    <%= form_tag new_user_path, method: :get, class: "dropdown-item" do %>
-                        <%= submit_tag 'Sign up', class: "btn btn-custom btn-link", style: "background: none; border: none;" %>
-                    <% end %>
+                  <%= image_tag "default_profile_pic.jpg", class: "profile-picture mr-2" %>
                 <% end %>
+              <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
+                <a class="dropdown-item" href="<%= profile_edit_path %>">Edit Profile</a>
+                <% if current_user %>
+                  <%= form_tag logout_path, method: :delete, class: "dropdown-item" do %>
+                    <%= submit_tag 'Logout', class: "btn btn-custom btn-link", style: "background: none; border: none;" %>
+                  <% end %>
+                <% else %>
+                  <%= form_tag login_path, method: :get, class: "dropdown-item" do %>
+                    <%= submit_tag 'Log in', class: "btn btn-custom btn-link", style: "background: none; border: none;" %>
+                  <% end %>
+                  <%= form_tag new_user_path, method: :get, class: "dropdown-item" do %>
+                    <%= submit_tag 'Sign up', class: "btn btn-custom btn-link", style: "background: none; border: none;" %>
+                  <% end %>
+                <% end %>
+              </div>
             </div>
+
         </li>
     </ul>
 </nav>
