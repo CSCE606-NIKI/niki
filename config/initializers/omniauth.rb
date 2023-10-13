@@ -5,7 +5,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   end
 
   Rails.application.config.middleware.use OmniAuth::Builder do
-    provider :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_APP_SECRET']
+    provider :facebook, '2615536415288670', 'ff593f7a6642457955b650c1be09803b'
   end
 # Make sure POST requests are allowed in OmniAuth
 # However, OmniAuth 2.0 now only accepts POST requests so this might be redundant
