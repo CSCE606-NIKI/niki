@@ -27,35 +27,34 @@ jobs:
       run: bundle install
       
     - name: Install Heroku CLI
-      uses: heroku/heroku@v5
-
+      uses: heroku/actions/setup-heroku@v5  # Use the setup-heroku action
+      with:
+      heroku-api-key: ${{ secrets.HEROKU_API_KEY }}  # Set your Heroku API key as a GitHub secret
+    
     - name: Login to Heroku
-      run: |
-        echo $HEROKU_API_KEY | heroku login --interactive
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}  # Set your Heroku API key as a GitHub secret
-
+      run: heroku auth:login
+    
     - name: Access Heroku Database
       run: |
-        DATABASE_URL=$(heroku config:get DATABASE_URL -a your-heroku-app-name)  # Replace 'your-heroku-app-name' with your app name
-        echo "Database URL: $DATABASE_URL"
+      DATABASE_URL=$(heroku config:get DATABASE_URL -a your-heroku-app-name)  # Replace 'your-heroku-app-name' with your app name
+      echo "Database URL: $DATABASE_URL"
       env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-
+      HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+    
     - name: Run Database Migrations
       run: |
-        # You can use the DATABASE_URL environment variable to run database migrations
-        bundle exec rails db:migrate
+      # You can use the DATABASE_URL environment variable to run database migrations
+      bundle exec rails db:migrate
       env:
-        DATABASE_URL: $DATABASE_URL
-
+      DATABASE_URL: $DATABASE_URL
+    
     - name: Database Setup
       run: heroku run rake db:create db:migrate
-
+    
     - name: Run Tests
       run: bundle exec rspec
-
+      
     - name: Deploy to Heroku
       run: |
-        git remote add heroku https://git.heroku.com/csce606-niki.git
-        git push heroku main
+      git remote add heroku https://git.heroku.com/csce606-niki.git
+      git push heroku main
