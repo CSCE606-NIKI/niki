@@ -34,7 +34,7 @@ We intend to build a web-app that allows Professional Engineers (PEs) to track t
         - POSTGRES_DB = development
         - POSTGRES_HOST = localhost # normally localhost, could be something else if you're not accessing the local db
         - POSTGRES_PASSWORD = *insert your password*
-        - POSTGRES_DB_TEST = test
+        - POSTGRES_TEST_DB = test
       ```
     - Create database and then run migrations on it
         - rake db:create
