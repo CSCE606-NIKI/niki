@@ -22,7 +22,7 @@ When('I enter my email {string}') do |email|
 end
   
 
-When('I click the "Reset Password" button') do
+When('I click "Reset Password" button') do
     click_button 'Reset Password'
 end
 

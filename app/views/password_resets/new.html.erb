@@ -6,9 +6,9 @@
     <h2>Forgot your password?</h2>
     <%= form_with url: password_reset_path, method: :post, local: true do |form| %>
       <!-- Display flash message if present -->
-      <% if flash[:danger] %>
+      <% if flash[:alert].present? %>
         <div class="passwordreset-alert">
-          <%= flash[:danger] %>
+          <%= flash[:alert] %>
         </div>
       <% end %>
 
@@ -23,4 +23,3 @@
     <% end %>
   </div>
 </div>
-

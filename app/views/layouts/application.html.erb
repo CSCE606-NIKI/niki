@@ -7,10 +7,102 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-<%= javascript_include_tag "/assets/application.js", "data-turbo-track": "reload", defer: true %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
   </head>
 
   <body>
+
+<style>
+    .navbar-custom {
+        background-color: #004a7c;
+    }
+
+    .navbar-custom .navbar-brand, 
+    .navbar-custom .nav-link {
+        color: white;
+    }
+
+    .btn-custom {
+        background-color: #500000;
+        color: white;
+    }
+    .custom-link {
+      padding: 7px;
+      color: white;
+      hover: white;
+      text-decoration: none;
+    }
+    .profile-picture {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+    
+</style>
+
+<body>
+
+<% if logged_in? %>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <ul class="navbar-nav ml-auto">
+                <% if controller_name == 'dashboard' && action_name == 'index' %>
+                    <li class="custom-link"> <%= link_to 'Add New Credit', new_credit_path , class: "custom-link" %> </li>
+                <% elsif controller_name == 'credits' && action_name == 'new' %>
+                    <li class="custom-link"><%= link_to 'Dashboard', dashboard_path , class: "custom-link" %> </li>
+                <% end %>
+
+            <li class="nav-item dropdown">
+            <div class="d-flex align-items-center">
+                <% if current_user.profile_pic.attached? %>
+                <%= image_tag current_user.profile_pic, class: "profile-picture mr-2" %>
+                <% else %>
+                <%= image_tag "default_profile_pic.jpg", class: "profile-picture mr-2" %>
+                <% end %>
+                <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
+                <a class="dropdown-item" href="<%= profile_edit_path %>">Edit Profile</a>
+                    <% if current_user %>
+                        <%= form_tag logout_path, method: :delete, class: "dropdown-item" do %>
+                            <%= submit_tag 'Logout', class: "btn btn-custom btn-link", style: "background: none; border: none;" %>
+                        <% end %>
+                    <% else %>
+                        <%= form_tag login_path, method: :get, class: "dropdown-item" do %>
+                            <%= submit_tag 'Log in', class: "btn btn-custom btn-link", style: "background: none; border: none;" %>
+                        <% end %>
+                        <%= form_tag new_user_path, method: :get, class: "dropdown-item" do %>
+                            <%= submit_tag 'Sign up', class: "btn btn-custom btn-link", style: "background: none; border: none;" %>
+                        <% end %>
+                    <% end %>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <% else %>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#">CE Tracker</a>
+            </li>
+        </ul>
+        </nav>
+    <% end %>
+
+    <% if flash[:notice] %>
+    <div class="alert alert-success">
+        <%= flash[:notice] %>
+    </div>
+    <% end %>
+
+    <% if flash[:error] %>
+    <div class="alert alert-danger">
+        <%= flash[:error] %>
+    </div>
+    <% end %>
+
     <%= yield %>
+
   </body>
 </html>
+

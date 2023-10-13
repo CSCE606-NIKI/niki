@@ -6,7 +6,7 @@ class ProfileController < ApplicationController
     def update
         @user = current_user
         if @user.update(user_params)
-          redirect_to dashboard_dashboard_path, notice: 'Profile updated successfully.'
+          redirect_to dashboard_path, notice: 'Profile updated successfully.'
         else
           render :edit
         end

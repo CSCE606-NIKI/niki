@@ -34,7 +34,7 @@ We intend to build a web-app that allows Professional Engineers (PEs) to track t
         - POSTGRES_DB = development
         - POSTGRES_HOST = localhost # normally localhost, could be something else if you're not accessing the local db
         - POSTGRES_PASSWORD = *insert your password*
-        - POSTGRES_TEST_DB = test
+        - POSTGRES_DB_TEST = test
       ```
     - Create database and then run migrations on it
         - rake db:create
@@ -75,4 +75,8 @@ You should be now be able to launch the server
 - The server will launch on the local machine on port 3000
 - Go to http://localhost:3000 to access
 - To play around with the homepage, edit *repo_path*/app/views/welcome/index.html.erb
+
+## To check code coverage
+- Run `bundle exec cucumber` or `bundle exec rspec`
+- Redirect to coverage/ , you can view index.html 
   

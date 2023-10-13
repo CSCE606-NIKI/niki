@@ -5,7 +5,6 @@
   <div class="signup">
     <h2>Log In</h2>
     <%= form_with url: '/login', method: :post, local: true do |form| %>
-      <!-- Display flash message if present -->
     <% if flash[:danger] %>
       <div class="login-alert">
         <%= flash[:danger] %>
@@ -26,11 +25,12 @@
     <div class="actions">
       <%= form.submit "Log in", class: "submit" %>
     </div>
-    
+       
     
     <div class="actions">
     <%= link_to "Forgot Password?", password_reset_path %>
     </div>
+
     
     <% end %>
     <!-- Add a button to log in with Google
@@ -42,5 +42,11 @@
     </div>
     
   </div>
+
+  <% if flash[:alert] %>
+      <div class="passwordreset-alert">
+          <%= flash[:alert] %>
+      </div>
+  <% end %>
 </div>
 

@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+    has_many :credits
     has_secure_password
     has_one_attached :profile_pic
     def self.from_omniauth(response)
@@ -8,4 +9,7 @@ class User < ApplicationRecord
             u.password_digest = SecureRandom.hex(15)
         end
     end
+
+    # Every user has to have an email, Google login fails if no email is provided
+    validates :email, presence: true
 end

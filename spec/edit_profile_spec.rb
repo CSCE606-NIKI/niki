@@ -29,7 +29,7 @@ RSpec.describe ProfileController, type: :controller do
 
       it 'redirects to the dashboard with a success notice' do
         patch :update, params: { user: valid_attributes }
-        expect(response).to redirect_to(dashboard_dashboard_path)
+        expect(response).to redirect_to(dashboard_path)
         expect(flash[:notice]).to eq('Profile updated successfully.')
       end
     end

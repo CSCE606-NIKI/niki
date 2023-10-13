@@ -30,6 +30,8 @@ RSpec.describe PasswordMailer, type: :mailer do
     expect(email.subject).to eq('Password Reset')
     expect(email.to).to eq([user.email])
     # Add other expectations if needed to verify the email content
+    #puts email.body.to_s
+    #expect(email.body.to_s).to include('Click the link below to reset your password:')
   end
 end
 

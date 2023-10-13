@@ -62,3 +62,47 @@ end
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
+# For google.features
+# INVALID CREDS (no email)
+Before('@omniauth_test0') do
+  OmniAuth.config.test_mode = true
+  Capybara.default_host = 'http://example.com'
+
+  OmniAuth.config.add_mock(:google_oauth2, {
+    :uid => '12345',
+    :info => {
+      :name => 'John Doe',
+      :email => nil
+    }
+  })
+
+  Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:google_oauth2]
+end
+
+After('@omniauth_test0') do
+  OmniAuth.config.test_mode = false
+end
+
+# VALID CREDS
+Before('@omniauth_test1') do
+  OmniAuth.config.test_mode = true
+  Capybara.default_host = 'http://example.com'
+
+  OmniAuth.config.on_failure = Proc.new { |env|
+    OmniAuth::FailureEndpoint.new(env).redirect_to_failure
+  }
+  
+  OmniAuth.config.add_mock(:google_oauth2, {
+    :uid => '12345',
+    :info => {
+      :name => 'John Doe',
+      :email => 'john@company_name.com'
+    }
+  })
+
+  Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:google_oauth2]
+end
+
+After('@omniauth_test1') do
+  OmniAuth.config.test_mode = false
+end

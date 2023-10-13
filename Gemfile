@@ -33,7 +33,8 @@ gem 'simplecov'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
-gem 'omniauth-facebook', group: [:development, :test]
+gem 'omniauth-facebook'
 gem 'rails-controller-testing'
+gem 'jquery-rails'
 
   

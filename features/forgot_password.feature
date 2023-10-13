@@ -17,13 +17,13 @@ Feature: Forgot Password
   Scenario: User submits an invalid email for password reset
     Given I am on the password reset page
     When I enter an invalid email "invalid_email"
-    And I click the "Reset Password" button
+    And I click "Reset Password" button
     Then I should see an error message displaying "Email not found"
 
   Scenario: User resets their password
     Given I have received a password reset email
     When I click on the reset password link in the email
-    Then I should see a "Reset Password" page
+    Then I should see a password reset page
     And I should be able to enter a new password
     And I should see a success message
 
