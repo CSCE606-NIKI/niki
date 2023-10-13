@@ -1,5 +1,3 @@
-# .github/workflows/rails_heroku_deploy.yml
-
 name: CI/CD Pipeline
 
 on:
@@ -12,48 +10,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Code
+    - name: Checkout code
       uses: actions/checkout@v2
 
     - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
+      uses: actions/setup-ruby@v1
       with:
-        ruby-version: 3.2.2 # Set to your Ruby version
+        ruby-version: 3.2.2
 
     - name: Install Bundler
       run: gem install bundler
 
-    - name: Install Dependencies
+    - name: Install dependencies
       run: bundle install
-      
-    - name: Install Heroku CLI
-      uses: heroku/actions/setup-heroku@v5  # Use the setup-heroku action
-      with:
-        heroku-api-key: ${{ secrets.HEROKU_API_KEY }}  # Set your Heroku API key as a GitHub secret
-    
-    - name: Login to Heroku
-      run: heroku auth:login
-    
-    - name: Access Heroku Database
-      run: |
-        DATABASE_URL=$(heroku config:get DATABASE_URL -a csce606-niki)  
-        echo "Database URL: $DATABASE_URL"
+
+    - name: Run tests
+      run: bundle exec rake test
+
+    - name: Deploy to Heroku
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-    
-    - name: Run Database Migrations
       run: |
-        bundle exec rails db:migrate
-      env:
-        DATABASE_URL: $DATABASE_URL
-    
-    - name: Database Setup
-      run: heroku run rake db:create db:migrate
-    
-    - name: Run Tests
-      run: bundle exec rspec
-      
-    - name: Deploy to Heroku
-      run: |
-        git remote add heroku https://git.heroku.com/csce606-niki.git
+        heroku git:remote -a csce606-niki
         git push heroku main
+    - name: Create and Migrate Database
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      run: |
+        heroku run rails db:create --app csce606-niki
+        heroku run rails db:migrate --app csce606-niki
