@@ -1,0 +1,38 @@
+# .github/workflows/rails_heroku_deploy.yml
+
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - iteration-2-dev
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.2.2 # Set to your Ruby version
+
+    - name: Install Bundler
+      run: gem install bundler
+
+    - name: Install Dependencies
+      run: bundle install
+
+    - name: Database Setup
+      run: bundle exec rails db:create db:migrate
+
+    - name: Run Tests
+      run: bundle exec rspec
+
+    - name: Deploy to Heroku
+      run: |
+        git remote add heroku https://git.heroku.com/csce606-niki.git
+        git push heroku main
