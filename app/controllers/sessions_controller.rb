@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def new
     if logged_in?
-      redirect_to root_path # Redirect logged-in users to their profile
+      redirect_to dashboard_path # Redirect logged-in users to their profile
     else
       @user = User.new
     end
