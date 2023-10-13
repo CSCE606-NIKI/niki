@@ -1,0 +1,47 @@
+<%= form_with(model: credit) do |form| %>
+  <% if credit.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(credit.errors.count, "error") %> prohibited this credit from being saved:</h2>
+
+      <ul>
+        <% credit.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class ="field form-group">
+    <%= form.label :creditID %>
+    <%= form.number_field :creditID, class:"form-control" %>
+  </div>
+
+  <div class ="field form-group">
+    <%= form.label :date %>
+    <%= form.date_field :date, class:"form-control" %>
+  </div>
+
+  <div class ="field form-group">
+    <%= form.label :status %>
+    <%= form.text_field :status, class:"form-control" %>
+  </div>
+
+  <div class ="field form-group">
+    <%= form.label :type %>
+    <%= form.text_field :type, class:"form-control" %>
+  </div>
+
+  <div class ="field form-group">
+    <%= form.label :credit_value %>
+    <%= form.number_field :credit_value, class:"form-control" %>
+  </div>
+
+  <div class ="field form-group">
+    <%= form.label :description %>
+    <%= form.text_area :description, class:"form-control" %>
+  </div>
+
+  <div class ="field form-group">
+    <%= form.submit class: 'btn btn-secondary' %>
+  </div>
+<% end %>
