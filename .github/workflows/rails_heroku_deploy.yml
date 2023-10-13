@@ -31,7 +31,7 @@ jobs:
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: |
-        heroku git:remote -a csce606-niki
+        git remote add heroku https://git.heroku.com/csce606-niki.git
         git push heroku ci/cd
     - name: Create and Migrate Database
       env:
