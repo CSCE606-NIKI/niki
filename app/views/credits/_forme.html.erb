@@ -1,0 +1,30 @@
+<h1> Edit Credit <h1>
+
+<style>
+form label {
+  font-size: 16px;
+}
+form input[type="text"],
+form select,
+form input[type="date"],
+form button, 
+form input[type="number"] {
+  font-size: 14px; 
+}
+.custom-button {
+  width: 70px; /* Adjust the width as needed */
+  height: 30px; /* Adjust the height as needed */
+  font-size: 16px; /* Adjust the font size as needed */
+  /* Add other styles as needed */
+}
+
+
+</style>
+<%= form_tag(edit_credit_path, method: :post) do %>
+    <%= label_tag :credit_type, 'Credit Type' %>
+    <%= select_tag :credit_type, options_for_select([['Type1', 'Type1'], ['Type2', 'Type2']], @credit_type) %>
+    <!-- Other form fields go here if needed -->
+    <%= submit_tag 'Submit' %>
+  <% end %>
+  
+  

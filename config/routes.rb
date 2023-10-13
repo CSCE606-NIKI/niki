@@ -18,7 +18,8 @@ Rails.application.routes.draw do
   post '/password/reset', to: 'password_resets#create'
   get '/password/reset/edit', to: 'password_resets#edit'
   patch '/password/reset/edit', to: 'password_resets#update'
-
+  get '/credits/update', to: 'credits#update', as: "update_credit"
+  post '/credits/edit', to: 'credits#edit', as: "edit_credit"
   # config/routes.rb
   resources :users, only: [:new, :create]
   resources :credits
