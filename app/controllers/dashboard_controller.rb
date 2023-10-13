@@ -1,7 +1,8 @@
 class DashboardController < ApplicationController
   before_action :require_login
   def index
-    @credits = Credit.all
+    @credits = current_user.credits # Assuming you have a relationship set up in your User model
+    @credits = @credits.order(date: :desc)   
     @credit_totals = {}
 
     Credit::CREDIT_TYPES.each do |credit_type|

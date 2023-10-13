@@ -2,8 +2,6 @@ class CreditsController < ApplicationController
 
     before_action :require_login
     def index
-        @credits = Credit.all # Fetch all credits or apply filtering as needed
-
     end 
 
     def new

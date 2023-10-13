@@ -47,7 +47,7 @@ describe SessionsController, type: :controller do
     it 'already logged in user' do
       session[:user_id] = user.id
       get :new
-      expect(response).to redirect_to(root_path) 
+      expect(response).to redirect_to(dashboard_path) 
     end
   end
 end
