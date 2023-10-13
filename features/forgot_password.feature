@@ -12,17 +12,17 @@ Feature: Forgot Password
     Given I am on the password reset page
     When I enter my email "user@example.com"
     And I click the "Reset Password" button
-    Then I should receive a password reset email
+    Then I should see a message displaying "If an account with that email was found, we have sent a link to reset the password"
 
   Scenario: User submits an invalid email for password reset
     Given I am on the password reset page
     When I enter an invalid email "invalid_email"
     And I click "Reset Password" button
-    Then I should see an error message displaying "Email not found"
+    Then I should see a message displaying "If an account with that email was found, we have sent a link to reset the password"
 
   Scenario: User resets their password
-    Given I have received a password reset email
-    When I click on the reset password link in the email
+    Given a user with email "test@example.com" exists
+    When I request a password reset for "test@example.com"
     Then I should see a password reset page
     And I should be able to enter a new password
     And I should see a success message
