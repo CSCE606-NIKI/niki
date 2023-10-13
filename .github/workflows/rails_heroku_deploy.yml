@@ -32,7 +32,15 @@ jobs:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: |
         git remote add heroku https://git.heroku.com/csce606-niki.git
-        git push heroku ci/cd
+        git config user.email "shrutisusan055@gmail.com"
+        git config user.name "shrutisusan26"
+  
+    - name: Heroku Login
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      run: |
+        heroku login --interactive
+            git push heroku ci/cd
     - name: Create and Migrate Database
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
