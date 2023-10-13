@@ -19,6 +19,8 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: 3.2.2 # Set to your Ruby version
+    - name: Check GitHub Workspace
+      run: echo ${{ github.workspace }}
 
     - name: Install Bundler
       run: |
