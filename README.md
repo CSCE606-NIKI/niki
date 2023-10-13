@@ -39,6 +39,8 @@ We intend to build a web-app that allows Professional Engineers (PEs) to track t
     - Create database and then run migrations on it
         - rake db:create
         - rake db:migrate
+    - Do rails active_storage:install
+    - rails db:migrate
     - Run the server using the command: rails s
     - If you encounter the following error: "password authentication failed for user credittrackeradmin," you can change the user's password in PostgreSQL:
     - Alter the password for the user 'credittrackeradmin' using the following command: `ALTER USER credittrackeradmin PASSWORD 'new_password';`
