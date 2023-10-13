@@ -21,16 +21,29 @@ jobs:
         ruby-version: 3.2.2 # Set to your Ruby version
 
     - name: Install Bundler
-      run: gem install bundler
+      run: |
+         cd ${{ github.workspace }}
+         gem install bundler
+      working-directory: ${{ github.workspace }}
+     
 
     - name: Install Dependencies
-      run: bundle install
+      run: |
+         cd ${{ github.workspace }}
+         bundle install
+      working-directory: ${{ github.workspace }}
 
     - name: Database Setup
-      run: bundle exec rails db:create db:migrate
+      run: | 
+         cd ${{ github.workspace }}
+         bundle exec rails db:create db:migrate
+      working-directory: ${{ github.workspace }}
 
     - name: Run Tests
-      run: bundle exec rspec
+      run:  cd ${{ github.workspace }}
+         bundle exec rspec
+      working-directory: ${{ github.workspace }}
+      
 
     - name: Deploy to Heroku
       run: |
