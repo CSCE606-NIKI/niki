@@ -5,7 +5,6 @@ class ProfileController < ApplicationController
       
     def update
         @user = current_user
-        puts current_user.profile_pic
         if @user.update(user_params)
           redirect_to dashboard_dashboard_path, notice: 'Profile updated successfully.'
         else
