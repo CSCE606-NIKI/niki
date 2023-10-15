@@ -1,4 +1,3 @@
-<h1> Add Credit <h1>
 
 <style>
 form label {
@@ -44,17 +43,27 @@ form input[type="number"] {
 
 <%= form_with(model: @credit, local: true, html: { id: 'credit-form' }) do |form| %>
 
-  <%= form.label :credit_type %>
-  <%= form.select :credit_type, @credit_types %>
+    <div class ="field form-group">
+      <label for="credit_type">Credit Type</label>
+      <%= form.select :credit_type, @credit_types, class: "form-control" %>
+    </div>
 
-  <%= form.label :date %>
-  <%= form.date_field :date %>
-
-  <%= form.label :amount %>
-  <%= form.number_field :amount %>
-
-  <%= form.label :description %>
-  <%= form.text_field :description %>
-
-  <%= form.submit 'Submit', class: 'custom-button' %>
+    <div class ="field form-group">
+      <%= form.label :date %>
+      <%= form.date_field :date, class:"form-control" %>
+    </div>
+ 
+    <div class ="field form-group">
+      <%= form.label :amount %>
+      <%= form.number_field :amount, class:"form-control" %>
+    </div>
+  
+    <div class ="field form-group">
+      <%= form.label :description %>
+      <%= form.text_area :description, class:"form-control" %>
+    </div>
+  
+    <div class ="field form-group">
+      <%= form.submit class: 'btn btn-secondary' %>
+    </div>
 <% end %>

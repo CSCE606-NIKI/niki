@@ -2,11 +2,30 @@ class CreditsController < ApplicationController
 
     before_action :require_login
     def index
+        @credits = Credit.all
     end 
+
+    def show
+        @credit = Credit.find(params[:id])
+    end
 
     def new
         @credit = Credit.new
         @credit_types = ['Credit_type1', 'Credit_type2', 'Credit_type3']
+    end
+
+    def edit
+        @credit = Credit.find(params[:id])
+        @credit_types = ['Credit_type1', 'Credit_type2', 'Credit_type3']
+    end
+
+    def update
+        @credit = Credit.find(params[:id])
+        if @credit.update(credit_params)
+          redirect_to @credit, notice: "Credit was successfully updated.", status: :see_other
+        else
+          render :edit, status: :unprocessable_entity
+        end
     end
 
     def create
@@ -32,9 +51,15 @@ class CreditsController < ApplicationController
         end
         
     end
+
+    def destroy
+        @credit = Credit.find(params[:id])
+        @credit.destroy
+        redirect_to dashboard_path, notice: "Credit was successfully deleted.", status: :see_other
+    end
     
     private
     def credit_params
-            params.require(:credit).permit(:credit_type, :date , :amount  ,:user_id , :description)
+        params.require(:credit).permit(:credit_type, :date , :amount  ,:user_id , :description)
     end
 end

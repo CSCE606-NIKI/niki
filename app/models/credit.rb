@@ -11,3 +11,4 @@ class Credit < ApplicationRecord
     }
     CREDIT_TYPES = ['Credit_type1', 'Credit_type2', 'Credit_type3']
 end
+
