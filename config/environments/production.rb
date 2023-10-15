@@ -118,19 +118,19 @@ Rails.application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
-  # config.action_mailer.raise_delivery_errors = true
-  # config.action_mailer.default_url_options = { host: "niki.com", protocol: "https"}
-  # config.action_mailer.perform_deliveries = true
-  # config.action_mailer.delivery_method = :smtp
-  # config.action_mailer.smtp_settings = {
-  #   address: 'smtp.gmail.com',
-  #   port: 587,
-  #   domain: 'localhost:3000',
-  #   user_name: Rails.application.credentials.dig(:gmail_smtp, :email),
-  #   password: Rails.application.credentials.dig(:gmail_smtp, :password),
-  #   authentication: 'plain',
-  #   enable_starttls_auto: true
-  # }
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_url_options = { host: "credittracker2.herokuapp.com", protocol: "https"}
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.gmail.com',
+    port: 587,
+    domain: 'localhost:3000',
+    user_name: Rails.application.credentials.dig(:gmail_smtp, :email),
+    password: Rails.application.credentials.dig(:gmail_smtp, :password),
+    authentication: 'plain',
+    enable_starttls_auto: true
+  }
 
   
 end
