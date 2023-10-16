@@ -38,7 +38,7 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.perform_caching = false
 
@@ -83,19 +83,19 @@ Rails.application.configure do
 
 
   config.action_mailer.logger = Logger.new('log/mail.log')
-
-  # config.action_mailer.delivery_method = :smtp
-  # config.action_mailer.smtp_settings = {
-  # address: 'smtp.example.com',  # Replace with your SMTP server address
-  # port: 587,                   # SMTP server port (587 is common for TLS, 465 for SSL)
-  # domain: 'example.com',       # Your domain (e.g., example.com)
-  # user_name: 'username',   # Your SMTP username
-  # password: 'password_digest',   # Your SMTP password
-  # authentication: :login,      # Authentication method (:login, :plain, :cram_md5, etc.)
-  # enable_starttls_auto: true   # Enable TLS/SSL
-  # }
-
-  config.action_mailer.delivery_method = :log
+  
   config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.gmail.com',
+    port: 587,
+    domain: 'localhost:3000',
+    user_name: Rails.application.credentials.dig(:gmail_smtp, :email),
+    password: Rails.application.credentials.dig(:gmail_smtp, :password),
+    authentication: 'plain',
+    enable_starttls_auto: true
+  }
+
+  #config.action_mailer.delivery_method = :log
 
 end
