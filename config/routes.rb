@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   get 'auth/:provider/callback', to: 'sessions#omniauth'
   get '/password/reset', to: 'password_resets#new'
   post '/password/reset', to: 'password_resets#create'
-  get '/password/reset/edit', to: 'password_resets#edit'
+  get '/password/reset/edit/:token', to: 'password_resets#edit', as: 'password_reset_edit'
   patch '/password/reset/edit', to: 'password_resets#update'
   
   get 'profile/edit', to: 'profile#edit', as: 'profile_edit'
