@@ -52,8 +52,14 @@
 
     <br/>
     <hr/>
+    
     <h3>Credit List</h3>
-    <table class="credit-table">
+    <label for="credits">from</label>
+    <input type="date" id="start" name="trip-start"/>
+    <label for="credits">to</label>
+    <input type="date" id="end" value="" name="trip-start"/>
+    <table class="credit-table" id="credit_table">
+    <button id="reset_button">Reset</button>
     <thead>
         <tr>
         <th>Credit Type</th>
@@ -71,6 +77,50 @@
         <% end %>
     </tbody>
     </table>
+
+    <script>
+    document.getElementById("end").valueAsDate = new Date();
+    document.getElementById("start").value = "";
+    document.getElementById("reset_button").addEventListener("click", resetFunction);
+    document.getElementById("start").addEventListener("input", filterFunction);
+    document.getElementById("end").addEventListener("input", filterFunction);
+
+    function filterFunction() {
+      var start_date, end_date, table, tr, td, i, dateValue, year, month, day;
+      if (document.getElementById("start").value == "") {
+        start_date = new Date(0000, 00, 00);
+      }
+      else {start_date = new Date(document.getElementById("start").value);}
+      end_date = new Date(document.getElementById("end").value);
+      table = document.getElementById("credit_table");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+            year = td.textContent.substring(0,4);
+            month = td.textContent.substring(5,7) - 1;
+            day = td.textContent.substring(8,10); 
+            dateValue = new Date(year, month, day);
+            if (dateValue >= start_date && dateValue <= end_date) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+      }
+    }
+
+    function resetFunction() {
+      var table, tr, i;
+      document.getElementById("start").value = "";
+      document.getElementById("end").valueAsDate = new Date();
+      table = document.getElementById("credit_table");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        tr[i].style.display = "";
+      }
+    }
+    </script>
 
 
 
