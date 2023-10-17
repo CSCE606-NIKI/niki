@@ -64,7 +64,7 @@
     <tbody>
         <% @credits.each do |credit| %>
         <tr>
-            <td><%= credit.credit_type %></td>
+            <td><%= credit.credit_type.name %></td>
             <td><%= credit.date %></td>
             <td><%= credit.amount %></td>
         </tr>

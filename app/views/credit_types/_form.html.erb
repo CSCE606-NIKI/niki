@@ -1,0 +1,31 @@
+<%= form_for(@credit_type, html: { class: 'form-container' }) do |f| %>
+  <% if @credit_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@credit_type.errors.count, "error") %> prohibited this credit type from being saved:</h2>
+      <ul>
+        <% @credit_type.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :credit_limit %>
+    <%= f.text_field :credit_limit %>
+  </div>
+
+  <div class="field">
+    <%= f.label :carry_forward %>
+    <%= f.check_box :carry_forward %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

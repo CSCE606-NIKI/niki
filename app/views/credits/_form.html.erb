@@ -43,9 +43,9 @@ form input[type="number"] {
 </style>
 
 <%= form_with(model: @credit, local: true, html: { id: 'credit-form' }) do |form| %>
-
-  <%= form.label :credit_type %>
-  <%= form.select :credit_type, @credit_types %>
+  
+  <%= form.label :credit_type_id %>
+  <%= form.select :credit_type_id, @credit_types, include_blank: true %>
 
   <%= form.label :date %>
   <%= form.date_field :date %>

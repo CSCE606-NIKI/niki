@@ -6,17 +6,21 @@ class CreditsController < ApplicationController
 
     def new
         @credit = Credit.new
-        @credit_types = ['Credit_type1', 'Credit_type2', 'Credit_type3']
+        @credit_types = CreditType.pluck(:name, :id) # Fetches credit type names and IDs
     end
 
     def create
         @credit = Credit.new(credit_params)
         @credit.user = current_user 
 
-        existing_credits = Credit.where(user: current_user, credit_type: @credit.credit_type)
+        existing_credits = Credit.where(user: current_user, credit_type_id: @credit.credit_type_id)
         total_number_of_credits = existing_credits.sum(:amount) + @credit.amount
+
+        credit_type = CreditType.find(@credit.credit_type_id)
+        @credit.credit_type = credit_type
+
         puts total_number_of_credits
-        if total_number_of_credits <= Credit::CREDIT_LIMITS[@credit.credit_type]
+        if total_number_of_credits <= credit_type.credit_limit
             @credit.total_number_of_credits = total_number_of_credits
             if @credit.save
                 flash[:notice] = "Added Successfully!"
@@ -35,6 +39,6 @@ class CreditsController < ApplicationController
     
     private
     def credit_params
-            params.require(:credit).permit(:credit_type, :date , :amount  ,:user_id , :description)
+            params.require(:credit).permit(:credit_type, :date , :amount  ,:user_id , :description ,:credit_type_id)
     end
 end
