@@ -1,1 +1,12 @@
-<%= render 'form' , credit: @credit %>
+
+<%= stylesheet_link_tag 'credits.css' %>
+<div class="credits-container">
+  <h1>Add New credit</h1>
+
+  <%= render "form", credit: @credit %>
+  <br>
+
+  <div>
+    <%= link_to "Cancel", dashboard_path, class:"btn btn-custom" %>
+  </div>
+</div>

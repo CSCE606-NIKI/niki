@@ -1,1 +1,15 @@
-<%= render 'form',  credit = @credit %>
+
+<%= stylesheet_link_tag 'credits.css' %>
+<div class="credits-container">
+
+  <h1>Editing Credit</h1>
+
+  <%= render "form", credit: @credit %>
+
+  <br>
+
+  <div class="button-container">
+    <%= link_to "Show this credit", @credit, class: 'btn btn-custom' %>
+    <%= link_to "Back to credits", dashboard_path, class: 'btn btn-custom' %>
+  </div>
+</div>
