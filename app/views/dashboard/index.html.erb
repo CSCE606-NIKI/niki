@@ -27,7 +27,22 @@
   background-color: #ddd;
 }
 
+.reset-filters {
+    background-color: #004a7c;
+    color: #fff;
+    border-color: #004a7c;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.reset-filters:hover {
+    background-color: #2a75f3;
+    border-color: #2a75f3;
+}
 </style>
+
 <!-- Main Dashboard-->
 <div class="container mt-5">
     <h1>Welcome to the Dashboard</h1>
@@ -54,12 +69,36 @@
     <hr/>
     
     <h3>Credit List</h3>
-    <label for="credits">from</label>
-    <input type="date" id="start" name="trip-start"/>
-    <label for="credits">to</label>
-    <input type="date" id="end" value="" name="trip-start"/>
+    <!--FILTER BLOCK STARTS HERE-->
+    <table id="filters">
+    <thead>
+      <tr>
+        <th>Credit Type</th>
+        <th>Amount</th>
+        <th>From</th>
+        <th>To</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <input list="filter_credit_types" id="filter_credit_type" type="text" placeholder="Select credit type...">
+          <datalist id="filter_credit_types">  
+            <% @credit_types.each do |credit_type| %>
+              <option value="<%= credit_type %>">
+            <% end %>
+          </datalist>
+        </td>
+        <td><input id="filter_amount" type="number" placeholder="Select amount..."></td>
+        <td><input type="date" id="start" name="filter_date_start"/></td>
+        <td><input type="date" id="end" value="" name="filter_date_end"/></td>
+        <td><button class="reset-filters" id="reset_button">Reset Filters</button></td>
+      </tr>
+    </tbody>
+    </table>
+    <!--FILTER BLOCK ENDS HERE-->
     <table class="credit-table" id="credit_table">
-    <button id="reset_button">Reset</button>
     <thead>
         <tr>
         <th>Credit Type</th>
@@ -77,57 +116,9 @@
         <% end %>
     </tbody>
     </table>
-
-    <script>
-    document.getElementById("end").valueAsDate = new Date();
-    document.getElementById("start").value = "";
-    document.getElementById("reset_button").addEventListener("click", resetFunction);
-    document.getElementById("start").addEventListener("input", filterFunction);
-    document.getElementById("end").addEventListener("input", filterFunction);
-
-    function filterFunction() {
-      var start_date, end_date, table, tr, td, i, dateValue, year, month, day;
-      if (document.getElementById("start").value == "") {
-        start_date = new Date(0000, 00, 00);
-      }
-      else {start_date = new Date(document.getElementById("start").value);}
-      end_date = new Date(document.getElementById("end").value);
-      table = document.getElementById("credit_table");
-      tr = table.getElementsByTagName("tr");
-      for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[1];
-        if (td) {
-            year = td.textContent.substring(0,4);
-            month = td.textContent.substring(5,7) - 1;
-            day = td.textContent.substring(8,10); 
-            dateValue = new Date(year, month, day);
-            if (dateValue >= start_date && dateValue <= end_date) {
-                tr[i].style.display = "";
-            } else {
-                tr[i].style.display = "none";
-            }
-        }
-      }
-    }
-
-    function resetFunction() {
-      var table, tr, i;
-      document.getElementById("start").value = "";
-      document.getElementById("end").valueAsDate = new Date();
-      table = document.getElementById("credit_table");
-      tr = table.getElementsByTagName("tr");
-      for (i = 0; i < tr.length; i++) {
-        tr[i].style.display = "";
-      }
-    }
-    </script>
-
-
-
-    
 </div>
 
-
+ <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
