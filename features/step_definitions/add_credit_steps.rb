@@ -19,9 +19,9 @@ And("I should see the {string} link") do |button_text|
     expect(page).to have_content(button_text)
 end
 
-When("I visit the new credit page") do
+When("I visit the Add New credit page") do
     visit new_credit_path
-    expect(page).to have_content("Add Credit")
+    expect(page).to have_content("Add New credit")
 end
 
 And("I fill in the following:") do |table|
@@ -80,3 +80,45 @@ end
 Then("I should see the credit details") do
 # Implement logic to check if the credit details are displayed on the page
 end
+
+Given('I am on Add New credit page') do
+    visit(new_credit_path)
+end
+
+When("I click the {string} link for the first credit") do |link_text|
+    first('a', text: link_text).click
+end
+
+Then('I should be redirected to show this credit path') do
+    credit = Credit.find_by(credit_type: 'Credit_type1')
+    expect(credit).not_to be_nil
+
+    visit credit_path(credit)
+end
+
+Then('I should see the credit details on the page') do
+    expect(page).to have_content("Type:")
+end
+
+When('I click on "Edit credit" button') do
+    click_link("Edit credit")
+end
+
+Then('I should be redirected to edit credit page') do
+    credit = Credit.find_by(credit_type: 'Credit_type1')
+    visit edit_credit_path(credit)
+end
+
+When("I click the {string} link button") do |string|
+    click_link(string)
+end
+
+When("I click on the button {string} to delete") do |string|
+    click_button(string)
+end
+
+Then('this credit shouldnot be there') do
+    credit = Credit.find_by(credit_type: 'Credit_type1')
+    expect(Credit.exists?(credit)).to be false
+end
+
