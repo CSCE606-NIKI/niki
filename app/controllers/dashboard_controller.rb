@@ -4,6 +4,7 @@ class DashboardController < ApplicationController
     @credits = current_user.credits # Assuming you have a relationship set up in your User model
     @credits = @credits.order(date: :desc)   
     @credit_totals = {}
+    @credit_types = Credit::CREDIT_TYPES
 
     Credit::CREDIT_TYPES.each do |credit_type|
       total_credits = current_user.credits.where(credit_type: credit_type).sum(:amount)
