@@ -1,21 +1,4 @@
 
-/* .table-container {
-    padding: 10px;
-    width: 90%;
-    overflow: auto;
-    border: 1px solid #f7ebeb; #Optional border for the container 
-    margin: 0 auto;
-} */
-
-/* table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th, td {
-    padding: 10px;
-    text-align: center;
-} */
 
 *, *:before, *:after {
     box-sizing: border-box;
@@ -99,27 +82,27 @@ h2 {
 }
 
 .btn-custom {
-    background-color: #395bc9; /* Your preferred background color */
-    color: #e2dddd; /* Text color */
-    padding: 10px 20px; /* Adjust padding as needed */
-    border: none; /* Remove the border */
-    border-radius: 5px; /* Add rounded corners */
+    background-color: #395bc9;
+    color: #e2dddd;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
-    font-size: 16px; /* Adjust the font size as needed */
+    font-size: 16px;
     text-decoration: none;
 }
 
 .btn-custom:hover {
-    background-color: #e4e0e0; /* Change the background color on hover */
+    background-color: #e4e0e0;
 }
 
 .creditedit-alert {
     margin-top: 10px;
     padding: 10px 15px;
-    background-color: #f8d7da;   /* Light red background */
-    border: 1px solid #f5c6cb;   /* Red border */
-    border-radius: 4px;          /* Rounded corners */
-    color: #1c2572;              /* Dark blue text color */
+    background-color: #f8d7da; 
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    color: #1c2572;
     font-weight: bold;
     text-align: center;
   }
@@ -129,7 +112,7 @@ h2 {
   }
 
   .description-container {
-    word-wrap: break-word; /* Ensure text wraps within the container */
+    word-wrap: break-word;
     padding: 0px;
   }
 
