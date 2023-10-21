@@ -52,8 +52,8 @@
 }
 
 .reset-filters:hover {
-    background-color: #2a75f3;
-    border-color: #2a75f3;
+    background-color: #00335b;
+    border-color: #00335b;
 }
 </style>
 
@@ -90,6 +90,7 @@
       <tr>
         <th>Credit Type</th>
         <th>Amount</th>
+        <th>Description</th>
         <th>From</th>
         <th>To</th>
         <th></th>
@@ -98,16 +99,17 @@
     <tbody>
       <tr>
         <td>
-          <input list="filter_credit_types" id="filter_credit_type" type="text" placeholder="Select credit type...">
+          <input list="filter_credit_types" id="filter_credit_type" name="Filter Credit Type" type="text" placeholder="Select credit type...">
           <datalist id="filter_credit_types">  
             <% @credit_types.each do |credit_type| %>
               <option value="<%= credit_type %>">
             <% end %>
           </datalist>
         </td>
-        <td><input id="filter_amount" type="number" placeholder="Select amount..."></td>
-        <td><input type="date" id="start" name="filter_date_start"/></td>
-        <td><input type="date" id="end" value="" name="filter_date_end"/></td>
+        <td><input id="filter_amount" name="Filter Amount" type="number" placeholder="Enter amount..." size="15"></td>
+        <td><input id="filter_description" name="Filter Description" type="text" placeholder="Enter description..."></td>
+        <td><input type="date" id="start" name="Filter Start Date"/></td>
+        <td><input type="date" id="end" value="" name="Filter End Date"/></td>
         <td><button class="reset-filters" id="reset_button">Reset Filters</button></td>
       </tr>
     </tbody>
@@ -125,7 +127,7 @@
     </thead>
     <tbody>
         <% @credits.each do |credit| %>
-        <tr>
+        <tr class="credit-table">
             <td><%= credit.credit_type %></td>
             <td><%= credit.date %></td>
             <td><%= credit.amount %></td>
