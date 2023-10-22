@@ -53,12 +53,14 @@
     <br/>
     <hr/>
     <h3>Credit List</h3>
-    <table class="credit-table">
+    <table class="styled-table">
     <thead>
         <tr>
         <th>Credit Type</th>
         <th>Date</th>
         <th>Amount</th>
+        <th>Description</th>
+        <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -67,12 +69,18 @@
             <td><%= credit.credit_type.name %></td>
             <td><%= credit.date %></td>
             <td><%= credit.amount %></td>
+            <td style="max-width: 400px; word-wrap: break-word;"><%= credit.description %></td>
+            <td>
+              <%= link_to "Show this credit", credit %>
+            </td>
         </tr>
         <% end %>
     </tbody>
     </table>
-
-
+    <br>
+    <div style="text-align: center;">
+      <%= link_to "New credit", new_credit_path, class: "btn btn-secondary"%>
+    </div>  
 
     
 </div>

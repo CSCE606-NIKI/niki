@@ -56,7 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_16_230906) do
     t.date "date"
     t.integer "amount"
     t.string "credit_type"
-    t.bigint "user_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "description"

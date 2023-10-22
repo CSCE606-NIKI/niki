@@ -7,3 +7,4 @@ class Credit < ApplicationRecord
     validates :amount, presence: true, numericality: { greater_than: 0 }
     validates :total_number_of_credits, presence: true, numericality: { greater_than_or_equal_to: 0 }
 end
+

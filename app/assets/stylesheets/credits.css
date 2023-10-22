@@ -1,3 +1,5 @@
+
+
 *, *:before, *:after {
     box-sizing: border-box;
 }
@@ -9,7 +11,7 @@ body {
     padding: 0;
 }
 
-.passwordreset-container {
+.credits-container {
     max-width: 500px;
     margin: 40px auto;
     padding: 20px;
@@ -79,33 +81,47 @@ h2 {
     background-color: #00335b;
 }
 
-.passwordreset-alert {
+.btn-custom {
+    background-color: #395bc9;
+    color: #e2dddd;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.btn-custom:hover {
+    background-color: #e4e0e0;
+}
+
+.creditedit-alert {
     margin-top: 10px;
     padding: 10px 15px;
-    background-color: #f8d7da;
+    background-color: #f8d7da; 
     border: 1px solid #f5c6cb;
     border-radius: 4px;
-    color: #1c2572; 
+    color: #1c2572;
     font-weight: bold;
     text-align: center;
   }
 
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  @keyframes fadeOut {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-        display: none;
-    }
-}
-  .passwordreset-alert {
+  .creditedit-alert {
     animation: fadeOut 1s 2s forwards;
   }
+
+  .description-container {
+    word-wrap: break-word;
+    padding: 0px;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: flex-start;
+  }
   
-  
+  .button-container a,
+  .button-container input[type="submit"] {
+    margin-right: 10px;
+  }

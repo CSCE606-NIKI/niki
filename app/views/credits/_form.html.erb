@@ -1,4 +1,3 @@
-<h1> Add Credit <h1>
 
 <style>
 form label {
@@ -24,7 +23,7 @@ form input[type="number"] {
     background-color: #f8d7da;   /* Light red background */
     border: 1px solid #f5c6cb;   /* Red border */
     border-radius: 4px;          /* Rounded corners */
-    color: #721c24;              /* Dark red text color */
+    color: #721c24;
     font-weight: bold;
     text-align: center;
     width: 50 %;
@@ -47,14 +46,22 @@ form input[type="number"] {
   <%= form.label :credit_type_id %>
   <%= form.select :credit_type_id, @credit_types, include_blank: true %>
 
-  <%= form.label :date %>
-  <%= form.date_field :date %>
-
-  <%= form.label :amount %>
-  <%= form.number_field :amount %>
-
-  <%= form.label :description %>
-  <%= form.text_field :description %>
-
-  <%= form.submit 'Submit', class: 'custom-button' %>
+    <div class ="field form-group">
+      <%= form.label :date %>
+      <%= form.date_field :date, class:"form-control" %>
+    </div>
+ 
+    <div class ="field form-group">
+      <%= form.label :amount %>
+      <%= form.number_field :amount, class:"form-control" %>
+    </div>
+  
+    <div class ="field form-group">
+      <%= form.label :description %>
+      <%= form.text_area :description, class:"form-control" %>
+    </div>
+  
+    <div class ="field form-group">
+      <%= form.submit class: 'btn btn-secondary' %>
+    </div>
 <% end %>

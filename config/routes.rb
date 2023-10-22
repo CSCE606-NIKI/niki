@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  
+  get '/password/reset', to: 'password_resets#new'
+  post '/password/reset', to: 'password_resets#create'
+  get '/password/reset/edit', to: 'password_resets#edit', as: 'password_reset_edit'
+  patch '/password/reset/edit', to: 'password_resets#update'
+
   get 'password_resets/new'
   get 'password_resets/create'
   get 'password_resets/edit'
@@ -14,10 +20,6 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy', as: 'logout'
   get 'auth/:provider/callback', to: 'sessions#omniauth'
-  get '/password/reset', to: 'password_resets#new'
-  post '/password/reset', to: 'password_resets#create'
-  get '/password/reset/edit', to: 'password_resets#edit'
-  patch '/password/reset/edit', to: 'password_resets#update'
   
   get 'profile/edit', to: 'profile#edit', as: 'profile_edit'
   patch 'profile/update', to: 'profile#update', as: 'profile_update'
