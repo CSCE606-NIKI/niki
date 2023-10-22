@@ -1,13 +1,5 @@
 class CreditTypesController < ApplicationController
 
-    def index
-        @credit_types = CreditType.all
-    end
-
-    def show
-         @credit_type = CreditType.find(params[:id])
-    end
-
     def new
         @credit_type = CreditType.new
     end

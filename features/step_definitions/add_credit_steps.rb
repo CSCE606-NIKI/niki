@@ -1,4 +1,3 @@
-
 Given('I am logged in as {string} with password {string}') do |string, string2|
     @user = User.create(username:'user1', email: string, password: string2)
     visit login_path
@@ -122,3 +121,6 @@ Then('this credit shouldnot be there') do
     expect(Credit.exists?(credit)).to be false
 end
 
+Then('I should see an message {string}') do |string|
+    expect(page).to have_content(string)
+  end

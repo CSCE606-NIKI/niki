@@ -32,7 +32,6 @@ class CreditsController < ApplicationController
         @credit = Credit.new(credit_params)
         @credit.user = current_user 
         existing_credits = Credit.where(user: current_user, credit_type_id: @credit.credit_type_id)
-        total_number_of_credits = existing_credits.sum(:amount) + @credit.amount
         credit_type = CreditType.find(@credit.credit_type_id)
         @credit.credit_type = credit_type
         if @credit.credit_type.carry_forward
@@ -58,7 +57,7 @@ class CreditsController < ApplicationController
             end
         else
             redirect_to new_credit_path
-            flash[:error] = "You've already reached your credit limit for type #{@credit.credit_type}!"
+            flash[:error] = "You've already reached your credit limit for type #{@credit.credit_type.name}!"
         end
     
     end
