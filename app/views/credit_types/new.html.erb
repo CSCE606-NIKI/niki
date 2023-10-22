@@ -1,5 +1,12 @@
-<div class="page-container">
-  <h1 class="page-heading">New Credit Type</h1>
+
+<%= stylesheet_link_tag 'credits.css' %>
+<div class="credits-container">
+  <h1>Add New credit type </h1>
+
   <%= render 'form' %>
-  <%= link_to "Back", dashboard_path, class: "btn btn-primary" %>
+  <br>
+
+  <div>
+    <%= link_to "Cancel", dashboard_path, class: "btn btn-primary" %>
+  </div>
 </div>

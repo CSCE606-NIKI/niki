@@ -2,7 +2,7 @@
 
 <%= stylesheet_link_tag 'credits.css' %>
 <p><strong>Date:</strong> <%= credit.date %></p>
-<p><strong>Type:</strong> <%= credit.credit_type %></p>
+<p><strong>Type:</strong> <%= credit.credit_type.name %></p>
 <p><strong>Amount:</strong> <%= credit.amount %></p>
 <p><strong>Description:</strong></p>
 <div class="description-container">
