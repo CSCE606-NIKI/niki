@@ -17,14 +17,29 @@ form input[type="number"] {
   font-size: 16px; /* Adjust the font size as needed */
   /* Add other styles as needed */
 }
-
+textarea {
+    height: 50px; /* Adjust the height as needed */
+    font-size: 14px; 
+    width: 200px;
+  }
 
 </style>
-<%= form_tag(edit_credit_path, method: :post) do %>
-    <%= label_tag :credit_type, 'Credit Type' %>
-    <%= select_tag :credit_type, options_for_select([['Type1', 'Type1'], ['Type2', 'Type2']], @credit_type) %>
-    <!-- Other form fields go here if needed -->
-    <%= submit_tag 'Submit' %>
-  <% end %>
+<%= form_for @credit, url: edit_credit_path(@credit), method: :post do |f| %>
+  <%= f.label :credit_type, 'Credit Type' %>
+  <%= f.select :credit_type, options_for_select([['Type1', 'Type1'], ['Type2', 'Type2']], @credit.credit_type) %>
+
+  <%= f.label :date, 'Date' %>
+  <%= f.date_field :date %>
+
+  <%= f.label :amount, 'Amount' %>
+  <%= f.number_field :amount %>
+
+  <%= f.label :description, 'Description' %>
+  <%= f.text_area :description %>
+
+  <%= f.submit 'Submit', class: 'custom-button' %>
+<% end %>
+
+
   
   

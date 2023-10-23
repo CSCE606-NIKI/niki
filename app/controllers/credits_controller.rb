@@ -39,6 +39,7 @@ class CreditsController < ApplicationController
         puts current_user
         @credit.user = current_user
         @credit_type = "Type1"
+
         puts "###########", @credit_type
         render 'edit'
         # existing_credits = Credit.where(credit_type: @credit.credit_type)
@@ -70,13 +71,20 @@ class CreditsController < ApplicationController
         puts "in edit page"
         @credit = Credit.new
         @credit.user = current_user
-        puts "$$$$$$$$$$$$$$$$$", current_credit
+        #puts "$$$$$$$$$$$$$$$$$"
         selected_credit_type = credit_edit_params[:credit_type]
         puts "+++++",selected_credit_type
         credit_edit_params[:credit_type] = @credit_type
         @credit.update(credit_edit_params)
-        redirect_to dashboard_path
 
+        if @credit.update(credit_edit_params)
+            # Update the credit record with the provided parameters
+            redirect_to dashboard_path
+          else
+            # Handle errors if the update fails
+            render 'edit'
+        end    
+        puts "ooooooo", @credit_type
 
     end
     private
