@@ -11,7 +11,7 @@ class CreditsController < ApplicationController
 
     def new
         @credit = Credit.new
-        @credit_types = CreditType.pluck(:name, :id) # Fetches credit type names and IDs
+        @credit_types = current_user.credit_types.pluck(:name, :id)
     end
 
     def edit
