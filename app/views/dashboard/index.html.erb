@@ -26,35 +26,6 @@
 .credit-table tr:hover {
   background-color: #ddd;
 }
-
-.reset-filters {
-    background-color: #004a7c;
-    color: #fff;
-    border-color: #004a7c;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    text-align: center;
-}
-
-.reset-filters:hover {
-    background-color: #2a75f3;
-    border-color: #2a75f3;
-}
-.reset-filters {
-    background-color: #004a7c;
-    color: #fff;
-    border-color: #004a7c;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    text-align: center;
-}
-
-.reset-filters:hover {
-    background-color: #00335b;
-    border-color: #00335b;
-}
 </style>
 
 <!-- Main Dashboard-->
@@ -82,47 +53,41 @@
     <br/>
     <hr/>
     
-    
-    <h3>Credit List</h3>
-    <!--FILTER BLOCK STARTS HERE-->
-    <table id="filters">
+    <div>
+    <div style="float:left"><h3>Credit List</h3></div>
+    <div style="float:right"><button id="reset_button" class="btn btn-secondary">Reset filters</button></div>
+    </div> 
+    <table class="credit-table" id="credit_table">
     <thead>
-      <tr>
-        <th>Credit Type</th>
-        <th>Amount</th>
-        <th>Description</th>
-        <th>From</th>
-        <th>To</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          <input list="filter_credit_types" id="filter_credit_type" name="Filter Credit Type" type="text" placeholder="Select credit type...">
+        <tr>
+        <th>
+          Credit Type <br>
+          <input list="filter_credit_types" id="filter_credit_type" name="Filter Credit Type" type="text" >
           <datalist id="filter_credit_types">  
             <% @credit_types.each do |credit_type| %>
               <option value="<%= credit_type %>">
             <% end %>
           </datalist>
-        </td>
-        <td><input id="filter_amount" name="Filter Amount" type="number" placeholder="Enter amount..." size="15"></td>
-        <td><input id="filter_description" name="Filter Description" type="text" placeholder="Enter description..."></td>
-        <td><input type="date" id="start" name="Filter Start Date"/></td>
-        <td><input type="date" id="end" value="" name="Filter End Date"/></td>
-        <td><button class="reset-filters" id="reset_button">Reset Filters</button></td>
-      </tr>
-    </tbody>
-    </table>
-    <!--FILTER BLOCK ENDS HERE-->
-    <table class="credit-table" id="credit_table">
-    <thead>
-        <tr>
-        <th>Credit Type</th>
-        <th>Date</th>
-        <th>Amount</th>
-        <th>Description</th>
-        <th>Actions</th>
+        </th>
+        <th> 
+          Date <br> 
+          <span style="font-weight:normal">
+          from <input type="date" id="start" name="Filter Start Date"/>
+          to <input type="date" id="end" value="" name="Filter End Date"/>
+          </span>
+        </th>
+        <th>
+          Amount <br>
+          <input id="filter_amount" name="Filter Amount" type="number" size="15">
+        </th>
+        <th>
+          Description <br>
+          <input id="filter_description" name="Filter Description" type="text">
+        </th>
+        <th>
+          Actions
+          <br> <br>
+        </th>
         </tr>
     </thead>
     <tbody>
@@ -141,7 +106,7 @@
     </table>
     <br>
     <div style="text-align: center;">
-      <%= link_to "New credit", new_credit_path, class: "btn btn-secondary"%>
+      <%= link_to "New credit", new_credit_path, class: "btn btn-primary"%>
     </div>
 
 
