@@ -27,7 +27,36 @@
   background-color: #ddd;
 }
 
+.reset-filters {
+    background-color: #004a7c;
+    color: #fff;
+    border-color: #004a7c;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.reset-filters:hover {
+    background-color: #2a75f3;
+    border-color: #2a75f3;
+}
+.reset-filters {
+    background-color: #004a7c;
+    color: #fff;
+    border-color: #004a7c;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.reset-filters:hover {
+    background-color: #00335b;
+    border-color: #00335b;
+}
 </style>
+
 <!-- Main Dashboard-->
 <div class="container mt-5">
     <h1>Welcome to the Dashboard</h1>
@@ -52,8 +81,41 @@
 
     <br/>
     <hr/>
+    
+    
     <h3>Credit List</h3>
-    <table class="styled-table">
+    <!--FILTER BLOCK STARTS HERE-->
+    <table id="filters">
+    <thead>
+      <tr>
+        <th>Credit Type</th>
+        <th>Amount</th>
+        <th>Description</th>
+        <th>From</th>
+        <th>To</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <input list="filter_credit_types" id="filter_credit_type" name="Filter Credit Type" type="text" placeholder="Select credit type...">
+          <datalist id="filter_credit_types">  
+            <% @credit_types.each do |credit_type| %>
+              <option value="<%= credit_type %>">
+            <% end %>
+          </datalist>
+        </td>
+        <td><input id="filter_amount" name="Filter Amount" type="number" placeholder="Enter amount..." size="15"></td>
+        <td><input id="filter_description" name="Filter Description" type="text" placeholder="Enter description..."></td>
+        <td><input type="date" id="start" name="Filter Start Date"/></td>
+        <td><input type="date" id="end" value="" name="Filter End Date"/></td>
+        <td><button class="reset-filters" id="reset_button">Reset Filters</button></td>
+      </tr>
+    </tbody>
+    </table>
+    <!--FILTER BLOCK ENDS HERE-->
+    <table class="credit-table" id="credit_table">
     <thead>
         <tr>
         <th>Credit Type</th>
@@ -65,7 +127,7 @@
     </thead>
     <tbody>
         <% @credits.each do |credit| %>
-        <tr>
+        <tr class="credit-table">
             <td><%= credit.credit_type %></td>
             <td><%= credit.date %></td>
             <td><%= credit.amount %></td>
@@ -80,12 +142,14 @@
     <br>
     <div style="text-align: center;">
       <%= link_to "New credit", new_credit_path, class: "btn btn-secondary"%>
-    </div>  
+    </div>
+
+
 
     
 </div>
 
-
+ <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
