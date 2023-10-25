@@ -5,28 +5,28 @@ class CreditsController < ApplicationController
         @credits = Credit.all
     end 
 
-    def show
-        @credit = Credit.find(params[:id])
-    end
+    # def show
+    #     @credit = Credit.find(params[:id])
+    # end
 
     def new
         @credit = Credit.new
         @credit_types = current_user.credit_types.pluck(:name, :id)
     end
 
-    def edit
-        @credit = Credit.find(params[:id])
-        @credit_types = ['Credit_type1', 'Credit_type2', 'Credit_type3']
-    end
+    # def edit
+    #     @credit = Credit.find(params[:id])
+    #     @credit_types = ['Credit_type1', 'Credit_type2', 'Credit_type3']
+    # end
 
-    def update
-        @credit = Credit.find(params[:id])
-        if @credit.update(credit_params)
-          redirect_to @credit, notice: "Credit was successfully updated.", status: :see_other
-        else
-          render :edit, status: :unprocessable_entity
-        end
-    end
+    # def update
+    #     @credit = Credit.find(params[:id])
+    #     if @credit.update(credit_params)
+    #       redirect_to @credit, notice: "Credit was successfully updated.", status: :see_other
+    #     else
+    #       render :edit, status: :unprocessable_entity
+    #     end
+    # end
 
     def create
         @credit = Credit.new(credit_params)

@@ -1,6 +1,9 @@
 require 'rails_helper'
 RSpec.describe CreditTypesController, type: :controller do
-
+    before(:each) do
+        @user = FactoryBot.create(:user) # Create a user using FactoryBot
+        allow(controller).to receive(:current_user).and_return(@user) # Set current_user in the controller
+      end
     describe "GET #new" do
         it "gives a successful response" do 
             get :new

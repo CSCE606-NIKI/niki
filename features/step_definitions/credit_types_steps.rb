@@ -1,6 +1,6 @@
-# credit_types_steps.rb
-Given('I have created a credit type {string}') do |string|
-    @credit_type = CreditType.create(name:'type1', credit_limit: 1000);
+Given('I have created a credit type {string}') do |credit_type_name|
+    @user = User.find_by(email: "user@example.com")  # Adjust this based on your setup
+    @credit_type = @user.credit_types.create(name: credit_type_name, credit_limit: 1000, carry_forward: true)
 end
 
 When("I visit the new credit type page") do

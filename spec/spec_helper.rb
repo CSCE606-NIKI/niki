@@ -17,8 +17,7 @@ require 'factory_bot_rails'
 # spec/spec_helper.rb
 require_relative '../coverage_helper'
 require 'simplecov'
-SimpleCov.start
-
+SimpleCov.start 
 # Previous content of test helper now starts here
 
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration

@@ -4,6 +4,7 @@ Given('I am logged in as {string} with password {string}') do |string, string2|
     fill_in("Email or Username", :with => @user.email)
     fill_in("password", :with => @user.password)
     click_button("Log in")
+
 end
 
 When("I visit the dashboard page") do
