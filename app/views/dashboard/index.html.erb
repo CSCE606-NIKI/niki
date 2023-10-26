@@ -81,48 +81,44 @@
 
     <br/>
     <hr/>
-    
-    
-    <h3>Credit List</h3>
-    <!--FILTER BLOCK STARTS HERE-->
-    <table id="filters">
+  
+    <div>
+    <div style="float:left"><h3>Credit List</h3></div>
+    <div style="float:right"><button id="reset_button" class="btn btn-secondary">Reset filters</button></div>
+    </div> 
+    <table class="styled-table" id="credit_table">
     <thead>
       <tr>
-        <th>Credit Type</th>
-        <th>Amount</th>
-        <th>Description</th>
-        <th>From</th>
-        <th>To</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
+        <th>
+          Credit Type <br>
           <input list="filter_credit_types" id="filter_credit_type" name="Filter Credit Type" type="text" placeholder="Select credit type...">
           <datalist id="filter_credit_types">  
             <% @credit_types.each do |credit_type| %>
               <option value="<%= credit_type %>">
             <% end %>
           </datalist>
-        </td>
-        <td><input id="filter_amount" name="Filter Amount" type="number" placeholder="Enter amount..." size="15"></td>
-        <td><input id="filter_description" name="Filter Description" type="text" placeholder="Enter description..."></td>
-        <td><input type="date" id="start" name="Filter Start Date"/></td>
-        <td><input type="date" id="end" value="" name="Filter End Date"/></td>
-        <td><button class="reset-filters" id="reset_button">Reset Filters</button></td>
-      </tr>
-    </tbody>
-    </table>
-    <!--FILTER BLOCK ENDS HERE-->
-    <table class="styled-table" id="credit_table">
-    <thead>
-        <tr>
-        <th>Credit Type</th>
-        <th>Date</th>
-        <th>Amount</th>
-        <th>Description</th>
-        <th>Actions</th>
+        </th>
+        <th> 
+          Date <br> 
+          <span style="font-weight:normal">
+          <nobr>
+          from<input type="date" id="start" name="Filter Start Date"/>
+          to<input type="date" id="end" value="" name="Filter End Date"/>
+          </nobr>
+          </span>
+        </th>
+        <th>
+          Amount <br>
+          <input id="filter_amount" name="Filter Amount" type="number" size="15">
+        </th>
+        <th>
+          Description <br>
+          <input id="filter_description" name="Filter Description" type="text">
+        </th>
+        <th>
+          Actions
+          <br> <br>
+        </th>
         </tr>
     </thead>
     <tbody>
