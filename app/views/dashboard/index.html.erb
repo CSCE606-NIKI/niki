@@ -26,6 +26,35 @@
 .credit-table tr:hover {
   background-color: #ddd;
 }
+
+.reset-filters {
+    background-color: #004a7c;
+    color: #fff;
+    border-color: #004a7c;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.reset-filters:hover {
+    background-color: #2a75f3;
+    border-color: #2a75f3;
+}
+.reset-filters {
+    background-color: #004a7c;
+    color: #fff;
+    border-color: #004a7c;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.reset-filters:hover {
+    background-color: #00335b;
+    border-color: #00335b;
+}
 </style>
 
 <!-- Main Dashboard-->
@@ -52,17 +81,17 @@
 
     <br/>
     <hr/>
-    
+  
     <div>
     <div style="float:left"><h3>Credit List</h3></div>
     <div style="float:right"><button id="reset_button" class="btn btn-secondary">Reset filters</button></div>
     </div> 
     <table class="styled-table" id="credit_table">
     <thead>
-        <tr>
+      <tr>
         <th>
           Credit Type <br>
-          <input list="filter_credit_types" id="filter_credit_type" name="Filter Credit Type" type="text" >
+          <input list="filter_credit_types" id="filter_credit_type" name="Filter Credit Type" type="text" placeholder="Select credit type...">
           <datalist id="filter_credit_types">  
             <% @credit_types.each do |credit_type| %>
               <option value="<%= credit_type %>">
@@ -108,7 +137,7 @@
     </table>
     <br>
     <div style="text-align: center;">
-      <%= link_to "New credit", new_credit_path, class: "btn btn-primary"%>
+      <%= link_to "New credit", new_credit_path, class: "btn btn-secondary"%>
     </div>
 
 

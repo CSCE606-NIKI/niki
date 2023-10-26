@@ -69,6 +69,34 @@ RSpec.describe CreditsController, type: :controller do
       end
     end
   end
+
+  describe 'Scenario: Creating a New Credit with Invalid Inputs' do
+    it 'does not create a new credit with invalid inputs' do
+      invalid_credit_attributes = {
+        credit_type: 'Credit_type1',
+        date: '2023-10-11',
+        amount: 10,  # Invalid amount
+        description: 'Test credit'
+      }
+
+      expect do
+        post :create, params: { credit: invalid_credit_attributes }
+      end.not_to change(Credit, :count)
+    end
+
+    it 'sets an error flash message' do
+      invalid_credit_attributes = {
+        credit_type: 'Credit_type1',
+        date: '2023-10-11',
+        amount: 10,  # Invalid amount
+        description: 'Test credit'
+      }
+
+      post :create, params: { credit: invalid_credit_attributes }
+      expect(flash[:error]).to be_present
+    end
+  end
+
 end
 
 def sign_in_user(user)
