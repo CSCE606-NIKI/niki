@@ -57,7 +57,7 @@
     <div style="float:left"><h3>Credit List</h3></div>
     <div style="float:right"><button id="reset_button" class="btn btn-secondary">Reset filters</button></div>
     </div> 
-    <table class="credit-table" id="credit_table">
+    <table class="styled-table" id="credit_table">
     <thead>
         <tr>
         <th>
@@ -72,8 +72,10 @@
         <th> 
           Date <br> 
           <span style="font-weight:normal">
-          from <input type="date" id="start" name="Filter Start Date"/>
-          to <input type="date" id="end" value="" name="Filter End Date"/>
+          <nobr>
+          from<input type="date" id="start" name="Filter Start Date"/>
+          to<input type="date" id="end" value="" name="Filter End Date"/>
+          </nobr>
           </span>
         </th>
         <th>
