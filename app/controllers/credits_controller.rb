@@ -68,6 +68,7 @@ class CreditsController < ApplicationController
         redirect_to dashboard_path, notice: "Credit was successfully deleted.", status: :see_other
     end
     
+    
     private
     def credit_params
             params.require(:credit).permit(:credit_type, :date , :amount  ,:user_id , :description ,:credit_type_id)

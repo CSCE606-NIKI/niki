@@ -1,6 +1,8 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
+
 <style>
 
 .credit-table {
@@ -25,6 +27,30 @@
 
 .credit-table tr:hover {
   background-color: #ddd;
+}
+.progress-bar-container {
+    margin-bottom: 20px;
+    background-color: #f3f3f3;
+    padding: 3px;
+    border-radius: 20px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar {
+    background-color: #004a7c;
+    text-align: center;
+    padding: 10px 0;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+    transition: width 0.4s ease-out;
+}
+
+.progress-label {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
 .reset-filters {
@@ -62,6 +88,17 @@
     <h1>Welcome to the Dashboard</h1>
     
     <h2>Summary Credits</h2>
+
+    <% sum_of_credits = @credit_totals.values.sum %>
+    
+    <div class="progress-bar-container">
+        <div class="progress-bar" style="width: <%= [((sum_of_credits / 15.0) * 100), 100].min %>%;">
+            <%= sum_of_credits %> / 15 Credits
+        </div>
+    </div>
+    <!--<div class="progress-label">Credit Tracker</div>-->
+    <!--<canvas id="creditChart" width="400" height="200"></canvas>-->
+
     <table class="styled-table">
     <thead>
         <tr>
@@ -78,6 +115,7 @@
         <% end %>
     </tbody>
     </table>
+ 
 
     <br/>
     <hr/>
@@ -140,10 +178,6 @@
     
 </div>
 
- <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %> 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 </html>

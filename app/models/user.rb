@@ -14,4 +14,6 @@ class User < ApplicationRecord
 
     # Every user has to have an email, Google and Facebook login fails if no email is returned in hash
     validates :email, presence: true
+    validates :username, presence: true
+
 end

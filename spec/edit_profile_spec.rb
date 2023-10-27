@@ -33,5 +33,27 @@ RSpec.describe ProfileController, type: :controller do
         expect(flash[:notice]).to eq('Profile updated successfully.')
       end
     end
+    
+    context 'with invalid attributes' do
+      let(:invalid_attributes) { { username: '', email: 'newemail@example.com' } } # username is intentionally left blank
+    
+      it 'does not update the user attributes' do
+        patch :update, params: { user: invalid_attributes }
+        user.reload
+        expect(user.username).not_to eq('')
+        expect(user.email).not_to eq('newemail@example.com')
+      end
+    
+      it 'renders the edit view' do
+        patch :update, params: { user: invalid_attributes }
+        expect(response).to render_template(:edit)
+      end
+    
+      it 'adds errors to the @user object' do
+        patch :update, params: { user: invalid_attributes }
+        expect(assigns(:user).errors).to be_present
+      end
+    end
+    
     end
 end

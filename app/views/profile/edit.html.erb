@@ -1,4 +1,14 @@
-<%= stylesheet_link_tag 'edit_profile.css' %>
+
+<head>
+  <!-- ... other content ... -->
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <%= stylesheet_link_tag 'edit_profile.css' %>
+</head>
+
+<body>
 <div class ="edit-profile-container">
 
   <h1>Edit Profile</h1>
@@ -23,5 +33,40 @@
         <%= f.submit "Update Profile" %>
       </div>
     <% end %>
+
+
+<% if @user.errors.any? %>
+
+  <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert" style="font-size: 18px;>
+    <h4 class="alert-heading">
+      <%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:
+    </h4>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
+<% end %>
+
+  </div>
+  
 </div>
+
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+  <!-- Popper.js (required for some Bootstrap components) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <%= yield :javascript %> <!-- This is optional but allows you to load page-specific scripts -->
+
+
+</body>
