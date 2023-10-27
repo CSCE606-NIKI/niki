@@ -10,5 +10,15 @@ class Credit < ApplicationRecord
       'Credit_type3' => 300
     }
     CREDIT_TYPES = ['Credit_type1', 'Credit_type2', 'Credit_type3']
+
+
+    private
+
+    # Private Methods
+    def validate_credit_limit
+      if CREDIT_LIMITS[credit_type] && amount > CREDIT_LIMITS[credit_type]
+        errors.add(:amount, "exceeds the limit for #{credit_type}")
+      end
+    end
 end
 
