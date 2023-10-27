@@ -9,7 +9,7 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
   </head>
 
   <body>
@@ -42,16 +42,65 @@
         border-radius: 50%;
     }
     
-</style>
+    .bell-icon {
+        cursor: pointer;
+        color: white;
+        margin-right: 10px; 
+        margin-top: 589 bbb  npx; 
+    }
 
+    .credits-notification-container {
+      border: 1px solid #ccc;
+      padding: 10px;
+      position: absolute;
+      right: 0; /* Align it to the right */
+      display: none; /* Hide it by default */
+      top: 100%;
+      z-index: 999;
+    }
+
+    .credits-notification-container.active {
+      display: block; /* Show the container when active class is present */
+    }
+
+</style>
+<script>
+    function displayCredits() {
+        var creditsContainer = document.querySelector('.credits-notification-container');
+        creditsContainer.classList.toggle('active');
+        console.log("Here#############")
+    }
+</script>
 <body>
 
 <% if logged_in? %>
     <nav class="navbar navbar-expand-lg navbar-custom">
         <ul class="navbar-nav ml-auto">
-                <li class="custom-link"><%= link_to 'Dashboard', dashboard_path , class: "custom-link" %> </li>
+            <li class="custom-link"><%= link_to 'Dashboard', dashboard_path , class: "custom-link" %> </li>
+           <div class="bell-icon" onclick="displayCredits()">
+              <i class="fas fa-bell fa-2x"></i>
+            </div>
+
+            <div class="credits-notification-container">
+              <div class="dropdown">
+                <% if @credits.present? %>
+                  <% credits_count = @credits.count %>
+                <% end %>
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #004a7c;">
+                  <%= "#{credits_count} Credits due soon!" %>
+                </button>
+                <% if @credits.present? %>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <% @credits.each do |credit| %>
+                      <a class="dropdown-item" href="#"><%= credit.description %></a>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
 
             <li class="nav-item dropdown">
+
             <div class="d-flex align-items-center">
                 <% if current_user.profile_pic.attached? %>
                 <%= image_tag current_user.profile_pic, class: "profile-picture mr-2" %>
