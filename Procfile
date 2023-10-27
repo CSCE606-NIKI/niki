@@ -1,1 +1,1 @@
-release: rake db:migrate auth:generate_tokens --trace
+release: rake db:migrate --trace
