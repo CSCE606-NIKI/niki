@@ -6,13 +6,13 @@ describe SessionsController, type: :controller do
   describe 'POST #create' do
     it 'logs in with valid email and password' do
       post :create, params: { identifier: user.email, password: user.password }
-      expect(session[:user_id]).to eq(user.id)
+      expect(cookies[:auth_token]).to eq(user.auth_token)
       expect(response).to redirect_to(dashboard_path(user.id)) 
     end
     
     it 'logs in with valid username and password' do
         post :create, params: { identifier: user.username, password: user.password }
-        expect(session[:user_id]).to eq(user.id)
+        expect(cookies[:auth_token]).to eq(user.auth_token)
         expect(response).to redirect_to(dashboard_path(user.id))
       end
 
@@ -37,17 +37,32 @@ describe SessionsController, type: :controller do
 
   describe 'DELETE #destroy' do
     it 'logs out the user' do
-      session[:user_id] = user.id
+      cookies[:auth_token] = user.auth_token
       delete :destroy
-      expect(session[:user_id]).to be_nil
+      # Deleting a cookie is not as simple as deleting a session variable
+      # When you delete a cookie, instead of just deleting the variable
+      # Rails sets the response header to a special value that tells the browser to delete the cookie
+      # Check that the response header sets auth_token to an empty string
+      expect(response.header['Set-Cookie']).to match(/^auth_token=;/)
       expect(response).to redirect_to(login_path) 
     end
   end
   describe 'GET #new' do
     it 'already logged in user' do
-      session[:user_id] = user.id
+      cookies[:auth_token] = user.auth_token
       get :new
       expect(response).to redirect_to(dashboard_path) 
     end
   end
 end
+
+# describe MyController do
+#   let(:cookies) { mock('cookies') }
+#   context "when my page is visited" do
+#     it "should delete my cookie" do
+#       controller.stub!(:cookies).and_return(cookies)
+#       cookies.should_receive(:delete).with(cookie, :domain => '.mydomain.com')
+#       get "my_action"
+#     end
+#   end
+# end 
