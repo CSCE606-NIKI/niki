@@ -16,7 +16,11 @@ class SessionsController < ApplicationController
       User.find_by('lower(username) = ?', identifier.downcase)
     end
     if @user && @user.authenticate(params[:password])
-        session[:user_id] = @user.id
+        if params[:remember_me]
+          cookies.permanent[:auth_token] = @user.auth_token
+        else
+          cookies[:auth_token] = @user.auth_token
+        end
         redirect_to dashboard_path(@user)
     else
         flash[:danger] ='Invalid credentials'
@@ -25,7 +29,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
+    cookies.delete(:auth_token)
     redirect_to '/login', notice: 'Logged out successfully'
   end
 
@@ -34,7 +38,7 @@ class SessionsController < ApplicationController
     # from_omniauth takes care of creating a new user if it doesn't exist yet
     @user = User.from_omniauth(request.env['omniauth.auth']) 
     if @user.valid?
-      session[:user_id] = @user.id
+      cookies.permanent[:auth_token] = @user.auth_token
       redirect_to dashboard_path(@user)
     else
       # If Google returns an invalid hash, take the user to the login page
