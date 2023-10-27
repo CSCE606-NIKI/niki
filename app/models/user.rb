@@ -1,5 +1,7 @@
 class User < ApplicationRecord
     has_many :credits
+    has_many :credit_types
+
     has_secure_password
     has_one_attached :profile_pic
     def self.from_omniauth(response)

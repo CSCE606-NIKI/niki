@@ -119,7 +119,7 @@
     <tbody>
         <% @credits.each do |credit| %>
         <tr class="credit-table">
-            <td><%= credit.credit_type %></td>
+            <td><%= credit.credit_type.name %></td>
             <td><%= credit.date %></td>
             <td><%= credit.amount %></td>
             <td style="max-width: 400px; word-wrap: break-word;"><%= credit.description %></td>
