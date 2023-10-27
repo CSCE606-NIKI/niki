@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_13_041404) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_23_202458) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
+    t.integer "record_id", null: false
+    t.integer "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -34,9 +34,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_13_041404) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.bigint "blob_id", null: false
+    t.integer "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "credit_types", force: :cascade do |t|
+    t.string "name"
+    t.integer "credit_limit"
+    t.boolean "carry_forward"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_credit_types_on_user_id"
   end
 
   create_table "credits", force: :cascade do |t|
@@ -49,6 +60,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_13_041404) do
     t.datetime "updated_at", null: false
     t.text "description"
     t.integer "creditID"
+    t.integer "credit_type_id", default: 1, null: false
+    t.index ["credit_type_id"], name: "index_credits_on_credit_type_id"
     t.index ["user_id"], name: "index_credits_on_user_id"
   end
 
@@ -61,9 +74,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_13_041404) do
     t.string "uid"
     t.string "provider"
     t.string "profile_pic"
+    t.integer "credit_type_id"
+    t.index ["credit_type_id"], name: "index_users_on_credit_type_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "credit_types", "users"
+  add_foreign_key "credits", "credit_types"
   add_foreign_key "credits", "users"
+  add_foreign_key "users", "credit_types"
 end

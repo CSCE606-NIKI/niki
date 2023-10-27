@@ -1,0 +1,29 @@
+<h1>Credit Types</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Credit Limit</th>
+      <th>Carry Forward</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @credit_types.each do |credit_type| %>
+      <tr>
+        <td><%= credit_type.name %></td>
+        <td><%= credit_type.credit_limit %></td>
+        <td><%= credit_type.carry_forward ? 'Yes' : 'No' %></td>
+        <td><%= credit_type.description %></td>
+        <td>
+          <%= link_to 'Edit', edit_credit_type_path(credit_type) %>
+          <%= link_to 'Delete', credit_type, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New Credit Type', new_credit_type_path %>
