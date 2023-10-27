@@ -5,9 +5,9 @@ class CreditsController < ApplicationController
         @credits = Credit.all
     end 
 
-    # def show
-    #     @credit = Credit.find(params[:id])
-    # end
+    def show
+        @credit = Credit.find(params[:id])
+    end
 
     def new
         @credit = Credit.new

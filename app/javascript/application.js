@@ -18,11 +18,6 @@ document.getElementById("reset_button").addEventListener("click", resetFunction)
 function filterTable() {
   var credit_type, amount, description, start_date, end_date, table, tr, i, creditValue, amountValue, descValue, dateValue, year, month, day;
   var td0, td1, td2, td3;
-  console.log("credit_type: " + credit_type);
-  console.log("amount: " + amount);
-  console.log("description: " + description);
-  console.log("start_date: " + start_date);
-  console.log("end_date: " + end_date);
   credit_type = document.getElementById("filter_credit_type").value.toUpperCase();
   amount = document.getElementById("filter_amount").value.toUpperCase();
   description = document.getElementById("filter_description").value.toUpperCase();
