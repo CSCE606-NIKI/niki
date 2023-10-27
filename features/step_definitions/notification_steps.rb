@@ -1,5 +1,9 @@
 # features/step_definitions/credits_steps.rb
 
+Given("I am on dashboard") do
+  visit "/dashboard"
+end
+
 When("I have {int} credits due soon") do |credits_count|
   @credits = [] # You can initialize @credits as needed for testing
   credits_count.times do |i|
