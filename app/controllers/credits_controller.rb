@@ -31,36 +31,27 @@ class CreditsController < ApplicationController
     def create
         @credit = Credit.new(credit_params)
         @credit.user = current_user 
-        existing_credits = Credit.where(user: current_user, credit_type_id: @credit.credit_type_id)
-        credit_type = CreditType.find(@credit.credit_type_id)
-        @credit.credit_type = credit_type
-        if @credit.credit_type.carry_forward
-            # If carry forward is enabled, calculate the cumulative total
-            total_number_of_credits = existing_credits.sum(:amount) + @credit.amount
-        else
-            # If carry forward is not enabled, calculate the total for the current year
-            current_year = Time.now.year
-            credits_for_current_year = existing_credits.where(date: Date.new(current_year, 1, 1)..Date.new(current_year, 12, 31))
-            total_number_of_credits = credits_for_current_year.sum(:amount) + @credit.amount
-        end
+        all_credits = Credit.where(user: @credit.user,credit_type_id: @credit.credit_type_id)
+        credit_type = @credit.credit_type  
+        total_number_of_credits = all_credits.sum(&:amount)
+        puts total_number_of_credits
+    
+        @credit.total_number_of_credits = total_number_of_credits
+        if @credit.save
+            flash[:notice] = "Added Successfully!"
+            redirect_to dashboard_path
 
-   
-        if total_number_of_credits <= credit_type.credit_limit
-            @credit.total_number_of_credits = total_number_of_credits
-            if @credit.save
-                flash[:notice] = "Added Successfully!"
-                redirect_to dashboard_path
-                return 
-            else
-                redirect_to new_credit_path
-                flash[:error] = "Couldn't be added, try again!"
+            if total_number_of_credits > credit_type.credit_limit
+                flash[:error] = "You've already reached your credit limit for type #{@credit.credit_type.name}!"
             end
+            return 
         else
             redirect_to new_credit_path
-            flash[:error] = "You've already reached your credit limit for type #{@credit.credit_type.name}!"
+            flash[:error] = "Couldn't be added, try again!"
         end
-    
     end
+      
+      
 
     def destroy
         @credit = Credit.find(params[:id])
