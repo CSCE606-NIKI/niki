@@ -2,7 +2,10 @@ class UsersController < ApplicationController
   def new
     @user = User.new
   end
-
+  def renewal_date
+    # Render the renewal date setting page
+    @user = current_user # Assuming you have a method to get the current user
+  end
   def create
      if check_if_new_user(user_params[:email])
       if check_if_username_valid(user_params[:username])
@@ -16,7 +19,9 @@ class UsersController < ApplicationController
             @user = User.new(specific_params)
 
             if @user.save
-              redirect_to login_path(@user)
+              cookies.permanent[:auth_token] = @user.auth_token
+
+              redirect_to renewal_date_user_path(@user)
             else
               render :new
             end
@@ -38,11 +43,19 @@ class UsersController < ApplicationController
     end
   end
 
+  def set_renewal_date
+    if current_user.update(user_params)
+      flash[:notice] = 'Renewal date set successfully.'
+      redirect_to dashboard_path
+    else
+      render :renewal_date
+    end
+  end
   
   private
 
   def user_params
-    params.require(:user).permit(:username, :email, :password, :password_confirmation)
+    params.require(:user).permit(:username, :email, :password, :password_confirmation ,:renewal_date)
   end
 
   # Method to validate password.
