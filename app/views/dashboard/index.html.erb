@@ -89,15 +89,33 @@
     
     <h2>Summary Credits</h2>
 
-    <% sum_of_credits = @credit_totals.values.sum %>
+    <% renewal_date = @current_user.renewal_date  %>
+    <% start_date = renewal_date - 1.year%>
+    <% end_date = renewal_date%>
+
+
+
+    <% sum_of_credits = @credits.where(date: start_date..end_date).sum(:amount) %>
+
+    <% unique_credit_types = @credits.map { |credit| credit.credit_type }.uniq %>
+    <% total_credit_limit = unique_credit_types.sum { |credit_type| credit_type.credit_limit } %>
+
+
+   <div class="progress-bar-container">
+     <div class="progress-bar" style="width: <%= [((sum_of_credits / (total_credit_limit.to_f))  * 100), 100].min %>%;">
+         <%= sum_of_credits %> / <%= total_credit_limit %> 
+     </div>
+   </div>
+
     
-    <div class="progress-bar-container">
-        <div class="progress-bar" style="width: <%= [((sum_of_credits / 15.0) * 100), 100].min %>%;">
-            <%= sum_of_credits %> / 15 Credits
-        </div>
-    </div>
-    <!--<div class="progress-label">Credit Tracker</div>-->
+
+   <% @credit_sums_by_date =@credits.where(date: start_date..end_date).group(:date).sum(:amount).to_h %>
+
+    <canvas id="creditChart" width="900" height="300"></canvas><!--<div class="progress-label">Credit Tracker</div>-->
     <!--<canvas id="creditChart" width="400" height="200"></canvas>-->
+
+
+
 
     <table class="styled-table">
     <thead>
@@ -182,5 +200,34 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+ var creditData = {
+   labels: <%= @credit_sums_by_date.keys.map { |date| date.strftime('%Y-%m-%d') }.to_json.html_safe %>,
+   datasets: [{
+     label: 'Credits Over Time',
+     data: <%= @credit_sums_by_date.values.to_json.html_safe %>,
+     borderColor: 'rgba(75, 192, 192, 1)',
+     borderWidth: 1,
+     fill: false
+   }]
+ };
+</script>
+
+<script>
+ var ctx = document.getElementById('creditChart').getContext('2d');
+ var myLineChart = new Chart(ctx, {
+   type: 'line',
+   data: creditData,
+   options: {
+     scales: {
+       y: {
+         beginAtZero: true
+       }
+     }
+   }
+ });
+</script>
 </body>
 </html>

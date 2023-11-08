@@ -93,7 +93,7 @@
                 <% if @credits.present? %>
                   <% credits_count = 15 - @credit_totals.values.sum %>
                 <% end %>
-                <%= link_to visualize_path, remote: true do %>
+                <%= link_to visualize_path( @credits), remote: true do %>
                   <button type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false" style="background-color: #004a7c;color: white;">
                     <%= "#{credits_count} Credits Pending!" %>
                   </button>
