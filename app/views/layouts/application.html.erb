@@ -91,7 +91,13 @@
 
             <div class="credits-notification-container">
                 <% if @credits.present? %>
-                  <% credits_count = 15 - @credit_totals.values.sum %>
+                    <% renewal_date = @current_user.renewal_date  %>
+                    <% start_date = renewal_date - 1.year%>
+                    <% end_date = renewal_date%>
+                    <% sum_of_credits = @credits.where(date: start_date..end_date).sum(:amount) %>
+                    <% unique_credit_types = @credits.map { |credit| credit.credit_type }.uniq %>
+                    <% total_credit_limit = unique_credit_types.sum { |credit_type| credit_type.credit_limit } %>
+                  <% credits_count = total_credit_limit - sum_of_credits %>
                 <% end %>
                 <%= link_to visualize_path( @credits), remote: true do %>
                   <button type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false" style="background-color: #004a7c;color: white;">
