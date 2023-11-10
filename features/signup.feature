@@ -12,7 +12,7 @@ Feature: User Sign Up
       And I fill in "Password" with "Password123!"
       And I fill in "Password confirmation" with "Password123!" 
       And I click on "Sign up"
-      Then I should see "Log In"
+      Then I should see "Set Renewal Date"
 
   Scenario: Passwords mismatch
       Given I am new user and I am on the user new page

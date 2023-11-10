@@ -8,6 +8,8 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= javascript_include_tag 'renew_credits.js' %>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
   </head>
@@ -68,7 +70,6 @@
     function displayCredits() {
         var creditsContainer = document.querySelector('.credits-notification-container');
         creditsContainer.classList.toggle('active');
-        console.log("Here#############")
     }
 </script>
 <body>
@@ -79,30 +80,25 @@
                 <% if controller_name == 'dashboard' && action_name == 'index' %>
                     <li class="custom-link"> <%= link_to 'Add New Credit Type', new_credit_type_path , class: "custom-link" %> </li>
                     <li class="custom-link"> <%= link_to 'Add New Credit', new_credit_path , class: "custom-link" %> </li>
+                    <li class="custom-link"> <%= link_to 'Renew Credits', renew_path , class: "custom-link" %> </li>
 
                 <% elsif controller_name == 'credits' && action_name == 'new' %>
                     <li class="custom-link"><%= link_to 'Dashboard', dashboard_path , class: "custom-link" %> </li>
                 <% end %>
-           <div class="bell-icon" onclick="displayCredits()">
+            <div class="bell-icon" onclick="displayCredits()">
               <i class="fas fa-bell fa-2x"></i>
             </div>
 
             <div class="credits-notification-container">
-              <div class="dropdown">
                 <% if @credits.present? %>
-                  <% credits_count = @credits.count %>
+                  <% credits_count = 15 - @credit_totals.values.sum %>
                 <% end %>
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #004a7c;">
-                  <%= "#{credits_count} Credits due soon!" %>
-                </button>
-                <% if @credits.present? %>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <% @credits.each do |credit| %>
-                      <a class="dropdown-item" href="#"><%= credit.description %></a>
-                    <% end %>
-                  </div>
+                <%= link_to visualize_path, remote: true do %>
+                  <button type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false" style="background-color: #004a7c;color: white;">
+                    <%= "#{credits_count} Credits Pending!" %>
+                  </button>
                 <% end %>
-              </div>
+            </div>
             </div>
 
             <li class="nav-item dropdown">
@@ -160,4 +156,6 @@
 
   </body>
 </html>
+
+
 

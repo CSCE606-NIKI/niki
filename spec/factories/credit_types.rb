@@ -27,5 +27,4 @@ FactoryBot.define do
     description { "Carry Forward is disabled" }
     user { association :user } # Include this line to associate the credit type with a user
   end
-
 end

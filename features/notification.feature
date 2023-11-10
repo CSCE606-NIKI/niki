@@ -4,16 +4,22 @@ Feature: Testing Credits Notification Container
         When I visit the dashboard page
         Then I should see the "Summary Credits" page title
         And I should see the "New credit" link
+        When I visit the new credit type page
+        And I fill in "Name" with "Credit_type1"
+        And I fill in "Credit limit" with "1000"
+        And I press "Create Credit type"
+        Then I should see "Credit type created successfully."
         When I visit the Add New credit page
+        
         And I fill in the following:
         | Field        | Value       |
-        | Credit Type  | Credit_type1 |
+        | Credit type  | Credit_type1 |
         | Date         | 2023-10-11  |
         | Amount       | 100         |
         | Description  | Test credit |
         And I click the "Create Credit" button
         Then I should be redirected to the dashboard
-        And a new credit with type "Credit_type1" and amount "100" should exist in the system
+        Then I should see an message "Added Successfully!"
 
   Scenario: Check Credits Notification Container
         Given I am on dashboard

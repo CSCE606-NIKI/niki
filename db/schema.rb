@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_23_202458) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_04_001221) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -75,6 +75,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_23_202458) do
     t.string "provider"
     t.string "profile_pic"
     t.integer "credit_type_id"
+    t.string "auth_token"
+    t.date "renewal_date"
     t.index ["credit_type_id"], name: "index_users_on_credit_type_id"
   end
 
