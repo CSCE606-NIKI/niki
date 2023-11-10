@@ -37,6 +37,14 @@ gem 'omniauth-facebook'
 gem 'rails-controller-testing'
 gem 'jquery-rails'
 gem 'sqlite3'
+# Gemfile
+gem 'sidekiq', '~> 6.5'
+gem 'whenever'
+# Gemfile
+gem 'sidekiq-scheduler'
+# Gemfile
+gem 'sidekiq-cron'
+gem 'activesupport',  '7.0.7.2'
 gem 'bootstrap', '~> 5.1.3'
 gem 'wicked_pdf'
 group :development do

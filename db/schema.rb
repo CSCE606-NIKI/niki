@@ -11,14 +11,11 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_11_10_080232) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
+    t.integer "record_id", null: false
+    t.integer "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -37,7 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_10_080232) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.bigint "blob_id", null: false
+    t.integer "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
@@ -49,7 +46,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_10_080232) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
+    t.integer "user_id"
     t.index ["user_id"], name: "index_credit_types_on_user_id"
   end
 
@@ -58,12 +55,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_10_080232) do
     t.date "date"
     t.integer "amount"
     t.string "credit_type"
-    t.bigint "user_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "description"
     t.integer "creditID"
-    t.bigint "credit_type_id", default: 1, null: false
+    t.integer "credit_type_id", default: 1, null: false
     t.index ["credit_type_id"], name: "index_credits_on_credit_type_id"
     t.index ["user_id"], name: "index_credits_on_user_id"
   end
@@ -84,6 +81,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_10_080232) do
     t.string "profile_pic"
     t.integer "credit_type_id"
     t.string "auth_token"
+    t.date "renewal_date"
     t.index ["credit_type_id"], name: "index_users_on_credit_type_id"
   end
 

@@ -1,0 +1,13 @@
+<!-- app/views/users/renewal_date.html.erb -->
+<div class="credits-container">
+<h1>Set Renewal Date</h1>
+
+<%= form_for current_user, url:set_renewal_date_user_path(@user), method: :put do |f| %>
+  <div class="form-group">
+    <%= f.label :renewal_date, 'Select Renewal Date' %>
+    <%= f.date_field :renewal_date, class: 'form-control' %>
+  </div>
+
+  <%= f.submit 'Set Renewal Date', class: 'btn btn-primary' %>
+<% end %>
+</div>

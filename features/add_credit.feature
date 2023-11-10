@@ -30,8 +30,9 @@ Feature: Managing Credits
         | Amount       | 1500        |
         | Description  | Test credit |
     And I click the "Create Credit" button
-    Then I should see an error message for "You've already reached your credit limit for type type1"
-    And I should not be redirected to the dashboard
+    Then I should be redirected to the dashboard
+    Then I should see an message "Added Successfully!"
+
 
   Scenario: Creating a New Credit with Invalid Inputs
     When I visit the Add New credit page

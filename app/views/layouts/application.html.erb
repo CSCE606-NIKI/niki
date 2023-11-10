@@ -8,6 +8,8 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= javascript_include_tag 'renew_credits.js' %>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
   </head>
@@ -75,7 +77,6 @@
     function displayCredits() {
         var creditsContainer = document.querySelector('.credits-notification-container');
         creditsContainer.classList.toggle('active');
-        console.log("Here#############")
     }
 </script>
 <body>
@@ -134,6 +135,11 @@
                       <%= link_to 'Add New Credit', new_credit_path , class: "custom-link",style:"color:black ; padding-left: 1.4rem;" %> 
                   </div>
                </div>
+               <div class="dropdowm-item"> 
+                 <div class= " btn btn-custom btn-link" style = "background: none; border: none;">     
+                      <%= link_to 'Renew Credits', renew_path , class: "custom-link",style:"color:black ; padding-left: 1.4rem;" %> 
+                      </div>
+               </div>
 
 
                 <% if current_user %>
@@ -178,4 +184,6 @@
 
   </body>
 </html>
+
+
 

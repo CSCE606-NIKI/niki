@@ -23,13 +23,22 @@ Rails.application.routes.draw do
   get 'profile/edit', to: 'profile#edit', as: 'profile_edit'
   patch 'profile/update', to: 'profile#update', as: 'profile_update'
   
+  get '/renew', to: 'credits#renew'
   get 'print', to: 'prints#show', as: 'print'
 
   # config/routes.rb
-  resources :users, only: [:new, :create]
-  resources :credits
+  resources :users do
+    member do
+      get :renewal_date
+      put :set_renewal_date
+    end
+  end
+  resources :credits do
+    post 'renew', on: :collection
+  end
   resources :credit_types
   resources :prints, only: [:show]
+
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
