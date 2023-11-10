@@ -115,9 +115,11 @@
         <% end %>
     </tbody>
     </table>
- 
 
     <br/>
+    <div style="text-align: center;">
+    <%= link_to "Download PDF", print_path, target: :_blank, class: "btn btn-secondary"%>
+    </div>
     <hr/>
   
     <div>
@@ -129,7 +131,7 @@
       <tr>
         <th>
           Credit Type <br>
-          <input id="filter_credit_type" name="Filter Credit Type" type="text" placeholder="Select credit type...">
+          <input id="filter_credit_type" name="Filter Credit Type" type="text" placeholder="Select credit type..." style="padding:2px">
         </th>
         <th> 
           Date <br> 
@@ -142,11 +144,11 @@
         </th>
         <th>
           Amount <br>
-          <input id="filter_amount" name="Filter Amount" type="number" size="15">
+          <input id="filter_amount" name="Filter Amount" type="number" size="15" style="padding:2px">
         </th>
         <th>
           Description <br>
-          <input id="filter_description" name="Filter Description" type="text">
+          <input id="filter_description" name="Filter Description" type="text" style="padding:2px">
         </th>
         <th>
           Actions

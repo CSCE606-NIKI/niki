@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  
   get '/password/reset', to: 'password_resets#new'
   post '/password/reset', to: 'password_resets#create'
   get '/password/reset/edit', to: 'password_resets#edit', as: 'password_reset_edit'
@@ -24,11 +23,13 @@ Rails.application.routes.draw do
   get 'profile/edit', to: 'profile#edit', as: 'profile_edit'
   patch 'profile/update', to: 'profile#update', as: 'profile_update'
   
+  get 'print', to: 'prints#show', as: 'print'
 
   # config/routes.rb
   resources :users, only: [:new, :create]
   resources :credits
   resources :credit_types
+  resources :prints, only: [:show]
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
