@@ -90,7 +90,10 @@ class CreditsController < ApplicationController
       end
     end
     
-      
+    def visualize
+        render :visualize
+    end
+
     def destroy
         @credit = Credit.find(params[:id])
         @credit.destroy

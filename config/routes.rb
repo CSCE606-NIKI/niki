@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   patch 'profile/update', to: 'profile#update', as: 'profile_update'
   
   get '/renew', to: 'credits#renew'
+  get '/visualize', to: 'credits#visualize', as: 'visualize'
   get 'print', to: 'prints#show', as: 'print'
 
   # config/routes.rb
