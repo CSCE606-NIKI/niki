@@ -12,7 +12,7 @@ When("I have {int} credits due soon") do |credits_count|
 end
 
 Then("I should see a button with the text {string}") do |button_text|
-  button = find('.credits-notification-container .btn-secondary')
+  button = find('.credits-notification-container button')
   expect(button).to have_text(button_text)
 end
 
@@ -22,7 +22,7 @@ And("I click the bell icon") do
 end
 
 And("I click the button") do
-  button = find('.credits-notification-container .btn-secondary')
+  button = find('.credits-notification-container button')
   button.click
 end
 

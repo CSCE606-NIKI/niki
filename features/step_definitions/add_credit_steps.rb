@@ -1,5 +1,5 @@
 Given('I am logged in as {string} with password {string}') do |string, string2|
-    @user = User.create(username:'user1', email: string, password: string2)
+    @user = User.create(username: 'user1', email: string , password: string2, renewal_date: Date.new(2024, 6, 1))
     visit login_path
     fill_in("Email or Username", :with => @user.email)
     fill_in("password", :with => @user.password)
