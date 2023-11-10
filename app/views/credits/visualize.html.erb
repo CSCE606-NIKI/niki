@@ -42,8 +42,9 @@
         <% unique_credit_types = credit_data.map { |credit| credit.credit_type }.uniq %>
         <% total_credit_limit = unique_credit_types.sum { |credit_type| credit_type.credit_limit } %>
         <h4>Total Credits Pending </h4>
+        <% result = (sum_of_credits / total_credit_limit.to_f ) * 100  %>
         <div class="progress-bar-container">
-            <div class="progress-bar" style="width: <%= [((sum_of_credits / (total_credit_limit.to_f))  * 100), 100].min %>%;">
+            <div class="progress-bar" style="width: <%= result.nan? ?  0: [result,100].min %>%;">
                 <%= sum_of_credits %> / <%= total_credit_limit %> 
             </div>
         </div>

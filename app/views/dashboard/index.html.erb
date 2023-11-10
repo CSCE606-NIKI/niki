@@ -93,16 +93,14 @@
     <% start_date = renewal_date - 1.year%>
     <% end_date = renewal_date%>
 
-
-
-    <% sum_of_credits = @credits.where(date: start_date..end_date).sum(:amount) %>
+    <% sum_of_credits = @credits.where(date: start_date..end_date).sum(:amount) || 0 %>
 
     <% unique_credit_types = @credits.map { |credit| credit.credit_type }.uniq %>
-    <% total_credit_limit = unique_credit_types.sum { |credit_type| credit_type.credit_limit } %>
+    <% total_credit_limit = unique_credit_types.sum { |credit_type| credit_type.credit_limit }  || 0 %>
 
-
+    <% result = (sum_of_credits / total_credit_limit.to_f ) * 100  %>
    <div class="progress-bar-container">
-     <div class="progress-bar" style="width: <%= [((sum_of_credits / (total_credit_limit.to_f))  * 100), 100].min %>%;">
+     <div class="progress-bar" style="width: <%= result.nan? ?  0: [result,100].min %>%;">
          <%= sum_of_credits %> / <%= total_credit_limit %> 
      </div>
    </div>
