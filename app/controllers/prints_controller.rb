@@ -28,6 +28,7 @@ class PrintsController < ApplicationController
 
     end
 
+    
     render pdf: "Credits Summary",
     page_size: 'letter',
     formats: [:html],
