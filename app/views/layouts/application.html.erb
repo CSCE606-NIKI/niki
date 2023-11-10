@@ -8,6 +8,8 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= javascript_include_tag 'renew_credits.js' %>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
   </head>
@@ -75,7 +77,6 @@
     function displayCredits() {
         var creditsContainer = document.querySelector('.credits-notification-container');
         creditsContainer.classList.toggle('active');
-        console.log("Here#############")
     }
 </script>
 <body>
@@ -88,26 +89,26 @@
                 <% elsif controller_name == 'credits' && action_name == 'new' %>
                     <li class="custom-link"><%= link_to 'Dashboard', dashboard_path , class: "custom-link" %> </li>
                 <% end %>
-           <div class="bell-icon" onclick="displayCredits()">
+            <div class="bell-icon" onclick="displayCredits()">
               <i class="fas fa-bell fa-2x"></i>
             </div>
 
             <div class="credits-notification-container">
-              <div class="dropdown">
                 <% if @credits.present? %>
-                  <% credits_count = @credits.count %>
+                    <% renewal_date = @current_user.renewal_date  %>
+                    <% start_date = renewal_date - 1.year%>
+                    <% end_date = renewal_date%>
+                    <% sum_of_credits = @credits.where(date: start_date..end_date).sum(:amount) %>
+                    <% unique_credit_types = @credits.map { |credit| credit.credit_type }.uniq %>
+                    <% total_credit_limit = unique_credit_types.sum { |credit_type| credit_type.credit_limit } %>
+                  <% credits_count = total_credit_limit - sum_of_credits %>
                 <% end %>
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #004a7c;">
-                  <%= "#{credits_count} Credits due soon!" %>
-                </button>
-                <% if @credits.present? %>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <% @credits.each do |credit| %>
-                      <a class="dropdown-item" href="#"><%= credit.description %></a>
-                    <% end %>
-                  </div>
+                <%= link_to visualize_path( @credits), remote: true do %>
+                  <button type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false" style="background-color: #004a7c;color: white;">
+                    <%= "#{credits_count} Credits Pending!" %>
+                  </button>
                 <% end %>
-              </div>
+            </div>
             </div>
 
             <li class="nav-item dropdown">
@@ -133,6 +134,11 @@
                  <div class= " btn btn-custom btn-link" style = "background: none; border: none;">     
                       <%= link_to 'Add New Credit', new_credit_path , class: "custom-link",style:"color:black ; padding-left: 1.4rem;" %> 
                   </div>
+               </div>
+               <div class="dropdowm-item"> 
+                 <div class= " btn btn-custom btn-link" style = "background: none; border: none;">     
+                      <%= link_to 'Renew Credits', renew_path , class: "custom-link",style:"color:black ; padding-left: 1.4rem;" %> 
+                      </div>
                </div>
 
 
@@ -178,4 +184,6 @@
 
   </body>
 </html>
+
+
 

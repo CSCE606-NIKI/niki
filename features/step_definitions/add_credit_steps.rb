@@ -1,5 +1,5 @@
 Given('I am logged in as {string} with password {string}') do |string, string2|
-    @user = User.create(username:'user1', email: string, password: string2)
+    @user = User.create(username: 'user1', email: string , password: string2, renewal_date: Date.new(2024, 6, 1))
     visit login_path
     fill_in("Email or Username", :with => @user.email)
     fill_in("password", :with => @user.password)
@@ -125,3 +125,42 @@ end
 Then('I should see an message {string}') do |string|
     expect(page).to have_content(string)
   end
+  When("I visit the renew credits page") do
+    visit renew_path
+  end
+  
+  When("I select valid carry-forward amounts") do
+    # Iterate through credits with carry_forward and select valid carry-forward amounts
+    # Fill in form fields using fill_in method
+    @credit_type = CreditType.find_by(name: 'renew_credits')
+
+    @credit = Credit.find_by(credit_type_id: @credit_type.id)
+
+    if @credit_type.carry_forward
+    fill_in "credit_#{@credit.id}_carry_forward_amount", with: [@credit.amount - @credit_type.credit_limit,14].min  # Choose a valid amount
+    end
+  end
+  
+  When("I submit the renewal form") do
+    click_button "Renew Credits"
+  end
+  
+  Then("I should see a success message for credits renewal") do
+    expect(page).to have_content("Credit renewal completed successfully.")
+  end
+  
+  When("I select invalid carry-forward amounts") do
+    @credit_type = CreditType.find_by(name: 'renew_credits')
+    @credit = Credit.find_by(credit_type_id: @credit_type.id)
+    if @credit_type.carry_forward
+    fill_in "credit_#{@credit.id}_carry_forward_amount", with: @credit.amount - @credit_type.credit_limit+5  # Choose a valid amount
+    end
+  end
+
+  Then("I should see an error message for credits renewal") do
+    @credit_type = CreditType.find_by(name: 'renew_credits')
+    @credit = Credit.find_by(credit_type_id: @credit_type.id)
+    expect(page).to have_content("Please fill in credit values that are within your excess credits for #{@credit_type.name}")
+  end
+ 
+  

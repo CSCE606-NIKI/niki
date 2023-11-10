@@ -50,7 +50,7 @@ RSpec.describe UsersController, type: :controller do
     it 'creates a new user with unique email' do
       post :create, params: { user: { username: 'test_user2', email: 'test2@example.com', password: 'Password123!', password_confirmation: 'Password123!' } }
 
-      expect(response).to redirect_to(login_path(User.last))
+      expect(response).to redirect_to(renewal_date_user_path(User.last))
       expect(User.count).to eq(current_user_count + 1) # 1 user should be created.
     end
 
