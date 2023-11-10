@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+.credit-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.credit-table th, .credit-table td {
+    border-bottom: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.credit-table th {
+}
+
+h3 {
+    font-family: "Arial", sans-serif;
+    font-weight: normal;
+    background-color: #ddd;
+    padding: 4px;
+}
+
+h2 {
+    font-family: "Arial", sans-serif;
+    font-size: 1.5em;
+    margin-top: 0.83em;
+    margin-bottom: 0.83em;
+    margin-left: 0;
+    margin-right: 0;
+}
+.top-spacing {
+    display: flex;
+    justify-content: space-between;
+}
+</style>
+
+<body>
+
+    <header>
+        <div class="top-spacing">
+            <div style="text-align:right">
+                Created: <strong><%= Time.now.strftime '%Y-%m-%d %H:%M:%S' %></strong>
+            </div>
+            <div>
+                <h2>Continuing Education Credits Summary</h2>
+            </div>
+        </div> 
+    </header>
+
+    <div>
+        <h3>Contact Info</h3>
+        <strong><%= @current_user.username %></strong><br>
+        <%= @current_user.email %> <br><br>
+    </div>
+    <div>
+        <h3> Totals </h3>
+        <table class="credit-table">
+            <thead>
+                <tr>
+                    <th>Credit Type</th>
+                    <th>Total Credits</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @credit_totals.each do |credit_type, total_credits| %>
+                <tr>
+                    <td><%= credit_type %></td>
+                    <td><%= total_credits %></td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+        <br>
+    </div>
+
+    <div>
+        <h3> Credit List </h3>
+        <table class="credit-table" id="credit_table">
+        <thead>
+            <tr>
+                <th>
+                Credit Type
+                <th> 
+                Date
+                </th>
+                <th>
+                Amount
+                </th>
+                <th>
+                Description
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @credits.each do |credit| %>
+            <tr class="credit-table">
+                <td><%= credit.credit_type.name %></td>
+                <td><%= credit.date %></td>
+                <td><%= credit.amount %></td>
+                <td style="max-width: 400px; word-wrap: break-word;"><%= credit.description %></td>
+            </tr>
+            <% end %>
+        </tbody>
+        </table>
+        <br><br>
+    </div>
+</body>
+</html>
