@@ -37,5 +37,13 @@ gem 'omniauth-facebook'
 gem 'rails-controller-testing'
 gem 'jquery-rails'
 gem 'sqlite3'
+gem 'bootstrap', '~> 5.1.3'
+gem 'wicked_pdf'
+group :development do
+  gem 'wkhtmltopdf-binary'
+end
+group :production do
+  gem 'wkhtmltopdf-heroku'
+end
 
   
