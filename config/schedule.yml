@@ -5,6 +5,6 @@
 #   enabled: true
 
 
-carry_forward_job:
-   cron: "*/2 * * * *"
-   class: "CarryForwardJob"
+# carry_forward_job:
+#    cron: "*/2 * * * *"
+#    class: "CarryForwardJob"
