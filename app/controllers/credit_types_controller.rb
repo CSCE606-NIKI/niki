@@ -10,9 +10,9 @@ class CreditTypesController < ApplicationController
       @credit_type = @user.credit_types.build
     end
 
-    # def show
-    #   @credit_type = CreditType.find(params[:id])
-    # end
+    def show
+      @credit_type = CreditType.find_by(name: params[:id])
+    end
 
     
     def create
@@ -25,20 +25,32 @@ class CreditTypesController < ApplicationController
         end
     end
 
-    # def update
-    #   if @credit_type.update(credit_type_params)
-    #     flash[:notice] = 'Credit type updated successfully.'
-    #     redirect_to dashboard_path
-    #   else
-    #     render :edit
-    #   end
-    # end
+    def edit
+      @credit_type = CreditType.find(params[:id])
+      # Ensure the credit type is found before rendering the edit form
+      if @credit_type.nil?
+        flash[:alert] = "Credit type not found"
+        redirect_to dashboard_path
+      end
+    end
+
+    def update
+      @credit_type = CreditType.find(params[:id])
+      if @credit_type.update(credit_type_params)
+        flash[:notice] = 'Credit type updated successfully.'
+        redirect_to dashboard_path
+      else
+        render :edit
+      end
+    end
   
-    # def destroy
-    #     @credit_type = CreditType.find(params[:id])
-    #     @credit_type.destroy
-    #     redirect_to dashboard_path, notice: "Credit type was successfully deleted."
-    # end
+    def destroy
+      @credit_type = CreditType.find(params[:id])
+      # Delete all associated credits
+      @credit_type.credits.destroy_all
+      @credit_type.destroy
+      redirect_to dashboard_path, notice: "Credit type was successfully deleted."
+    end
   
   private
 
@@ -50,7 +62,7 @@ class CreditTypesController < ApplicationController
     @user = current_user
   end
 
-  # def set_credit_type
-  #   @credit_type = @user.credit_types.find(params[:id])
-  # end
+  def set_credit_type
+    @credit_type = @user.credit_types.find_by(name: params[:id])
+  end
 end
