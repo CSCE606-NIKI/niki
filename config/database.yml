@@ -34,8 +34,8 @@ development:
   <<: *default
   database: db/development.sqlite3
 
-# production:
-   <<: *default
+production:
+ <<: *default
    database: <%= ENV['POSTGRES_PROD_DB'] %>
    username: postgres
    password: NIKI2023!
@@ -47,6 +47,3 @@ test:
   <<: *default
   database: db/test.sqlite3
 
-production:
-  <<: *default
-  database: db/production.sqlite3
