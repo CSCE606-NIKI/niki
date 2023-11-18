@@ -4,6 +4,20 @@ class ApplicationController < ActionController::Base
   helper_method :require_login
   before_action :check_and_renew_credits
 
+   def check_renewal_date_to_email
+    return unless logged_in? # Check if the user is logged in
+    
+    puts "*********HEREEeeeeeeeeeee**********"
+    @user = current_user
+    user_renewal_date = @user.renewal_date
+    current_date = Date.today
+
+    # Check if user_renewal_date is exactly 3 months away from current_date
+    if user_renewal_date == (current_date + 1.months)
+      CreditMailer.send_pending_credits_email # Call your method to send the email here
+    end
+  end
+
   private
   def current_user
     @current_user ||= User.find_by_auth_token(cookies[:auth_token]) if cookies[:auth_token]
@@ -35,20 +49,6 @@ class ApplicationController < ActionController::Base
           redirect_to renewal_date_user_path(@user)
         end
       end
-    end
-  end
-
-  def check_renewal_date_to_email
-    return unless logged_in? # Check if the user is logged in
-    
-    puts "*********HEREEeeeeeeeeeee**********"
-    @user = current_user
-    user_renewal_date = @user.renewal_date
-    current_date = Date.today
-
-    # Check if user_renewal_date is exactly 3 months away from current_date
-    if user_renewal_date == (current_date + 1.months)
-      CreditMailer.send_pending_credits_email # Call your method to send the email here
     end
   end
   
