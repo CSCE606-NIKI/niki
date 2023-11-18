@@ -11,6 +11,8 @@ def check_and_send_pending_credits_email(user)
   puts "*********HEREEeeeeeeeeeee**********"
   user_renewal_date = user.renewal_date
   current_date = Date.today
+  puts "User name: ", user.username
+  puts "renewal_date: ", user.renewal_date
 
   # Check if user_renewal_date is exactly 3 months away from current_date
   if user_renewal_date == (current_date + 3.months)
