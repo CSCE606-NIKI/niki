@@ -68,6 +68,10 @@ We intend to build a web-app that allows Professional Engineers (PEs) to track t
 - Skip Heroku steps below if you just wanna run the Rails server locally
   - Install Heroku CLI: `curl https://cli-assets.heroku.com/install-ubuntu.sh | sh`
   - Login to Heroku: `heroku login`
+- If ActionMailer doesn't work in development phase, then we need to reset SMTP credentials:
+  - Run: 'EDITOR=vim rails credentials:edit'
+  - Delete previous config/credential.yml.enc and config/master.key file and run the above command again either using vim or nano editor
+  - Set the email and passkey for the app and save it.
 
 You should be now be able to launch the server
 
@@ -81,4 +85,24 @@ You should be now be able to launch the server
 ## To check code coverage
 - Run `bundle exec cucumber` or `bundle exec rspec`
 - Redirect to coverage/ , you can view index.html 
-  
+
+## Heroku app link and deployment process:
+- `https://csce606-niki-a5715460073c.herokuapp.com/`
+- To deploy our app in heroku follow the below steps:
+  - Login to heroku: `heroku login``
+  - check your connection to heroku with `git remote`, you should be able to see heroku along with git for successful login
+  - If you are planning to deploy on a new app, create one using: `heroku create APP_NAME`
+  - If you don't have a database set up on heroku, try following this: https://elements.heroku.com/addons/heroku-postgresql by selecting a Miniplan (If using our heroku app, this step is not required).
+  - For deploying in an existing app, go to heroku > your app > settings, you should be able to find a heroku git URL
+  - Our heroku git URL: `https://git.heroku.com/csce606-niki.git`
+  - Now use command: `git remote add heroku {heroku git URL}`
+  - You can now check status using `git status` and commit changes using `git add .` and `git commit -m "message"``
+  - Push this change into heroku: `git push heroku main`` (you can also create a branch in heroku similar to git)
+  - Once the build is successful, run:
+    - `heroku run rails db:migrate`
+    - `heroku run rails db:seed`
+    - 'heroku config:set RAILS_MASTER_KEY=`cat config/master.key`' 
+
+## Contact Information:
+- email: nikicreditstracker@gmail.com
+- If you have any questions or need troubleshooting assistance, feel free to reach out to us at above email. This email is shared among all team members, and we will respond to your inquiries as promptly as we can.
