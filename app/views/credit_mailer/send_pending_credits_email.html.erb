@@ -9,7 +9,7 @@
 	<% @credit_progress.each do |credit_type_name, progress_data| %>
 	    <h4>Credits Pending for <%= credit_type_name %></h4>
 	    <div>
-	      <div style="background-color: #007C46; width: <%= [(progress_data[:sum_of_credits] / progress_data[:total_credit_limit].to_f) * 100, 100].min %>%;">
+	      <div style="background-color: #2faa74; width: <%= [(progress_data[:sum_of_credits] / progress_data[:total_credit_limit].to_f) * 100, 100].min %>%;">
 	        <%= progress_data[:sum_of_credits] %> / <%= progress_data[:total_credit_limit] %>
 	      </div>
 	      <p></p>
