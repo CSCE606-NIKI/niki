@@ -2,86 +2,25 @@ Hi <%= @user.email %>
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <style>
-        
-.progress-bar-container {
-    margin-bottom: 20px;
-    background-color: #f3f3f3;
-    padding: 3px;
-    border-radius: 20px;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-}
 
-.progress-bar {
-    background-color: #004a7c;
-    text-align: center;
-    padding: 10px 0;
-    border-radius: 20px;
-    color: white;
-    font-weight: bold;
-    transition: width 0.4s ease-out;
-}
-
-.progress-label {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    text-align: center;
-}
-    </style>
-</head>
 <body>
-    <div class="container mt-5">
-        <% renewal_date = @user.renewal_date %>
-        <% start_date = renewal_date - 1.year %>
-        <% end_date = renewal_date %>
-        <% credit_data = params[:credit_data] %>
-        
-        <%credit_data= @user.credits%>
-        <% sum_of_credits = credit_data.where(date: start_date..end_date).sum(:amount) %>
-        
-        <% unique_credit_types = credit_data.map { |credit| credit.credit_type }.uniq %>
-        <% total_credit_limit = unique_credit_types.sum { |credit_type| credit_type.credit_limit } %>
-        <h4>Total Credits Pending </h4>
-        <% result = (sum_of_credits / total_credit_limit.to_f ) * 100  %>
-        <div class="progress-bar-container">
-            <div class="progress-bar" style="width: <%= result.nan? ?  0: [result,100].min %>%;">
-                <%= sum_of_credits %> / <%= total_credit_limit %> 
-            </div>
-        </div>
-
-        <% unique_credit_types = credit_data.map { |credit| credit.credit_type }.uniq %>
-        <% @credit_progress = {} %>
-
-        <% unique_credit_types.each do |credit_type| %>
-            <% @fil_credits = credit_data.where(credit_type: credit_type, date: start_date..end_date) %>
-            <% sum_of_credits = @fil_credits&.sum(&:amount) || 0 %>
-
-            <% @credit_progress[credit_type.name] = {
-                sum_of_credits: sum_of_credits,
-                total_credit_limit: credit_type.credit_limit
-            } %>
-            <% end %>
-
-        <!-- Display progress bars for each unique credit type -->
-
-        <% @credit_progress.each do |credit_type_name, progress_data| %>
-        <h4>Credits Pending for <%= credit_type_name %></h4>
-        <div class="progress-container">
-            <div class="progress-bar" style="background-color: #007C46; width: <%= [(progress_data[:sum_of_credits] / progress_data[:total_credit_limit].to_f) * 100, 100].min %>%;">
-            <%= progress_data[:sum_of_credits] %> / <%= progress_data[:total_credit_limit] %>
-            </div>
-            <p><p>
-        </div>
+  
+    <table class="styled-table">
+    <thead>
+        <tr>
+            <th>Credit Type</th>
+            <th>Total Credits</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @credit_totals.each do |credit_type, total_credits| %>
+        <tr>
+            <td><%= credit_type %></td>
+            <td><%= total_credits %></td>
+        </tr>
         <% end %>
-
-    </div>
-
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %> 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </tbody>
+    </table>
 </body>
 </html>
 
