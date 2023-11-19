@@ -9,17 +9,19 @@ namespace :email do
       sum_of_credits = credit_data.where(date: start_date..end_date).sum(:amount)
       unique_credit_types = credit_data.map { |credit| credit.credit_type }.uniq
       total_credit_limit = unique_credit_types.sum { |credit_type| credit_type.credit_limit }
-      pending_credits = total_credit_limit -  sum_of_credits
+      pending_credits = total_credit_limit - sum_of_credits
       puts "Creditsssss ", sum_of_credits, unique_credit_types, total_credit_limit
       credit_progress = {} 
       unique_credit_types.each do |credit_type|
-         @fil_credits = credit_data.where(credit_type: credit_type, date: start_date..end_date)
-            sum_of_credits = @fil_credits&.sum(&:amount) || 0
-            credit_progress[credit_type.name] = {
-                sum_of_credits: sum_of_credits,
-                total_credit_limit: credit_type.credit_limit
-            }
+        @fil_credits = credit_data.where(credit_type: credit_type, date: start_date..end_date)
+        sum_of_credits = @fil_credits&.sum(&:amount) || 0
+        credit_progress[credit_type.name] = {
+          sum_of_credits: sum_of_credits,
+          total_credit_limit: credit_type.credit_limit
+        }
+      end
       check_and_send_pending_credits_email(user, credit_progress)
+    end
   end
 end
 
