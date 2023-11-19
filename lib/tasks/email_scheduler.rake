@@ -2,7 +2,9 @@
 namespace :email do
   task :check_renewal_date_to_email => :environment do
     User.all.each do |user|
-      check_and_send_pending_credits_email(user)
+      #check_and_send_pending_credits_email(user)
+      all_credits = Credit.where(user_id: user.id)
+      puts "Creditsssss ", all_credits
     end
   end
 end
