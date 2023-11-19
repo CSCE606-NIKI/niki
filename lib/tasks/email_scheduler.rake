@@ -18,8 +18,8 @@ def check_and_send_pending_credits_email(user)
 
   # Determine the frequency based on the days difference
   case days_difference
-  when 90, 60, 45, 30, 23, 16,12, 11,10,9,8 7, 6, 5, 4, 3, 2, 1
-    puts "Sending email to: ", user.email
+  when 90, 60, 45, 30, 23, 16,12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1
+    puts "Sending email to: ", user.email, days_difference
     CreditMailer.send_pending_credits_email(user).deliver_now
   end
 end
