@@ -13,11 +13,13 @@ def check_and_send_pending_credits_email(user)
   puts "User name: ", user.username
   puts "renewal_date: ", user.renewal_date
 
-  # Check if user_renewal_date is exactly 3 months away from current_date
-  if user_renewal_date <= 3.months.from_now
+  # Calculate the difference in days between user_renewal_date and current_date
+  days_difference = (user_renewal_date - Date.current).to_i
+
+  # Determine the frequency based on the days difference
+  case days_difference
+  when 90, 60, 45, 30, 23, 16, 7, 6, 5, 4, 3, 2, 1
     puts "Sending email to: ", user.email
     CreditMailer.send_pending_credits_email(user).deliver_now
-    # Call your method to send the email here
   end
 end
-
