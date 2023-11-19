@@ -20,7 +20,6 @@ namespace :email do
                 total_credit_limit: credit_type.credit_limit
             }
       check_and_send_pending_credits_email(user, credit_progress)
-    end
   end
 end
 
