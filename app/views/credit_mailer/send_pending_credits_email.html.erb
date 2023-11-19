@@ -1,1 +1,28 @@
 Hi <%= @user.email %>
+
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <div class="container mt-5">
+        <% renewal_date = @user.renewal_date %>
+        <% start_date = renewal_date - 1.year %>
+        <% end_date = renewal_date %>
+        <% credit_data = params[:credit_data] %>
+        
+        <%credit_data= @user.credits%>
+        <% sum_of_credits = credit_data.where(date: start_date..end_date).sum(:amount) %>
+        
+        <% unique_credit_types = credit_data.map { |credit| credit.credit_type }.uniq %>
+        <% total_credit_limit = unique_credit_types.sum { |credit_type| credit_type.credit_limit } %>
+        <h4>Total Credits Pending </h4>
+        <% result = (sum_of_credits / total_credit_limit.to_f ) * 100  %>
+        <div>
+               <%= sum_of_credits %> / <%= total_credit_limit %> 
+        </div>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
