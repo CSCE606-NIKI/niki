@@ -37,11 +37,11 @@ We intend to build a web-app that allows Professional Engineers (PEs) to track t
 - rails db:migrate
 - Run the server using the command: rails s
 - Node.js
-- Follow instructions for your OS here https://github.com/nodesource/distributions
-- Yarn: `npm install --global yarn`
+    - Follow instructions for your OS here https://github.com/nodesource/distributions
+    - Yarn: `npm install --global yarn`
 - Skip Heroku steps below if you just wanna run the Rails server locally
-  - Install Heroku CLI: `curl https://cli-assets.heroku.com/install-ubuntu.sh | sh`
-  - Login to Heroku: `heroku login`
+    - Install Heroku CLI: `curl https://cli-assets.heroku.com/install-ubuntu.sh | sh`
+    - Login to Heroku: `heroku login`
 - If ActionMailer doesn't work in development phase, then we need to reset SMTP credentials:
   - Run: 'EDITOR=vim rails credentials:edit'
   - Delete previous config/credential.yml.enc and config/master.key file and run the above command again either using vim or nano editor
