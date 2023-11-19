@@ -1,8 +1,13 @@
-Hi <%= @user.email %>
-
 <!DOCTYPE html>
 <html lang="en">
 <body>
+	<html>
+    <p>Dear <%= @user.email %>,</p>
+    <h2>Your renewal date is approaching: <%= @renewal_date %></h2>
+    <p>You currently have <%= @pending_credits %> pending credits for this renewal period.</p>
+    <p>Take action now to ensure a smooth renewal process.</p>
+    <p>Thank you for your attention.</p>
+    <p> Here's a quick summary of your credits </p>
 	<% @credit_progress.each do |credit_type_name, progress_data| %>
 	    <h4>Credits Pending for <%= credit_type_name %></h4>
 	    <div>
