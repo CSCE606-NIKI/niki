@@ -20,3 +20,42 @@ Feature: Manage Credit Types
     And I uncheck "Carry forward"
     And I press "Create Credit type"
     Then I should see "Credit type created successfully."
+
+  Scenario: Edit a existed credit type
+    Given I have added a credit type
+    When I visit the Add New credit page
+    And I fill in the following:
+    | Field        | Value       |
+    | Credit type  | Type        |
+    | Date         | 2020-10-11  |
+    | Amount       | 3           |
+    | Description  | Test credit |
+    And I click the "Create Credit" button
+    Then I should be redirected to the dashboard
+    And I should see the "Show this Credit Type" link for the new credit type
+    When I click link "Show this Credit Type"
+    Then I should see Edit button
+    When I click on Edit button
+    Then I should be directed to edit_credit_type_path
+    When I fill in "Credit limit" with "10"
+    And click Update Credit type
+    Then I should be redirected to Dashboard
+    And should see a message
+
+  Scenario: Delete credit type
+    Given I have added a credit type
+    When I visit the Add New credit page
+    And I fill in the following:
+    | Field        | Value       |
+    | Credit type  | Type        |
+    | Date         |  2020-10-11  |
+    | Amount       | 3           |
+    | Description  | Test credit |
+    And I click the "Create Credit" button
+    Then I should be redirected to the dashboard
+    And I should see the "Show this Credit Type" link for the new credit type
+    When I click link "Show this Credit Type"
+    Then I should see Delete button
+    When I click on Delete button
+    Then I should be redirected to Dashboard
+    And should see a deletion message

@@ -39,3 +39,4 @@
 
 .env
 coverage
+dump.rdb
