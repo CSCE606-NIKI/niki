@@ -23,23 +23,39 @@ Feature: Manage Credit Types
 
   Scenario: Edit a existed credit type
     Given I have added a credit type
-    Then I should see the "Show this Credit Type" link for the new credit type
+    When I visit the Add New credit page
+    And I fill in the following:
+    | Field        | Value       |
+    | Credit type  | Type        |
+    | Date         | 2023-10-11  |
+    | Amount       | 3           |
+    | Description  | Test credit |
+    And I click the "Create Credit" button
+    Then I should be redirected to the dashboard
+    And I should see the "Show this Credit Type" link for the new credit type
     When I click link "Show this Credit Type"
     Then I should see Edit button
     When I click on Edit button
     Then I should be directed to edit_credit_type_path
     When I fill in "Credit limit" with "10"
-    And click Update Credit Type
-    Then I should be directed to Dashboard
+    And click Update Credit type
+    Then I should be redirected to Dashboard
+    And should see a message
 
-# Scenario: Delete credit type
-# When I visit the new credit type page
-# And I fill in "Name" with "Type1"
-# And I fill in "Credit limit" with "1000"
-# And I check "Carry forward"
-# And I press "Create Credit type"
-# When I click link "Show this Credit Type"
-# Then I should see Delete button
-# When I click on Delete button
-# Then I should be directed to Dashboard
-# And I shouldnot see Type1 Credit type
+  Scenario: Delete credit type
+    Given I have added a credit type
+    When I visit the Add New credit page
+    And I fill in the following:
+    | Field        | Value       |
+    | Credit type  | Type        |
+    | Date         | 2023-10-11  |
+    | Amount       | 3           |
+    | Description  | Test credit |
+    And I click the "Create Credit" button
+    Then I should be redirected to the dashboard
+    And I should see the "Show this Credit Type" link for the new credit type
+    When I click link "Show this Credit Type"
+    Then I should see Delete button
+    When I click on Delete button
+    Then I should be redirected to Dashboard
+    And should see a deletion message
