@@ -37,4 +37,49 @@ RSpec.describe CreditTypesController, type: :controller do
         end
     end 
 
+    describe "GET #edit" do
+        it "gives a successful response" do
+            credit_type = FactoryBot.create(:credit_type, user: @user)
+            get :edit, params: { id: credit_type.id }
+            expect(response).to be_successful
+        end
+    end
+
+    describe "PATCH #update" do
+        it "updates the credit type successfully" do
+            credit_type = FactoryBot.create(:credit_type, user: @user)
+            patch :update, params: { id: credit_type.id, credit_type: { name: "New Name" } }
+            credit_type.reload
+            expect(credit_type.name).to eq("New Name")
+        end
+
+        it "redirects to dashboard after successful update" do
+            credit_type = FactoryBot.create(:credit_type, user: @user)
+            patch :update, params: { id: credit_type.id, credit_type: { name: "Updated Name" } }
+            expect(response).to redirect_to(dashboard_path)
+        end
+
+        it "does not update the credit type with invalid data" do
+            credit_type = FactoryBot.create(:credit_type, user: @user)
+            patch :update, params: { id: credit_type.id, credit_type: { name: nil } }
+            credit_type.reload
+            expect(credit_type.name).not_to be_nil
+        end
+
+        it "re-renders the 'edit' template with invalid data" do
+            credit_type = FactoryBot.create(:credit_type, user: @user)
+            patch :update, params: { id: credit_type.id, credit_type: { name: nil } }
+            expect(response).to render_template("edit")
+        end
+    end
+
+    describe "DELETE #destroy" do
+        it "deletes the credit type successfully" do
+            credit_type = FactoryBot.create(:credit_type, user: @user)
+            expect {
+                delete :destroy, params: { id: credit_type.id }
+            }.to change(CreditType, :count).by(-1)
+        end
+
+    end
 end

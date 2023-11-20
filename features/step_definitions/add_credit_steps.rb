@@ -124,12 +124,13 @@ end
 
 Then('I should see an message {string}') do |string|
     expect(page).to have_content(string)
-  end
-  When("I visit the renew credits page") do
+end
+
+When("I visit the renew credits page") do
     visit renew_path
-  end
+end
   
-  When("I select valid carry-forward amounts") do
+When("I select valid carry-forward amounts") do
     # Iterate through credits with carry_forward and select valid carry-forward amounts
     # Fill in form fields using fill_in method
     @credit_type = CreditType.find_by(name: 'renew_credits')

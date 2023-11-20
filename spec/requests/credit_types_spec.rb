@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "CreditTypes", type: :request do
-  describe "GET /index" do
-    pending "add some examples (or delete) #{__FILE__}"
+  before(:each) do
+    @user = FactoryBot.create(:user)
+    allow(controller).to receive(:current_user).and_return(@user)
   end
+
 end

@@ -1,5 +1,5 @@
 class CreditType < ApplicationRecord
-    has_many :credits
+    has_many :credits, dependent: :destroy
     belongs_to :user
  
     validates :name, uniqueness: { scope: :user_id }, presence: true
