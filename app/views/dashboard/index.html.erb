@@ -90,7 +90,7 @@
     <h2>Summary Credits</h2>
 
     <% renewal_date = @current_user.renewal_date  %>
-    <% start_date = renewal_date - 1.year%>
+    <% start_date = @current_user.start_date %>
     <% end_date = renewal_date%>
 
     <% sum_of_credits = @credits.where(date: start_date..end_date).sum(:amount) || 0 %>
@@ -166,22 +166,18 @@
           Description <br>
           <input id="filter_description" name="Filter Description" type="text" style="padding:2px">
         </th>
-        <th>
-          Actions
-          <br> <br>
-        </th>
         </tr>
     </thead>
     <tbody>
         <% @credits.each do |credit| %>
         <tr class="credit-table">
-            <td><%= credit.credit_type.name %></td>
+            <td>
+              <%= link_to credit.credit_type.name, credit %>
+            </td>
             <td><%= credit.date %></td>
             <td><%= credit.amount %></td>
             <td style="max-width: 400px; word-wrap: break-word;"><%= credit.description %></td>
-            <td>
-              <%= link_to "Show this credit", credit %>
-            </td>
+            
         </tr>
         <% end %>
     </tbody>

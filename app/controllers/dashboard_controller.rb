@@ -4,28 +4,27 @@ class DashboardController < ApplicationController
     @credits = current_user.credits
     @credits = Credit.where(user: current_user)
     @credits = @credits.order(date: :desc)
+    
     @credit_totals = {}
-    current_year = Time.now.year
+    # get the start and end date set by the user
+    end_date = current_user.renewal_date
+    start_date = current_user.start_date.to_date
 
+    # Select only credits that are between the start and end date
+    @credits = @credits.select { |credit| credit.date >= start_date && credit.date < end_date }
+
+    # Group credits by the credit type
     credits_grouped = @credits.group_by { |credit| credit.credit_type_id }
+    # Get the credit type and the credits associated with that credit type and sum them to get the total credits for that type
     credits_grouped.each do |credit_type_id, grouped_credits|
-    credit_type = CreditType.find(credit_type_id)
+      credit_type = CreditType.find(credit_type_id)
+      total_credits = grouped_credits.sum(&:amount)
 
-      # if credit_type.carry_forward
-      #   # If carry forward is enabled, calculate the cumulative total
-      #   total_credits = grouped_credits.sum(&:amount)
-      # else
-        # If carry forward is not enabled, filter and calculate the total for the current year
-        credits_for_current_year = grouped_credits.select { |credit| credit.date.year == current_year }
-        total_credits = credits_for_current_year.sum(&:amount)
-
-        # If it's the start of a new year, reset the total to 0
-      #   if Time.now.month == 1 && Time.now.day == 1
-      #     total_credits = 0
-      #   end
       @credit_totals[credit_type.name] = total_credits
+
     end
-    end
+    @credits = Credit.where(user: current_user).order(date: :desc)
   end
+end
  
   

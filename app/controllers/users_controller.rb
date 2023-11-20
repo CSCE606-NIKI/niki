@@ -45,7 +45,7 @@ class UsersController < ApplicationController
 
   def set_renewal_date
     if current_user.update(user_params)
-      flash[:notice] = 'Renewal date set successfully.'
+      flash[:notice] = 'Renewal period set successfully.'
       redirect_to dashboard_path
     else
       render :renewal_date
@@ -55,7 +55,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :email, :password, :password_confirmation ,:renewal_date)
+    params.require(:user).permit(:username, :email, :password, :password_confirmation ,:renewal_date , :start_date)
   end
 
   # Method to validate password.

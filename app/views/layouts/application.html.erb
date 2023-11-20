@@ -96,7 +96,7 @@
             <div class="credits-notification-container">
                 <% if @credits.present? %>
                     <% renewal_date = @current_user.renewal_date  %>
-                    <% start_date = renewal_date - 1.year%>
+                    <% start_date = @current_user.start_date %>
                     <% end_date = renewal_date%>
                     <% sum_of_credits = @credits.where(date: start_date..end_date).sum(:amount) %>
                     <% unique_credit_types = @credits.map { |credit| credit.credit_type }.uniq %>
