@@ -150,7 +150,7 @@ Before('@facebook_test1') do
     :uid => '12345',
     :info => {
       :name => 'John Doe',
-      :email => 'john_doe@outlook.com'
+      :email => 'john@company_name.com'
     }
   })
 

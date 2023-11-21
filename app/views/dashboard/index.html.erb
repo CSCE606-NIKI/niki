@@ -147,7 +147,14 @@
       <tr>
         <th>
           Credit Type <br>
-          <input id="filter_credit_type" name="Filter Credit Type" type="text" placeholder="Select credit type..." style="padding:2px">
+          <input list="filter_credit_types" id="filter_credit_type" name="Filter Credit Type" type="text" placeholder="Select credit type..." style="padding:2px">
+          <datalist id="filter_credit_types">  
+            <% if @credit_types != nil %>
+              <% @credit_types.each do |credit_type| %>
+                <option value="<%= credit_type %>">
+              <% end %>
+            <% end %>
+          </datalist>
         </th>
         <th> 
           Date <br> 

@@ -32,8 +32,14 @@ class ApplicationController < ActionController::Base
       if current_date >= user_renewal_date
         unless request.path == renewal_date_user_path(@user) || request.path == set_renewal_date_user_path(@user)
           # Only redirect if the current page is not the renewal date setting page
+          flash[:error] = "Renewal date must be after today's date."
           redirect_to renewal_date_user_path(@user)
         end
+      end
+    else
+      unless request.path == renewal_date_user_path(@user) || request.path == set_renewal_date_user_path(@user)
+        # Only redirect if the current page is not the renewal date setting page
+        redirect_to renewal_date_user_path(@user)
       end
     end
       

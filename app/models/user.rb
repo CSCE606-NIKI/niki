@@ -11,10 +11,22 @@ class User < ApplicationRecord
     before_create { generate_token(:auth_token) }
 
     def self.from_omniauth(response)
-        User.find_or_create_by(uid: response[:uid], provider: response[:provider]) do |u|
-            u.username = response[:info][:name]
-            u.email = response[:info][:email]
-            u.password_digest = SecureRandom.hex(15)
+        # Check if user's email is already in the database
+        if User.exists?(email: response[:info][:email])
+            # Check if that email is registered with the same provider and uid
+            if User.exists?(email: response[:info][:email], provider: response[:provider], uid: response[:uid])
+                return User.find_by(email: response[:info][:email], provider: response[:provider], uid: response[:uid])
+            # If provider and uid don't match, return nil to prevent account hijacking
+            else
+                return nil
+            end
+        # Nothing to worry about if the email is not in the database
+        else
+            User.create(uid: response[:uid], provider: response[:provider]) do |u|
+                u.username = response[:info][:name]
+                u.email = response[:info][:email]
+                u.password_digest = SecureRandom.hex(15)
+            end
         end
     end
 

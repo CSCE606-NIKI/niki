@@ -6,19 +6,26 @@ Given 'I am an existing user and I am on the login page' do
     visit login_path
 end
 
-When 'I click "Sign up with Google" and choose my valid TAMU account' do
+When 'I click "Sign up with Google" and choose my valid Google account' do
     click_button "Sign up with Google"
 end
 
-When 'I click "Sign up with Google" and choose my invalid TAMU account' do
+When 'I click "Sign up with Google" and choose my invalid Google account' do
     click_button "Sign up with Google"
 end
 
-When 'I click "Log in with Google" and choose my valid TAMU account' do 
+When 'I click "Log in with Google" and choose my valid Google account' do 
     click_button "Log in with Google"
 end
 
-When 'I click "Log in with Google" and choose my invalid TAMU account' do 
-    click_button "Log in with Google"
+Given 'someone else has already registered with my email' do
+    @user = User.create(username: "John Doe", 
+                        email: "john@company_name.com", 
+                        uid: "646534", 
+                        provider: "facebook", 
+                        password: "password", 
+                        password_confirmation: "password")
+    @user.save!
 end
+  
 
