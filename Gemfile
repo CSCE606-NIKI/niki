@@ -46,12 +46,6 @@ gem 'sidekiq-scheduler'
 gem 'sidekiq-cron'
 gem 'activesupport',  '7.0.7.2'
 gem 'bootstrap', '~> 5.1.3'
-gem 'wicked_pdf'
-group :development do
-  gem 'wkhtmltopdf-binary'
-end
-group :production do
-  gem 'wkhtmltopdf-heroku'
-end
+gem 'grover'
 
   
