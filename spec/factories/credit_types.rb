@@ -28,4 +28,11 @@ FactoryBot.define do
     description { "Carry Forward is disabled" }
     user { association :user } # Include this line to associate the credit type with a user
   end
+
+  factory :credit_type do
+    sequence(:name) { |n| "CreditType#{n}" }
+    credit_limit { 100 }
+    carry_forward { true }
+    user
+  end
 end

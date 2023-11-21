@@ -127,6 +127,9 @@
         <tr>
             <td><%= credit_type %></td>
             <td><%= total_credits %></td>
+            <td>
+              <%= link_to "Show this Credit Type", credit_type_path(credit_type) %>
+            </td>
         </tr>
         <% end %>
     </tbody>
