@@ -11,7 +11,8 @@ class DashboardController < ApplicationController
     credits_grouped.each do |credit_type_id, grouped_credits|
     credit_type = CreditType.find(credit_type_id)
 
-    @credit_types = CreditType.all.map(&:name)
+    # list all credit types belonging to this user
+    @credit_types = CreditType.where(user: current_user).map(&:name)
 
       # if credit_type.carry_forward
       #   # If carry forward is enabled, calculate the cumulative total
