@@ -14,8 +14,8 @@
 
     <div class="field">
       <%= form.label :identifier, 'Email or Username' %>
-      <%= form.text_field :identifier %>
-    </div>
+      <%= form.text_field :identifier, value: @user&.email || @user&.username %>
+      </div>
 
     <div class="field">
       <%= form.label :password %>

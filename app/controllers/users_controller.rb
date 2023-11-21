@@ -7,6 +7,8 @@ class UsersController < ApplicationController
     @user = current_user # Assuming you have a method to get the current user
   end
   def create
+    @user = User.new(user_params)
+
      if check_if_new_user(user_params[:email])
       if check_if_username_valid(user_params[:username])
         if validate_password(user_params[:password])
@@ -16,7 +18,7 @@ class UsersController < ApplicationController
               email: user_params[:email],
               password: user_params[:password]
             }
-            @user = User.new(specific_params)
+            # @user = User.new(specific_params)
 
             if @user.save
               cookies.permanent[:auth_token] = @user.auth_token
@@ -27,19 +29,19 @@ class UsersController < ApplicationController
             end
           else
             flash[:alert] = "Passwords Mismatch"
-            redirect_to new_user_path(@user)
+            render :new
           end
         else
           flash[:alert] = "Invalid password. Password must be atleast 8 character long with at least one lowercase letter, one uppercase letter, one digit, and one special character"
-          redirect_to new_user_path(@user)
+          render :new
         end
       else
         flash[:alert] = "username already in use"
-        redirect_to new_user_path(@user)
+        render :new
       end
     else
       flash[:alert] = "Email already registered"
-      redirect_to new_user_path(@user)
+      render :new
     end
   end
 
