@@ -1,21 +1,27 @@
 <div class="credits-container">
-  <% if @error %>
+  <% if @error%>
     <p class="error-message">Total carried forward credits must be less than or equal to 14.</p>
   <% end %>
   <%= form_with(url: renew_credits_path, method: :post, id: 'renew-credits-form') do |form| %>
     <h2>Carry-Forward Credits</h2>
     <ul>
-      <% current_user.credits.each do |credit| %>
-          <% if credit.credit_type.carry_forward %>
-            <li>
-            <%= "How much of #{credit.amount} credits for #{credit.credit_type.name} with credit limit #{credit.credit_type.credit_limit} do you want to carry forward?" %>
+      <% credits_by_type = current_user.credits.group_by { |credit| credit.credit_type } %>
+      <% credits_by_type.each do |credit_type, credits| %>
+        
+        <% if credit_type.carry_forward %>
+          <li>
+            <% end_date = current_user.renewal_date %>
+            <% start_date = current_user.start_date %>
+
+            <% total_credits = credits.select { |credit| credit.date >= start_date && credit.date <= end_date }.sum(&:amount) %>
+          
+            <%= "How much of #{total_credits} credits for #{credit_type.name} with credit limit #{credit_type.credit_limit} do you want to carry forward?" %>
             <%= "Carry Forward is true for this credit type" %>
-            <%= form.number_field("credit_#{credit.id}_carry_forward_amount", value: credit.amount, class: 'carry-forward-amount') %>
-            </li>
-            <% end %>
+            <%= form.number_field("credit_#{credits.first.id}_carry_forward_amount", class: 'carry-forward-amount') %>
+          </li>
+        <% end %>
       <% end %>
     </ul>
-    <div id="total-carry-forward">Total Carried Forward: 0</div>
     <%= form.submit("Renew Credits") %>
   <% end %>
 

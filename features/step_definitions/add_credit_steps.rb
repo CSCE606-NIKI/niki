@@ -1,5 +1,5 @@
 Given('I am logged in as {string} with password {string}') do |string, string2|
-    @user = User.create(username: 'user1', email: string , password: string2, renewal_date: Date.new(2024, 6, 1))
+    @user = User.create(username: 'user1', email: string , password: string2, renewal_date: Date.new(2021, 6, 1), start_date: Date.new(2020,1,1));
     visit login_path
     fill_in("Email or Username", :with => @user.email)
     fill_in("password", :with => @user.password)
@@ -138,7 +138,7 @@ When("I select valid carry-forward amounts") do
     @credit = Credit.find_by(credit_type_id: @credit_type.id)
 
     if @credit_type.carry_forward
-    fill_in "credit_#{@credit.id}_carry_forward_amount", with: [@credit.amount - @credit_type.credit_limit,14].min  # Choose a valid amount
+    fill_in "credit_#{@credit.id}_carry_forward_amount", with: [@credit.amount - @credit_type.credit_limit-1,0].max  # Choose a valid amount
     end
   end
   

@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
         redirect_to dashboard_path(@user)
     else
         flash[:danger] ='Invalid credentials'
-        redirect_to login_path(@user)
+        render :new
     end
   end
 

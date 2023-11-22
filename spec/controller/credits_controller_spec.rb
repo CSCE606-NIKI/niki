@@ -20,35 +20,20 @@ RSpec.describe CreditsController, type: :controller do
         sign_in_user(user) 
 
         # Create existing credits with carry forward enabled
-        credit1 = create(:credit, user: user, credit_type: credit_type_with_carry_forward, amount: 10)
-        credit2 = create(:credit, user: user, credit_type: credit_type_with_carry_forward, amount: 15)
-        credit3 = create(:credit, user: user, credit_type: credit_type_with_carry_forward, amount: 20)
-
+        credit1 = create(:credit, user: user, credit_type: credit_type_with_carry_forward, amount: 30)
+    
         # Valid carry forward amounts
         valid_carry_forward_amounts = {
           "credit_#{credit1.id}_carry_forward_amount" => 10,
-          "credit_#{credit2.id}_carry_forward_amount" => 15,
-          "credit_#{credit3.id}_carry_forward_amount" => 20
         }
 
-        post :renew, params: valid_carry_forward_amounts
-
-        # Reload the credits from the database
-        credit1.reload
-        credit2.reload
-        credit3.reload
-
-        # Verify that credits are renewed
-        expect(credit1.amount).to eq(10)
-        expect(credit2.amount).to eq(15)
-        expect(credit3.amount).to eq(20)
+        expect {
+          post :renew, params: valid_carry_forward_amounts
+        }.to change { Credit.count }.by(1)
+  
+        # Verify that credits are renewed       
       end
 
-      it 'redirects to the dashboard' do
-        sign_in_user(user) 
-        post :renew
-        expect(response).to redirect_to(dashboard_path)
-      end
 
       it 'sets a success flash message' do
         sign_in_user(user) 

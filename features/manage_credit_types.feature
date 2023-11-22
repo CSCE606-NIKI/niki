@@ -27,7 +27,7 @@ Feature: Manage Credit Types
     And I fill in the following:
     | Field        | Value       |
     | Credit type  | Type        |
-    | Date         | 2023-10-11  |
+    | Date         | 2020-10-11  |
     | Amount       | 3           |
     | Description  | Test credit |
     And I click the "Create Credit" button
@@ -48,7 +48,7 @@ Feature: Manage Credit Types
     And I fill in the following:
     | Field        | Value       |
     | Credit type  | Type        |
-    | Date         | 2023-10-11  |
+    | Date         |  2020-10-11  |
     | Amount       | 3           |
     | Description  | Test credit |
     And I click the "Create Credit" button

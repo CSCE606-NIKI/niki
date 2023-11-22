@@ -1,5 +1,5 @@
 Given('I am a registered user and I am on the login page') do
-    @mock_user = create(:user,username: 'mockuser', email: 'mock@gmail.com' , password: 'password', renewal_date: Date.new(2024, 6, 1)) 
+    @mock_user = create(:user,username: 'mockuser', email: 'mock@gmail.com' , password: 'password', renewal_date: Date.new(2024, 6, 1),start_date: Date.today) 
     visit login_path 
 end
 

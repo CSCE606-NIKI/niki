@@ -31,7 +31,7 @@ Feature: Testing Credits Notification Container
 
   Scenario: Check Credits Notification Container with no credits
     Given I am on dashboard
-    When I click the "Show this credit" link button
+    When I click the "Credit_type1" link button
     When I click on the button "Delete credit" to delete
     Then I should be redirected to the dashboard
     When I have no credits due soon
