@@ -2,6 +2,7 @@
 <%=stylesheet_link_tag 'sign_up.css'%>
 <div class ="login-container">
   <h1>Credits Tracker</h1>
+
   <div class="signup">
     <h2>Log In</h2>
     <%= form_with url: '/login', method: :post, local: true do |form| %>
@@ -40,9 +41,13 @@
     <div class="social-signup">
       <%= button_to "Log in with Facebook", '/auth/facebook', class: "third-party-signup" %>
     </div>
+
     <div class="actions">
       <%= link_to "Forgot Password?", password_reset_path %>
+
+      <%= link_to "Sign Up", '/users/new' %>
     </div>
+ 
   </div>
   <% if flash[:alert] %>
       <div class="passwordreset-alert">
