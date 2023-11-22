@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <style>
+html { 
+    -webkit-print-color-adjust: exact; 
+
+}
+body {
+    margin-top: 0.5in;
+    margin-bottom: 1in;
+    margin-left: 0.5in;
+    margin-right: 1in;
+}
 .credit-table {
     width: 100%;
     border-collapse: collapse;
@@ -16,11 +26,11 @@
 .credit-table th {
 }
 
-h3 {
+.headings {
     font-family: "Arial", sans-serif;
     font-weight: normal;
-    background-color: #ddd;
     padding: 4px;
+    background-color: #ddd;
 }
 
 h2 {
@@ -31,32 +41,26 @@ h2 {
     margin-left: 0;
     margin-right: 0;
 }
-.top-spacing {
-    display: flex;
-    justify-content: space-between;
-}
 </style>
 
 <body>
 
     <header>
-        <div class="top-spacing">
             <div style="text-align:right">
                 Created: <strong><%= Time.now.strftime '%Y-%m-%d %H:%M:%S' %></strong>
             </div>
             <div>
                 <h2>Continuing Education Credits Summary</h2>
             </div>
-        </div> 
     </header>
 
     <div>
-        <h3>Contact Info</h3>
+        <h3 class="headings">Contact Info</h3>
         <strong><%= @current_user.username %></strong><br>
         <%= @current_user.email %> <br><br>
     </div>
     <div>
-        <h3> Totals </h3>
+        <h3 class="headings"> Totals </h3>
         <table class="credit-table">
             <thead>
                 <tr>
@@ -77,7 +81,7 @@ h2 {
     </div>
 
     <div>
-        <h3> Credit List </h3>
+        <h3  class="headings"> Credit List </h3>
         <table class="credit-table" id="credit_table">
         <thead>
             <tr>

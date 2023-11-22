@@ -28,13 +28,14 @@ class PrintsController < ApplicationController
 
     end
 
-    render pdf: "Credits Summary",
-    page_size: 'letter',
-    formats: [:html],
-    layout: "pdf",
-    orientation: "Portrait",
-    lowquality: true,
-    zoom: 1,
-    dpi: 75
+    html = render_to_string "show", layout: "pdf"
+    render_pdf html, filename: "CreditsSummary.pdf"
   end
+
+  private
+  def render_pdf(html, filename:)
+    pdf = Grover.new(html, format: 'letter').to_pdf
+    send_data(pdf, filename: filename, type: 'application/pdf')
+  end
+
 end

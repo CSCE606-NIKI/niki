@@ -36,13 +36,22 @@ class SessionsController < ApplicationController
   def omniauth
     # Create a user object from the response
     # from_omniauth takes care of creating a new user if it doesn't exist yet
-    @user = User.from_omniauth(request.env['omniauth.auth']) 
-    if @user.valid?
-      cookies.permanent[:auth_token] = @user.auth_token
-      redirect_to dashboard_path(@user)
-    else
-      # If Google returns an invalid hash, take the user to the login page
-      redirect_to '/login', notice: 'Authentication failed. Please try again or try a different sign-in method.'
+    result = User.from_omniauth(request.env['omniauth.auth'])
+
+    if result == nil
+      # If the returned result is nil, it means that the email is already in the database but with a different provider/uid
+      # This is to prevent account hijacking
+      flash[:danger] = "This email is already being used with a different sign-in method. Please use a different sign-in method."
+      redirect_to login_path(@user)
+    else 
+      @user = result
+      if @user.valid?
+        cookies.permanent[:auth_token] = @user.auth_token
+        redirect_to dashboard_path(@user)
+      else
+        # If Google returns an invalid hash, take the user to the login page
+        redirect_to '/login', notice: 'Authentication failed. Please try again or try a different sign-in method.'
+      end
     end
   end
 
