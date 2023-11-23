@@ -10,12 +10,37 @@ form button,
 form input[type="number"] {
   font-size: 14px; 
 }
+
+.button-container {
+  display: flex;
+  align-items: center; 
+}
+
+.add-new-label {
+  margin-right: 10px; 
+}
+
+.small-button {
+  font-size: 0.8em;
+}
+
+
+.uppercase-label {
+  text-transform: camelcase;
+}
+
 </style>
 
 <%= form_with(model: @credit, local: true, html: { id: 'credit-form' }) do |form| %>
   
   <%= form.label :credit_type_id %>
-  <%= form.select :credit_type_id, @credit_types, include_blank: true %>
+<%= form.select :credit_type_id, @credit_types, include_blank: true %>
+
+<div class="button-container">
+  <%= form.label :add_new_credit_type, class: 'add-new-label uppercase-label' %>
+  <%= link_to 'Add New Credit Type', new_credit_type_path, class: 'btn btn-secondary small-button' %>
+</div>
+
 
     <div class ="field form-group">
       <%= form.label :date %>
