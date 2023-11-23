@@ -47,5 +47,3 @@ gem 'sidekiq-cron'
 gem 'activesupport',  '7.0.7.2'
 gem 'bootstrap', '~> 5.1.3'
 gem 'grover'
-
-  
