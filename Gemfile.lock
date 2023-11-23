@@ -403,7 +403,7 @@ PLATFORMS
 
 DEPENDENCIES
   Selenium
-  activesupport (~> 7.0.7.2)
+  activesupport (= 7.0.7.2)
   aws-sdk-s3
   bcrypt
   bootsnap (~> 1.16)
