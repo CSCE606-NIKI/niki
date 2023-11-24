@@ -13,7 +13,7 @@ form input[type="number"] {
 
 .button-container {
   display: flex;
-  align-items: center; 
+  align-items: left; 
 }
 
 .add-new-label {
@@ -36,10 +36,7 @@ form input[type="number"] {
   <%= form.label :credit_type_id %>
 <%= form.select :credit_type_id, @credit_types, include_blank: true %>
 
-<div class="button-container">
-  <%= form.label :add_new_credit_type, class: 'add-new-label uppercase-label' %>
-  <%= link_to 'Add New Credit Type', new_credit_type_path, class: 'btn btn-secondary small-button' %>
-</div>
+<%= link_to 'Add New Credit Type', new_credit_type_path, class: 'btn btn-secondary small-button', style: 'float: right; margin-left: 10px;'%>
 
 
     <div class ="field form-group">
