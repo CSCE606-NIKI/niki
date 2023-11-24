@@ -25,12 +25,12 @@ We intend to build a web-app that allows Professional Engineers (PEs) to track t
 - Install Ruby 3.x.y: `rbenv install 3.x.y`
   - 3.x.y is the version of ruby specified in the Gemfile (currently 3.2.2)
   - Takes 5-10 minutes
+  - If you're having issues with the installation, make sure you have all Ruby dependencies installed: \
+`sudo apt-get install git-core zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev software-properties-common libffi-dev`
 - Install Node.js
   - Follow instructions for your OS here https://github.com/nodesource/distributions
 - Install Yarn: `npm install --global yarn`
 - Set Ruby 3.x.y as the local default version `rbenv local 3.x.y`
-  - If you're having issues with the installation, make sure you have all Ruby dependencies installed: \
-`sudo apt-get install git-core zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev software-properties-common libffi-dev`
 - Install bundler: `gem install bundler`
 - Configure bundler to skip production gems: `bundle config set --local without 'production'`
 - Install dependencies: `bundle install`
