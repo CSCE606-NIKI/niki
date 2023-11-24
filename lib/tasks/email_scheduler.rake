@@ -2,7 +2,7 @@ namespace :email do
   task :check_renewal_date_to_email => :environment do
     User.all.each do |user|
       renewal_date = user.renewal_date
-      start_date = renewal_date - 1.year
+      start_date = user.start_date.to_date
       end_date = renewal_date
       credit_data = Credit.where(user_id: user.id)
       sum_of_credits = credit_data.where(date: start_date..end_date).sum(:amount)
