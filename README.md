@@ -29,6 +29,7 @@ We intend to build a web-app that allows Professional Engineers (PEs) to track t
 - Install bundler: `gem install bundler`
 - Configure bundler to skip production gems: `bundle config set --local without 'production'`
 - Install dependencies: `bundle install`
+- Install Node.js dependencies: `npm install`
 - Install JavaScript base files: `rails javascript:install:esbuild`
 - Create database and then run migrations on it
     - rails db:create
