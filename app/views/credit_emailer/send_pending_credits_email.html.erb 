@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+	<html>
+    <p>Dear <%= @user.username %>,</p>
+    <p>I hope this email finds you well.</p>
+    <h2>Your renewal date is approaching: <%= @renewal_date %></h2>
+    <p>You currently have <%= @pending_credits %> pending credits for this renewal period. Take action now to ensure a smooth renewal process.</p>
+    <p> Here's a quick summary of your credits </p>
+	<% @credit_progress.each do |credit_type_name, progress_data| %>
+	    <h4>Credits Pending for <%= credit_type_name %></h4>
+	    <div>
+	      <div style="background-color: #2faa74; width: <%= [(progress_data[:sum_of_credits] / progress_data[:total_credit_limit].to_f) * 100, 100].min %>%;">
+	        <%= progress_data[:sum_of_credits] %> / <%= progress_data[:total_credit_limit] %>
+	      </div>
+	      <p></p>
+	    </div>
+	<% end %>
+	<p>Thank you for your attention.</p>
+
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
