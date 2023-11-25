@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<% flash.each do |type, msg| %>
+    <div style="color:green">
+      <%= msg %>
+    </div>
+<% end %>
+<header>
+<p> Hi, <strong> <%= @user.username%></strong></p>
+</header>
+<body>
+    <%= form_tag admin_logout_path, method: :delete do %>
+        <%= submit_tag 'Log out'%>
+    <% end %>
+    <br>
+
+    <table id="users_table">
+        <thead>
+            <th>Users</th>
+        </thead>
+        <tbody>
+            <% @users.each do |user| %>
+            <tr class="users-table">
+                <td>
+                <%= link_to user.username, user_overview_path(:u => user.id)%>
+                </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -25,10 +25,16 @@ We intend to build a web-app that allows Professional Engineers (PEs) to track t
 - Install Ruby 3.x.y: `rbenv install 3.x.y`
   - 3.x.y is the version of ruby specified in the Gemfile (currently 3.2.2)
   - Takes 5-10 minutes
+  - If you're having issues with the installation, make sure you have all Ruby dependencies installed: \
+`sudo apt-get install git-core zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev software-properties-common libffi-dev`
+- Install Node.js
+  - Follow instructions for your OS here https://github.com/nodesource/distributions
+- Install Yarn: `npm install --global yarn`
 - Set Ruby 3.x.y as the local default version `rbenv local 3.x.y`
 - Install bundler: `gem install bundler`
 - Configure bundler to skip production gems: `bundle config set --local without 'production'`
 - Install dependencies: `bundle install`
+- Install Node.js dependencies: `npm install`
 - Install JavaScript base files: `rails javascript:install:esbuild`
 - Create database and then run migrations on it
     - rails db:create
@@ -36,9 +42,7 @@ We intend to build a web-app that allows Professional Engineers (PEs) to track t
 - Do `rails active_storage:install`
 - rails db:migrate
 - Run the server using the command: rails s
-- Node.js
-    - Follow instructions for your OS here https://github.com/nodesource/distributions
-    - Yarn: `npm install --global yarn`
+
 - Skip Heroku steps below if you just wanna run the Rails server locally
     - Install Heroku CLI: `curl https://cli-assets.heroku.com/install-ubuntu.sh | sh`
     - Login to Heroku: `heroku login`
@@ -74,7 +78,25 @@ You should be now be able to launch the server
   - Push this change into heroku: `git push heroku main` (you can also create a branch in heroku similar to git)
   - Once the build is successful, run:
     - `heroku run rails db:migrate`
-    - 'heroku config:set RAILS_MASTER_KEY=`cat config/master.key` ' 
+    - 'heroku config:set RAILS_MASTER_KEY=`cat config/master.key` '
+
+## For Admins
+### Access
+To access the Administrator console, visit the **/admin** route and log in with username and password (Note: Google/Facebook login is not supported for Admins)
+
+### Implementation:
+User objects can have either the Standard User role or the Administrator role.
+The Admin role is implemented with column "admin" in Users table. It is set to true (Admin) or false (Standard User). By default, all new users are set to Standard User
+
+### Getting Started:
+Modify and execute the **admin:assign_roles** Rake task to assign the Admin role to users of your choice. By default, the rake task will only assign the Admin role to the username "admin"
+
+### Functionality:
+- View all users
+- View all users' credits
+- Change user roles between Standard User and Administrator
+- Delete users
+
 
 ## Contact Information:
 - email: nikicreditstracker@gmail.com

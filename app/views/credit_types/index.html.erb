@@ -19,6 +19,7 @@
         <td><%= credit_type.description %></td>
         <td>
           <%= link_to 'Edit', edit_credit_type_path(credit_type) %>
+          <%= link_to 'Cancel', dashboard_path , class: "btn btn-primary" %>
           <%= link_to 'Delete', credit_type, method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>

@@ -1,0 +1,9 @@
+<% flash.each do |type, msg| %>
+    <div style="color:red">
+      <%= msg %>
+    </div>
+    <br>
+<% end %>
+<%= form_tag admin_logout_path, method: :delete do %>
+    <%= submit_tag 'Logout'%>
+<% end %>

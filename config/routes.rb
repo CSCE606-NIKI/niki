@@ -27,6 +27,14 @@ Rails.application.routes.draw do
   get '/visualize', to: 'credits#visualize', as: 'visualize'
   get 'print', to: 'prints#show', as: 'print'
 
+  get 'admin', to: 'admin#index'
+  get 'admin_login', to: 'sessions#admin_new'
+  post 'admin_login', to: 'sessions#admin_create'
+  delete 'admin_logout', to: 'sessions#admin_destroy'
+  get 'user_overview', to: 'admin#user_overview'
+  post 'change_user_role', to: 'admin#change_user_role'
+  delete 'delete_user', to: 'admin#delete_user'
+
   # config/routes.rb
   resources :users do
     member do
