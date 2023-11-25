@@ -78,7 +78,25 @@ You should be now be able to launch the server
   - Push this change into heroku: `git push heroku main` (you can also create a branch in heroku similar to git)
   - Once the build is successful, run:
     - `heroku run rails db:migrate`
-    - 'heroku config:set RAILS_MASTER_KEY=`cat config/master.key` ' 
+    - 'heroku config:set RAILS_MASTER_KEY=`cat config/master.key` '
+
+## For Admins
+### Access
+To access the Administrator console, visit the **/admin** route and log in with username and password (Note: Google/Facebook login is not supported for Admins)
+
+### Implementation:
+User objects can have either the Standard User role or the Administrator role.
+The Admin role is implemented with column "admin" in Users table. It is set to true (Admin) or false (Standard User). By default, all new users are set to Standard User
+
+### Getting Started:
+Modify and execute the **admin:assign_roles** Rake task to assign the Admin role to users of your choice. By default, the rake task will only assign the Admin role to the username "admin"
+
+### Functionality:
+- View all users
+- View all users' credits
+- Change user roles between Standard User and Administrator
+- Delete users
+
 
 ## Contact Information:
 - email: nikicreditstracker@gmail.com
