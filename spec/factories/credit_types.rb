@@ -10,6 +10,16 @@ FactoryBot.define do
     start_date { Date.new(2020, 12, 30) }   # Set a fixed start date
     # Add other attributes as needed
   end
+
+  # Define a factory for a user with a specific renewal date
+  factory :user_with_different_renewal_date, class: User do
+    username { Faker::Name.name }
+    email { 'fake@niki.com' }
+    password { 'password' }
+    renewal_date { Date.tomorrow } # Set a different renewal date
+    start_date { Date.new(2021, 1, 15) }   # Set a different start date
+  end
+
   
   factory :credit_type_with_carry_forward, class: CreditType do
     id {21}
