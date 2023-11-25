@@ -55,4 +55,25 @@ class SessionsController < ApplicationController
     end
   end
 
+  def admin_create
+    identifier = params[:username]
+    @user = User.find_by('lower(username) = ?', identifier.downcase)
+    if @user && @user.authenticate(params[:password])
+        cookies[:auth_token] = @user.auth_token
+        redirect_to admin_path(@user)
+    else
+        flash[:danger] ='Invalid credentials'
+        render :template => "admin/admin_login", :layout => false
+    end
+  end
+
+  def admin_new
+      render :template => "admin/admin_login", :layout => false
+  end
+
+  def admin_destroy
+    cookies.delete(:auth_token)
+    redirect_to admin_login_path, notice: 'Logged out successfully', :layout => false
+  end
+
 end

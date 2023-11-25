@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-    has_many :credits
-    has_many :credit_types
+    has_many :credits, dependent: :destroy
+    has_many :credit_types, dependent: :destroy
 
     has_secure_password
     has_one_attached :profile_pic

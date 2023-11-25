@@ -1,0 +1,45 @@
+<div>
+  <div>
+    <h2>Create User</h2>
+    <%= form_with(model: @user, local: true) do |form| %>
+      <div class="field">
+          <%= form.label :username %>
+          <%= form.text_field :username %>
+      </div>
+      <div class="field">
+          <%= form.label :email %>
+          <%= form.email_field :email%>
+      </div>
+      <div class="field">
+          <%= form.label :password %>
+          <%= form.password_field :password %>
+      </div>
+      <div class="field">
+          <%= form.label :password_confirmation %>
+          <%= form.password_field :password_confirmation %>
+      </div>
+      <% if flash[:alert].present? %>
+      <div class="signup-alert">
+          <%= flash[:alert] %>
+      </div>
+      <% end %>
+      <div class="actions">
+          <%= form.submit "Sign up" %>
+      </div>
+      <% end %>
+
+      <!-- Make sure to keep 3rd party logins separate from other routing logic because the buttons have to make POST requests to /auth/:provider
+      and not POST to /login-->    
+      <div class="social-signup">
+          <%= button_to "Sign up with Google", '/auth/google_oauth2', class: "third-party-signup" %>
+      </div>
+      <div class="social-signup">
+          <%= button_to "Sign up with Facebook", '/auth/facebook', class: "third-party-signup" %>
+      </div>
+      <div class="existing-account">
+            Already have an account? 
+            <%= link_to "Log in", '/login' %>
+      </div>
+      
+  </div>
+</div>
