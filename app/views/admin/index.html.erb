@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+<% flash.each do |type, msg| %>
+    <div style="color:green">
+      <%= msg %>
+    </div>
+<% end %>
 <header>
 <p> Hi, <strong> <%= @user.username%></strong></p>
 </header>
