@@ -23,7 +23,7 @@ class User < ApplicationRecord
         # Nothing to worry about if the email is not in the database
         else
             User.create(uid: response[:uid], provider: response[:provider]) do |u|
-                u.username = response[:info][:name]
+                u.username = response[:info][:email]
                 u.email = response[:info][:email]
                 u.password_digest = SecureRandom.hex(15)
             end
