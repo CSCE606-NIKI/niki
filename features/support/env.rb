@@ -95,13 +95,23 @@ Before('@google_test1') do
     OmniAuth::FailureEndpoint.new(env).redirect_to_failure
   }
   
+  renewal_date = Date.today + 1.month
+  start_date = Date.today
+
   OmniAuth.config.add_mock(:google_oauth2, {
     :uid => '12345',
     :info => {
       :name => 'John Doe',
-      :email => 'john@company_name.com'
+      :email => 'john@company_name.com',
+    },
+    :extra => {
+      :raw_info => {
+        :renewal_date => renewal_date,
+        :start_date => start_date
+      }
     }
   })
+  
 
   Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:google_oauth2]
 end

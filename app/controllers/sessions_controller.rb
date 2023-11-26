@@ -37,7 +37,6 @@ class SessionsController < ApplicationController
     # Create a user object from the response
     # from_omniauth takes care of creating a new user if it doesn't exist yet
     result = User.from_omniauth(request.env['omniauth.auth'])
-
     if result == nil
       # If the returned result is nil, it means that the email is already in the database but with a different provider/uid
       # This is to prevent account hijacking
@@ -47,14 +46,20 @@ class SessionsController < ApplicationController
       @user = result
       if @user.valid?
         cookies.permanent[:auth_token] = @user.auth_token
-        redirect_to dashboard_path(@user)
+        if @user.renewal_date.nil? && @user.start_date.nil?
+            # Check if renewal date or start date is not set
+          redirect_to renewal_date_user_path(@user)
+        else 
+          # Redirect to the dashboard
+          redirect_to dashboard_path(@user)
+        end
       else
         # If Google returns an invalid hash, take the user to the login page
         redirect_to '/login', notice: 'Authentication failed. Please try again or try a different sign-in method.'
       end
     end
   end
-
+  
   def admin_create
     identifier = params[:username]
     @user = User.find_by('lower(username) = ?', identifier.downcase)

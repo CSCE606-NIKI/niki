@@ -23,7 +23,7 @@ Feature: Google Login/Sign Up
     Scenario: Valid login with Google account
         Given I am an existing user and I am on the login page
         When I click "Log in with Google" and choose my valid Google account
-        Then I should see "Add New Credit Type"
+        Then I should see "Set Renewal Date"
     
     @google_test1
     Scenario: Sign up with an already registered email

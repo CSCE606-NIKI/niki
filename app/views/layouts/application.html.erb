@@ -103,7 +103,19 @@
     .credits-notification-container.active {
       display: block; /* Show the container when active class is present */
     }
+    @media (max-width: 767px) {
+    .sidenav {
+        width: 100%;
+        padding-top: 10px;
+        text-align: center; /* Center the content */
+    }
 
+    .sidenav a {
+        padding: 10px;
+        font-size: 16px;
+        display: block; /* Ensure each link takes up the full width of the container */
+    }
+    }
 </style>
 <script>
     function displayCredits() {
@@ -210,13 +222,13 @@
     <% end %>
 
     <% if flash[:notice] %>
-    <div class="alert alert-success">
+    <div class="alert alert-success" style="padding-left: 162px;">
         <%= flash[:notice] %>
     </div>
     <% end %>
 
     <% if flash[:error] %>
-    <div class="alert alert-danger">
+    <div class="alert alert-danger " style="padding-left: 162px;">
         <%= flash[:error] %>
     </div>
     <% end %>
