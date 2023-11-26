@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   
   get '/renew', to: 'credits#renew'
   get '/visualize', to: 'credits#visualize', as: 'visualize'
-  get 'print', to: 'prints#show', as: 'print'
+  get '/print', to: 'prints#show', as: 'print'
 
   get 'admin', to: 'admin#index'
   get 'admin_login', to: 'sessions#admin_new'

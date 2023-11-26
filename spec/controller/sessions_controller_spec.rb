@@ -54,6 +54,37 @@ describe SessionsController, type: :controller do
       expect(response).to redirect_to(dashboard_path) 
     end
   end
+
+  describe 'GET #admin_new' do
+    it 'already logged in user' do
+      cookies[:auth_token] = user.auth_token
+      get :admin_new
+      expect(response).to render_template('admin/admin_login') 
+    end
+  end
+
+  describe 'POST #admin_create' do
+    it 'logs in with valid email and password' do
+      post :admin_create, params: { username: user.username, password: user.password }
+      expect(cookies[:auth_token]).to eq(user.auth_token)
+      expect(response).to redirect_to(admin_path(user.id)) 
+    end
+
+    it 'does not log in with invalid password' do
+      post :admin_create, params: { username: user.username, password: 'wrong_password' }
+      expect(flash[:danger]).to eq('Invalid credentials') 
+      expect(response).to render_template('admin/admin_login')
+    end
+  end
+
+  describe 'DELETE #admin_destroy' do
+    it 'logs out the user' do
+      cookies[:auth_token] = user.auth_token
+      delete :admin_destroy
+      expect(response.header['Set-Cookie']).to match(/^auth_token=;/)
+      expect(response).to redirect_to(admin_login_path) 
+    end
+  end
 end
 
 # describe MyController do

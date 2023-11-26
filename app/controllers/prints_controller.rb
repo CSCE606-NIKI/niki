@@ -1,7 +1,8 @@
 class PrintsController < ApplicationController
   before_action :require_login
   def show
-    @credits = current_user.credits
+    @user = current_user
+    @credits = @user.credits
     @credits = Credit.where(user: current_user)
     @credits = @credits.order(date: :desc)
     @credit_totals = {}
@@ -28,14 +29,9 @@ class PrintsController < ApplicationController
 
     end
 
-    html = render_to_string "show", layout: "pdf"
-    render_pdf html, filename: "CreditsSummary.pdf"
-  end
-
-  private
-  def render_pdf(html, filename:)
-    pdf = Grover.new(html, format: 'letter').to_pdf
-    send_data(pdf, filename: filename, type: 'application/pdf')
+    @html = render_to_string "show", layout: "pdf"
+    pdf = Grover.new(@html, format: 'letter').to_pdf
+    send_data(pdf, filename: "CreditsSummary.pdf", type: 'application/pdf')
   end
 
 end
